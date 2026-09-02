@@ -1,21 +1,30 @@
-import ArrowRight from "@/public/ArrowRight.svg";
-import BellRinging from "@/public/BellRinging.svg";
+import { Icon } from "@/components/ui/icon";
+import Image from "next/image";
 
 export default function Home() {
     return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-background">
-            <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-background text-primary sm:items-start">
-                <h1 className="font-sans text-[32px] leading-[40px] font-medium">
+        <div>
+            <main>
+                <h1 className="font-sans text-[32px] leading-[40px] font-medium text-primary">
                     Roboto Heading
                 </h1>
 
-                <p className="font-mono text-base leading-[24px] font-medium">
+                <div className="w-90 h-12 bg-primary">
+                    <Image
+                        src="/logo&text.svg"
+                        alt="digitalbase-logo"
+                        width={180}
+                        height={40}
+                        priority
+                    />
+                </div>
+
+                <p className="font-mono text-base leading-[24px] font-medium text-primary">
                     JetBrains Mono Text
                 </p>
 
                 <div className="flex space-x-3">
-                    <ArrowRight className="w-5 h-5 text-secondary" />
-                    <BellRinging className="w-5 h-5 text-resolved" />
+                    <Icon name="plusCircle" className="w-4 h-4" />
                 </div>
 
                 <div className="flex space-x-3">
