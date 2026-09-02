@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/layout/Sidebar";
-import Header from "@/components/layout/Header";
+import Sidebar from "@/components/shared/sidebar";
+import Header from "@/components/shared/header";
 
 const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
@@ -26,21 +26,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
+        // <body className="flex h-screen overflow-hidden bg-background">
+        //     {/* Fixed Left Sidebar */}
+        //     <Sidebar />
+
+        //     {/* Main Content Scroll Area */}
+        //     <div className="flex-1 flex flex-col overflow-y-auto bg-background">
+        //         <div className="w-full mx-auto space-y-6 ">
+        //             <Header />
+        //             <main className="px-8">{children}</main>
+        //         </div>
+        //     </div>
+        // </body>
         <html
             lang="en"
             className={`${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
-            <body className="flex h-screen overflow-hidden bg-background">
-                {/* Fixed Left Sidebar */}
-                <Sidebar />
-
-                {/* Main Content Scroll Area */}
-                <div className="flex-1 flex flex-col overflow-y-auto bg-background">
-                    <div className="w-full mx-auto space-y-6 ">
-                        <Header />
-                        <main className="px-8">{children}</main>
-                    </div>
-                </div>
+            <body className="h-screen bg-background antialiased">
+                {children}
             </body>
         </html>
     );

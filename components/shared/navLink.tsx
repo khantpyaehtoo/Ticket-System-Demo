@@ -12,8 +12,11 @@ interface NavLinkProps {
 }
 
 export default function NavLink({ href, label, icon }: NavLinkProps) {
-    const path = usePathname();
-    const isActive = path === href || (href !== `/` && path.startsWith(href));
+    const pathname = usePathname();
+
+    // Exactly match (e.g. /dashboard) or Nested match (e.g. /tickets/123)
+    const isActive =
+        pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
 
     return (
         <Link
@@ -21,8 +24,8 @@ export default function NavLink({ href, label, icon }: NavLinkProps) {
             className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium group transition-colors",
                 isActive
-                    ? "bg-secondary text-background" // Active state
-                    : "text-zinc-400 hover:text-background", // Default state
+                    ? "bg-secondary text-background" // Active State
+                    : "text-zinc-400 hover:text-background", // Idle/Hover State
             )}
         >
             <Icon
