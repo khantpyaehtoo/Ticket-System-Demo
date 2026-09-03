@@ -12,7 +12,7 @@ export default function LoginPage() {
                     priority
                 />
 
-                <div className="mt-20 space-y-8 py-10 border-b border-b-background">
+                <div className="mt-14 space-y-6 py-8 border-b border-b-background/40  max-w-full w-180">
                     <div className="bg-background flex justify-center items-center space-x-6 py-1 rounded-full max-w-full w-74">
                         <div className="w-3 h-3 rounded-full bg-primary" />
                         <span className="text-primary font-medium">
@@ -20,10 +20,10 @@ export default function LoginPage() {
                             Trusted service operations
                         </span>
                     </div>
-                    <p className="text-5xl font-medium max-w-full w-180  bg-linear-to-r from-background to-secondary bg-clip-text text-transparent pb-4">
+                    <p className="text-5xl font-medium bg-linear-to-r from-background to-secondary bg-clip-text text-transparent pb-4">
                         Technical Service Workspace & SLA Management
                     </p>
-                    <p>
+                    <p className="text-md font-light">
                         Manage your service requests, track SLA hours in
                         real-time, and collaborate with technical team.
                     </p>

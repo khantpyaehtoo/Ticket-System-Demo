@@ -19,6 +19,7 @@ export default function CustomerLayout({
             userName="Team"
             subtitle="Welcome. Here's an overview of your service activity."
             navItems={customerNavItems}
+            homeHref="/team"
         >
             {children}
         </DashboardShell>

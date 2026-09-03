@@ -3,7 +3,7 @@ import { NavItem } from "@/types/user";
 
 const customerNavItems: NavItem[] = [
     { label: "Dashboard", href: "/admin", icon: "squaresFour" },
-    { label: "Tickets", href: "/tickets", icon: "ticket" },
+    { label: "Tickets", href: "/admin-tickets", icon: "ticket" },
     { label: "Client", href: "/notifications", icon: "bellRinging" },
     { label: "Team", href: "/notifications", icon: "bellRinging" },
     { label: "Products", href: "/products", icon: "package" },
@@ -20,6 +20,7 @@ export default function CustomerLayout({
             userName="Admin"
             subtitle="Welcome. Here's an overview of your service activity."
             navItems={customerNavItems}
+            homeHref="/admin"
         >
             {children}
         </DashboardShell>

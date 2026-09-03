@@ -1,3 +1,4 @@
+import { NavItem } from "@/types/user";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
@@ -7,6 +8,7 @@ interface DashboardShellProps {
     navItems: NavItem[];
     showCreateTicket?: boolean;
     children: React.ReactNode;
+    homeHref: string;
 }
 
 export default function DashboardShell({
@@ -15,11 +17,12 @@ export default function DashboardShell({
     navItems,
     showCreateTicket = true,
     children,
+    homeHref,
 }: DashboardShellProps) {
     return (
         <div className="flex h-screen overflow-hidden bg-background">
             {/* Sidebar */}
-            <Sidebar navItems={navItems} />
+            <Sidebar homeHref={homeHref} navItems={navItems} />
 
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col overflow-y-auto">
