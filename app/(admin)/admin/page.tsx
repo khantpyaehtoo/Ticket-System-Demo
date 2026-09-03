@@ -24,7 +24,11 @@ export default function Home() {
                 </p>
 
                 <div className="flex space-x-3">
-                    <Icon name="plusCircle" className="w-4 h-4" />
+                    <Icon
+                        name="plusCircle"
+                        className="w-5 h-5 text-submitted"
+                    />
+                    <Icon name="signOut" />
                 </div>
 
                 <div className="flex space-x-3">

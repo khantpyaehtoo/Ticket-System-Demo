@@ -1,5 +1,5 @@
 import Header from "./header";
-import Sidebar, { NavItem } from "./sidebar";
+import Sidebar from "./sidebar";
 
 interface DashboardShellProps {
     userName?: string;

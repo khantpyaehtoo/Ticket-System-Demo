@@ -1,13 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icon, IconName } from "@/components/ui/icon";
+import { Icon } from "@/components/ui/icon";
 import NavLink from "./navLink";
-
-export interface NavItem {
-    label: string;
-    href: string;
-    icon: IconName;
-}
+import { NavItem } from "@/types/user";
 
 interface SidebarProps {
     navItems: NavItem[];
@@ -19,7 +14,7 @@ export default function Sidebar({ navItems }: SidebarProps) {
             <div className="space-y-8">
                 {/* Logo Section */}
                 <div className="flex justify-center items-center gap-2">
-                    <Link href={"/dashboard"}>
+                    <Link href={"/"}>
                         <Image
                             src="/logo&text.svg"
                             alt="Digital Base"

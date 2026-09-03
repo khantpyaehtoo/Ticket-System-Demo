@@ -1,11 +1,12 @@
 import DashboardShell from "@/components/shared/dashboardShell";
-import { NavItem } from "@/components/shared/sidebar";
+import { NavItem } from "@/types/user";
 
 const customerNavItems: NavItem[] = [
-    { label: "Dashboard", href: "/dashboard", icon: "squaresFour" },
-    { label: "My Tickets", href: "/tickets", icon: "ticket" },
-    { label: "My Products", href: "/products", icon: "package" },
-    { label: "Notifications", href: "/notifications", icon: "bellRinging" },
+    { label: "Dashboard", href: "/admin", icon: "squaresFour" },
+    { label: "Tickets", href: "/tickets", icon: "ticket" },
+    { label: "Client", href: "/notifications", icon: "bellRinging" },
+    { label: "Team", href: "/notifications", icon: "bellRinging" },
+    { label: "Products", href: "/products", icon: "package" },
     { label: "Settings", href: "/settings", icon: "gearSix" },
 ];
 

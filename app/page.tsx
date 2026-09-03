@@ -12,10 +12,10 @@ export default async function RootPage() {
 
     switch (userRole) {
         case "ADMIN":
-            redirect("/admin/dashboard");
+            redirect("/admin/");
         case "TECH_TEAM":
-            redirect("/team/dashboard");
+            redirect("/team/");
         default:
-            redirect("/dashboard");
+            redirect("/");
     }
 }

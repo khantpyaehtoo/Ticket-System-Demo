@@ -1,8 +1,8 @@
 import DashboardShell from "@/components/shared/dashboardShell";
-import { NavItem } from "@/components/shared/sidebar";
+import { NavItem } from "@/types/user";
 
 const customerNavItems: NavItem[] = [
-    { label: "Dashboard", href: "/dashboard", icon: "squaresFour" },
+    { label: "Dashboard", href: "/user", icon: "squaresFour" },
     { label: "My Tickets", href: "/tickets", icon: "ticket" },
     { label: "My Products", href: "/products", icon: "package" },
     { label: "Notifications", href: "/notifications", icon: "bellRinging" },
@@ -16,7 +16,7 @@ export default function CustomerLayout({
 }) {
     return (
         <DashboardShell
-            userName="Ohmar Kyaw"
+            userName="User"
             subtitle="Welcome. Here's an overview of your service activity."
             navItems={customerNavItems}
         >
