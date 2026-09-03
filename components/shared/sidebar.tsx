@@ -6,7 +6,7 @@ import SignOutBtn from "./signOutBtn";
 
 interface SidebarProps {
     navItems: NavItem[];
-    homeHref?: string;
+    homeHref: string;
 }
 
 export default function Sidebar({ navItems, homeHref }: SidebarProps) {
