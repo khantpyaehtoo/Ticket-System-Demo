@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
     return (
@@ -28,8 +29,38 @@ export default function LoginPage() {
                         real-time, and collaborate with technical team.
                     </p>
                 </div>
+
+                {/* Stepper Section */}
+                <div className="pt-8 space-y-10 relative max-w-full w-180">
+                    {/* Connecting Line */}
+                    <div className="absolute left-4 top-12 -bottom-10 w-0.5 bg-background -z-0" />
+
+                    {/* Steps List */}
+                    {[
+                        "Service Incident Logged",
+                        "Vendor Analysis",
+                        "SLA Milestone Check",
+                        "Verified Patch Resolved",
+                    ].map((step, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center space-x-5 relative z-10"
+                        >
+                            {/* Number Badge */}
+                            <div className="w-8 h-8 rounded-full bg-background text-primary flex items-center justify-center font-medium text-sm border border-background shrink-0">
+                                {index + 1}
+                            </div>
+                            {/* Step Title */}
+                            <span className="text-background text-sm tracking-wider">
+                                {step}
+                            </span>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className="bg-background"></div>
+
+            {/* Right: Login Form */}
+            <LoginForm />
         </div>
     );
 }
