@@ -3,24 +3,33 @@
 import { Button, Form, Input } from "antd";
 import { ArrowLeft, Info } from "lucide-react";
 
-interface ForgotFormProps {
+export interface ForgotFormProps {
     onBackToLogin: () => void;
+    onSuccessSubmit: () => void; // OTP
 }
 
-export default function ForgotForm({ onBackToLogin }: ForgotFormProps) {
+export default function ForgotForm({
+    onBackToLogin,
+    onSuccessSubmit,
+}: ForgotFormProps) {
     return (
-        <div className="w-full max-w-md mx-auto p-6 md:p-10 flex flex-col justify-center">
-            <div className="space-y-2 mb-6 md:mb-8">
+        <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
+            <div className="space-y-2 mb-6">
                 <h1 className="text-xl md:text-2xl font-semibold text-black">
-                    Reset your password
+                    Reset Password
                 </h1>
                 <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
-                    Enter your email address and we will send you a link to
-                    reset your password.
+                    Enter your email address and we&apos;ll send you an OTP code
+                    to reset your password.
                 </p>
             </div>
 
-            <Form name="forgot-password" layout="vertical" requiredMark={false}>
+            <Form
+                name="forgot"
+                layout="vertical"
+                requiredMark={false}
+                onFinish={onSuccessSubmit}
+            >
                 <Form.Item
                     name="email"
                     label={
@@ -39,13 +48,13 @@ export default function ForgotForm({ onBackToLogin }: ForgotFormProps) {
                     />
                 </Form.Item>
 
-                <Form.Item>
+                <Form.Item className="mt-6 mb-2">
                     <Button
                         block
                         htmlType="submit"
                         className="h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all cursor-pointer"
                     >
-                        Send Reset Link
+                        Send OTP Code
                     </Button>
                 </Form.Item>
 
@@ -60,10 +69,10 @@ export default function ForgotForm({ onBackToLogin }: ForgotFormProps) {
                     </button>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-xs text-cancelled mt-6">
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-6 pt-4 border-t border-zinc-100">
                     <Info className="w-4 h-4 shrink-0" />
                     <span className="text-center">
-                        Authorized Personnel Only. System activity is logged.
+                        Authorized Personnel Only.
                     </span>
                 </div>
             </Form>

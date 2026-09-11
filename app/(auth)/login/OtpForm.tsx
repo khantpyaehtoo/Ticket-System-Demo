@@ -1,3 +1,143 @@
-export default function OtpForm() {
-    return <div>OtpForm</div>;
+"use client";
+
+import { useState, useEffect } from "react";
+import { Button, Form, Input } from "antd";
+import { ArrowLeft, Info, RotateCw } from "lucide-react";
+
+interface OtpFormProps {
+    email?: string;
+    onBackToLogin?: () => void;
+    onSuccessSubmit?: (otp: string) => void;
+    onResendOtp?: () => void;
+}
+
+export default function OtpForm({
+    email = "user@example.com",
+    onBackToLogin,
+    onSuccessSubmit,
+    onResendOtp,
+}: OtpFormProps) {
+    const [form] = Form.useForm();
+    const [timer, setTimer] = useState<number>(60);
+    const [canResend, setCanResend] = useState<boolean>(false);
+
+    // Resend Countdown Timer Logic
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (timer > 0) {
+            interval = setInterval(() => {
+                setTimer((prev) => prev - 1);
+            }, 1000);
+        } else {
+            setCanResend(true);
+        }
+        return () => clearInterval(interval);
+    }, [timer]);
+
+    const handleResend = () => {
+        if (!canResend) return;
+        setTimer(60);
+        setCanResend(false);
+        if (onResendOtp) onResendOtp();
+    };
+
+    const handleSubmit = (values: { otp: string }) => {
+        if (onSuccessSubmit) {
+            onSuccessSubmit(values.otp);
+        }
+    };
+
+    return (
+        <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
+            {/* Header Section */}
+            <div className="space-y-2 mb-6 text-center md:text-left">
+                <h1 className="text-xl md:text-2xl font-semibold text-black">
+                    Enter OTP Code
+                </h1>
+                <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
+                    We've sent a 6-digit verification code to{" "}
+                    <span className="font-medium text-black">{email}</span>.
+                </p>
+            </div>
+
+            <Form
+                form={form}
+                name="otp_verification"
+                layout="vertical"
+                requiredMark={false}
+                onFinish={handleSubmit}
+            >
+                {/* AntD OTP Input Component */}
+                <Form.Item
+                    name="otp"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter the OTP code!",
+                        },
+                        { len: 6, message: "OTP must be 6 digits!" },
+                    ]}
+                    className="flex justify-center mb-4"
+                >
+                    <Input.OTP
+                        length={6}
+                        formatter={(str) => str.toUpperCase()}
+                        className="*:h-11! *:w-10! md:*:h-12! md:*:w-12! *:rounded-xl! *:border-zinc-300! *:bg-zinc-50! *:hover:bg-zinc-100! *:focus:bg-white! *:transition-all *:text-center *:text-base! *:font-bold!"
+                    />
+                </Form.Item>
+
+                {/* Resend Timer Logic */}
+                <div className="flex items-center justify-between text-xs my-4 px-1">
+                    <span className="text-gray-500">
+                        Didn't receive the code?
+                    </span>
+                    {canResend ? (
+                        <button
+                            type="button"
+                            onClick={handleResend}
+                            className="inline-flex items-center gap-1 font-semibold text-primary hover:underline cursor-pointer"
+                        >
+                            <RotateCw className="w-3 h-3" />
+                            <span>Resend Code</span>
+                        </button>
+                    ) : (
+                        <span className="text-gray-400 font-medium">
+                            Resend in {timer}s
+                        </span>
+                    )}
+                </div>
+
+                {/* Submit Button */}
+                <Form.Item className="mt-6 mb-2">
+                    <Button
+                        block
+                        htmlType="submit"
+                        className="h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all cursor-pointer"
+                    >
+                        Verify & Continue
+                    </Button>
+                </Form.Item>
+
+                {/* Back to Login */}
+                <div className="text-center mt-4">
+                    <button
+                        type="button"
+                        onClick={onBackToLogin}
+                        className="inline-flex items-center gap-2 text-xs font-semibold text-gray-600 hover:text-primary transition-colors cursor-pointer"
+                    >
+                        <ArrowLeft className="w-3.5 h-3.5" />
+                        <span>Back to Login</span>
+                    </button>
+                </div>
+
+                {/* Footer Info */}
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-6 pt-4 border-t border-zinc-100">
+                    <Info className="w-4 h-4 shrink-0" />
+                    <span className="text-center">
+                        Authorized Personnel Only.
+                    </span>
+                </div>
+            </Form>
+        </div>
+    );
 }

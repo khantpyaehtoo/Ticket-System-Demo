@@ -11,14 +11,25 @@ import ForgotForm from "./ForgotForm";
 import gsap from "gsap";
 
 import { useGSAP } from "@gsap/react";
+import OtpForm from "./OtpForm";
+import ResetPasswordForm from "./ResetPassFrom";
 
 type AuthView = "login" | "forgot" | "otp" | "reset-password";
 
 export default function LoginPage() {
     const [view, setView] = useState<AuthView>("login");
+    const [userEmail, setUserEmail] = useState<string>("");
+
+    const handleForgotSuccess = (email: string) => {
+        setUserEmail(email);
+        handleSwitch("otp");
+    };
+    const handleOtpSuccess = (otp: string) => {
+        console.log("Submitted Otp: ", otp);
+        handleSwitch("reset-password");
+    };
 
     const containerRef = useRef<HTMLDivElement>(null);
-
     const formWrapperRef = useRef<HTMLDivElement>(null);
 
     // GSAP Initial Animation (When view is "login")
@@ -244,6 +255,138 @@ export default function LoginPage() {
                         },
                     });
                 }
+            } else if (view === "forgot" && nextView === "otp") {
+                gsap.to(formWrapperRef.current, {
+                    opacity: 0,
+                    y: -15,
+                    duration: 0.25,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        setView(nextView);
+
+                        requestAnimationFrame(() => {
+                            gsap.fromTo(
+                                formWrapperRef.current,
+                                { opacity: 0, y: 25 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.4,
+                                    ease: "power3.out",
+                                    clearProps: "all",
+                                },
+                            );
+                        });
+                    },
+                });
+            } else if (view === "otp" && nextView === "reset-password") {
+                gsap.to(formWrapperRef.current, {
+                    opacity: 0,
+                    y: -15,
+                    duration: 0.25,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        setView(nextView);
+
+                        requestAnimationFrame(() => {
+                            gsap.fromTo(
+                                formWrapperRef.current,
+                                { opacity: 0, y: 25 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.4,
+                                    ease: "power3.out",
+                                    clearProps: "all",
+                                },
+                            );
+                        });
+                    },
+                });
+            } else if (view === "reset-password" && nextView === "login") {
+                const isDesktop = window.innerWidth >= 768;
+
+                if (isDesktop) {
+                    setView(nextView);
+
+                    // 2. React Render finished ? Animation requestAnimationFrame
+
+                    requestAnimationFrame(() => {
+                        const tl = gsap.timeline({
+                            defaults: { ease: "power2.inOut" },
+                        });
+
+                        // Layout Width 100% to 50%
+
+                        tl.fromTo(
+                            ".intro-section",
+                            { width: "100%" },
+                            {
+                                width: "50%",
+                                duration: 0.75,
+                                ease: "expo.inOut",
+                            },
+                        )
+
+                            // Left Intro Content
+
+                            .fromTo(
+                                [
+                                    ".intro-content",
+                                    ".connecting-line",
+                                    ".stepper-item",
+                                ],
+
+                                { opacity: 0, x: -30 },
+
+                                {
+                                    opacity: 1,
+                                    x: 0,
+                                    duration: 0.5,
+                                    stagger: 0.08,
+                                    ease: "power2.out",
+                                    clearProps: "all",
+                                },
+
+                                "-=0.55",
+                            )
+
+                            // Right Form Container R to L Smooth Slide In
+
+                            .fromTo(
+                                formWrapperRef.current,
+
+                                { opacity: 0, x: 40 },
+
+                                {
+                                    opacity: 1,
+                                    x: 0,
+                                    duration: 0.45,
+                                    ease: "power3.out",
+                                    clearProps: "all",
+                                },
+
+                                "-=0.45",
+                            );
+                    });
+                } else {
+                    // Mobile View
+                    gsap.to(formWrapperRef.current, {
+                        opacity: 0,
+                        y: -20,
+                        duration: 0.2,
+
+                        onComplete: () => {
+                            setView(nextView);
+
+                            gsap.fromTo(
+                                formWrapperRef.current,
+                                { opacity: 0, y: 20 },
+                                { opacity: 1, y: 0, duration: 0.3 },
+                            );
+                        },
+                    });
+                }
             }
         },
 
@@ -258,7 +401,6 @@ export default function LoginPage() {
             {view === "login" ? (
                 <div className="relative w-full h-full bg-background">
                     {/* Base Layer: Form Container */}
-
                     <div className="form-container w-full h-full md:w-1/2 md:absolute md:right-0 md:top-0 flex items-center justify-center p-6 bg-background z-0">
                         <div ref={formWrapperRef} className="w-full">
                             <LoginForm
@@ -268,9 +410,8 @@ export default function LoginPage() {
                     </div>
 
                     {/* Top Layer: Intro Section */}
-
                     <div
-                        style={{ width: "50%" }}
+                        // style={{ width: "50%" }}
                         className="intro-section absolute lg:w-[50%] md:w-[50%] sm:[100%] inset-0 md:relative md:inset-auto h-full bg-linear-to-b from-primary to-secondary py-8 px-6 md:px-14 flex flex-col justify-between z-10"
                     >
                         <div className="intro-header">
@@ -334,8 +475,16 @@ export default function LoginPage() {
                 </div>
             ) : (
                 /* Forgot View Container */
-
-                <div className="w-full h-full bg-linear-to-b from-primary to-secondary flex items-center justify-center p-4">
+                <div className="relative w-full h-full bg-linear-to-b from-primary to-secondary flex items-center justify-center p-4">
+                    <div className="absolute top-0 left-4 py-8 px-10">
+                        <Image
+                            src="/logo&text.svg"
+                            alt="digitalbase-logo"
+                            width={180}
+                            height={40}
+                            priority
+                        />
+                    </div>
                     <div
                         ref={formWrapperRef}
                         className="w-full max-w-md flex justify-center"
@@ -344,6 +493,31 @@ export default function LoginPage() {
                             <ForgotForm
                                 onBackToLogin={() => handleSwitch("login")}
                                 onSuccessSubmit={() => handleSwitch("otp")}
+                            />
+                        )}
+                        {view === "otp" && (
+                            <OtpForm
+                                email={userEmail}
+                                onBackToLogin={() => setView("login")}
+                                onSuccessSubmit={(otp) => handleOtpSuccess(otp)}
+                                onResendOtp={() => {
+                                    console.log(
+                                        "Resending Otp code to :",
+                                        userEmail,
+                                    );
+                                }}
+                            />
+                        )}
+                        {view === "reset-password" && (
+                            <ResetPasswordForm
+                                onBackToLogin={() => handleSwitch("login")}
+                                onSuccessSubmit={(values) => {
+                                    console.log(
+                                        "New Password:",
+                                        values.password,
+                                    );
+                                    handleSwitch("login");
+                                }}
                             />
                         )}
                     </div>
