@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut } from "@/actions/authAction";
-import { Icon } from "../ui/icon";
+import { LogOut } from "lucide-react";
 
 export default function SignOutBtn() {
     return (
@@ -9,7 +9,7 @@ export default function SignOutBtn() {
             onClick={() => signOut()}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-background text-secondary font-medium rounded-xl hover:bg-secondary hover:text-background transition-colors cursor-pointer"
         >
-            <Icon name="signOut" className="w-4 h-4" />
+            <LogOut />
             <span>Log Out</span>
         </button>
     );
