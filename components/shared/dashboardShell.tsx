@@ -1,40 +1,31 @@
 import { NavItem } from "@/types/user";
-import Header from "./header";
 import Sidebar from "./sidebar";
 
 interface DashboardShellProps {
-    userName?: string;
-    subtitle?: string;
     navItems: NavItem[];
-    showCreateTicket?: boolean;
-    children: React.ReactNode;
     homeHref: string;
+    children: React.ReactNode;
+    header: React.ReactNode; // Flexible Header Slot
 }
 
 export default function DashboardShell({
-    userName,
-    subtitle,
     navItems,
-    showCreateTicket = true,
-    children,
     homeHref,
+    children,
+    header,
 }: DashboardShellProps) {
     return (
         <div className="flex h-screen overflow-hidden bg-background">
             {/* Sidebar */}
             <Sidebar homeHref={homeHref} navItems={navItems} />
 
-            {/* Main Content Area */}
-            <div className="flex-1 flex flex-col overflow-y-auto">
-                {/* Header */}
-                <Header
-                    userName={userName}
-                    subtitle={subtitle}
-                    showCreateTicket={showCreateTicket}
-                />
+            {/* Right Side: Header + Main Body */}
+            <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+                {/* Header Section (Sticky ဖြစ်စေချင်ရင် sticky top-0 z-10 ထည့်နိုင်ပါတယ်) */}
+                <header className="shrink-0">{header}</header>
 
-                {/* Dynamic Page Content */}
-                <main className="p-8 flex-1">{children}</main>
+                {/* Main Page Body */}
+                <main className="p-6 md:p-8 flex-1">{children}</main>
             </div>
         </div>
     );
