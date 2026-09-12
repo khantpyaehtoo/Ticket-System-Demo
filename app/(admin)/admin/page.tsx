@@ -1,4 +1,4 @@
-import { Icon } from "@/components/ui/icon";
+import { LogOut, PlusCircle } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -24,11 +24,8 @@ export default function Home() {
                 </p>
 
                 <div className="flex space-x-3">
-                    <Icon
-                        name="plusCircle"
-                        className="w-5 h-5 text-submitted"
-                    />
-                    <Icon name="signOut" />
+                    <PlusCircle />
+                    <LogOut />
                 </div>
 
                 <div className="flex space-x-3">
