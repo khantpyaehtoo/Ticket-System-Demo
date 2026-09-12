@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/shared/sidebar";
-import Header from "@/components/shared/header";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import Providers from "./provider";
 
 const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
@@ -31,7 +31,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             className={`${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
             <body className="h-screen bg-background antialiased">
-                {children}
+                <Providers>
+                    <AntdRegistry>{children}</AntdRegistry>
+                </Providers>
             </body>
         </html>
     );

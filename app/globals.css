@@ -24,7 +24,7 @@
   --color-background: var(--background);
   
   --font-sans: var(--font-roboto);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-jetbrains: var(--font-jetbrains-mono);
 
   /* Status Colors */
   --color-submitted: var(--submitted);
