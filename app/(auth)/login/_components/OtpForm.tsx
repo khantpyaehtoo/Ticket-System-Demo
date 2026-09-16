@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
-import { ArrowLeft, Info, RotateCw } from "lucide-react";
+import { ArrowLeft, MailOpen, RotateCw } from "lucide-react";
 
 interface OtpFormProps {
-    email?: string;
+    email?: string | { email: string };
     onBackToLogin?: () => void;
     onSuccessSubmit?: (otp: string) => void;
     onResendOtp?: () => void;
@@ -20,6 +20,8 @@ export default function OtpForm({
     const [form] = Form.useForm();
     const [timer, setTimer] = useState<number>(60);
     const [canResend, setCanResend] = useState<boolean>(false);
+
+    const displayEmail = typeof email === "object" ? email.email : email;
 
     // Resend Countdown Timer Logic
     useEffect(() => {
@@ -50,13 +52,21 @@ export default function OtpForm({
     return (
         <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
             {/* Header Section */}
+            <div className="flex justify-center items-center mb-6">
+                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center">
+                    <MailOpen />
+                </p>
+            </div>
             <div className="space-y-2 mb-6 text-center md:text-left">
                 <h1 className="text-xl md:text-2xl font-semibold text-black">
                     Enter OTP Code
                 </h1>
                 <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
                     We&apos;ve sent a 6-digit verification code to{" "}
-                    <span className="font-medium text-black">{email}</span>.
+                    <span className="font-medium text-black">
+                        {displayEmail}
+                    </span>
+                    .
                 </p>
             </div>
 
@@ -89,7 +99,7 @@ export default function OtpForm({
                 {/* Resend Timer Logic */}
                 <div className="flex items-center justify-between text-xs my-4 px-1">
                     <span className="text-gray-500">
-                        Didn't receive the code?
+                        Didn&apos;t receive the code?
                     </span>
                     {canResend ? (
                         <button
@@ -126,16 +136,8 @@ export default function OtpForm({
                         className="inline-flex items-center gap-2 text-xs font-semibold text-gray-600 hover:text-primary transition-colors cursor-pointer"
                     >
                         <ArrowLeft className="w-3.5 h-3.5" />
-                        <span>Back to Login</span>
+                        <span>Back to reset</span>
                     </button>
-                </div>
-
-                {/* Footer Info */}
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-6 pt-4 border-t border-zinc-100">
-                    <Info className="w-4 h-4 shrink-0" />
-                    <span className="text-center">
-                        Authorized Personnel Only.
-                    </span>
                 </div>
             </Form>
         </div>

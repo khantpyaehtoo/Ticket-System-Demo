@@ -4,7 +4,12 @@ import { useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export type AuthView = "login" | "forgot" | "otp" | "reset-password";
+export type AuthView =
+    | "login"
+    | "forgot"
+    | "otp"
+    | "reset-password"
+    | "success";
 
 export function useAuthAnimation(
     view: AuthView,

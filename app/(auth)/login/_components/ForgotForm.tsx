@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Form, Input } from "antd";
-import { ArrowLeft, Info } from "lucide-react";
+import { ArrowLeft, LockKeyholeIcon } from "lucide-react";
 
 export interface ForgotFormProps {
     onBackToLogin: () => void;
@@ -14,13 +14,18 @@ export default function ForgotForm({
 }: ForgotFormProps) {
     return (
         <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
+            <div className="flex justify-center items-center mb-6">
+                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center">
+                    <LockKeyholeIcon />
+                </p>
+            </div>
             <div className="space-y-2 mb-6">
                 <h1 className="text-xl md:text-2xl font-semibold text-black">
-                    Reset Password
+                    Reset your password
                 </h1>
                 <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
-                    Enter your email address and we&apos;ll send you an OTP code
-                    to reset your password.
+                    Enter your email address and we&apos;ll send you a secure
+                    verification link to reset your password.
                 </p>
             </div>
 
@@ -67,13 +72,6 @@ export default function ForgotForm({
                         <ArrowLeft className="w-3.5 h-3.5" />
                         <span>Back to Login</span>
                     </button>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-6 pt-4 border-t border-zinc-100">
-                    <Info className="w-4 h-4 shrink-0" />
-                    <span className="text-center">
-                        Authorized Personnel Only.
-                    </span>
                 </div>
             </Form>
         </div>

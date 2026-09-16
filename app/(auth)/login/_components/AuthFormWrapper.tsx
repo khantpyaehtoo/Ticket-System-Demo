@@ -6,6 +6,7 @@ import ForgotForm from "./ForgotForm";
 import OtpForm from "./OtpForm";
 import ResetPasswordForm from "./ResetPassFrom";
 import { AuthView } from "../_hooks/useAuthAnimation";
+import SuccessForm from "./SuccessForm";
 
 interface AuthFormWrapperProps {
     view: AuthView;
@@ -44,7 +45,8 @@ export default function AuthFormWrapper({
             {view === "otp" && (
                 <OtpForm
                     // email={userEmail}
-                    onBackToLogin={() => onSwitchView("login")}
+                    email={userEmail.email}
+                    onBackToLogin={() => onSwitchView("forgot")}
                     onSuccessSubmit={() => onSwitchView("reset-password")}
                     onResendOtp={() => {
                         console.log("Resending OTP code to:", userEmail);
@@ -56,9 +58,13 @@ export default function AuthFormWrapper({
                 <ResetPasswordForm
                     onBackToLogin={() => onSwitchView("login")}
                     onSuccessSubmit={() => {
-                        onSwitchView("login");
+                        onSwitchView("success");
                     }}
                 />
+            )}
+
+            {view === "success" && (
+                <SuccessForm onBackToLogin={() => onSwitchView("login")} />
             )}
         </div>
     );
