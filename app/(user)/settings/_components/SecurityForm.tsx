@@ -5,13 +5,26 @@ import { Input, Form, Button } from "antd";
 import { Save } from "lucide-react";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
+import { useNotificationModal } from "@/components/ui/notiModal";
 
 export default function SecurityForm() {
+    const [form] = Form.useForm();
+    const { showModal, contextHolder } = useNotificationModal();
+
     const [password, setPassword] = useState("");
     const strength = usePasswordStrength(password);
 
+    // Handle Update Password
+    const handleUpdatePassword = (value: any) => {
+        showModal({
+            title: "Password Updated Successfully!",
+            description: "This notification will close in",
+        });
+    };
+
     return (
         <div className="space-y-4">
+            {contextHolder}
             <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">
                 <h1 className="text-2xl text-black">Change Password</h1>
                 <p className="text-primary">
@@ -20,7 +33,12 @@ export default function SecurityForm() {
                 </p>
             </div>
 
-            <Form layout="vertical" className="w-full space-y-10!">
+            <Form
+                form={form}
+                layout="vertical"
+                className="w-full space-y-10!"
+                onFinish={handleUpdatePassword}
+            >
                 {/* Current Password */}
                 <Form.Item
                     name="currentPassword"
