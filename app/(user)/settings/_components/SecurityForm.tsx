@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Input, Form, Button } from "antd";
 import { Save } from "lucide-react";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
 import { useNotificationModal } from "@/components/ui/notiModal";
+import gsap from "gsap";
 
 export default function SecurityForm() {
     const [form] = Form.useForm();
@@ -13,6 +14,36 @@ export default function SecurityForm() {
 
     const [password, setPassword] = useState("");
     const strength = usePasswordStrength(password);
+
+    // GSAP Animated Container Ref
+    const indicatorRef = useRef<HTMLDivElement>(null);
+
+    // Handle GSAP Smooth Show / Hide Animation
+    useEffect(() => {
+        if (!indicatorRef.current) return;
+
+        if (password.length > 0) {
+            // Smooth Expansion & Fade In
+            gsap.to(indicatorRef.current, {
+                height: "auto",
+                opacity: 1,
+                marginTop: 16,
+                marginBottom: 16,
+                duration: 0.4,
+                ease: "power2.out",
+            });
+        } else {
+            // Smooth Collapse & Fade Out
+            gsap.to(indicatorRef.current, {
+                height: 0,
+                opacity: 0,
+                marginTop: 0,
+                marginBottom: 0,
+                duration: 0.3,
+                ease: "power2.in",
+            });
+        }
+    }, [password.length > 0]); // Trigger when state changes between empty and non-empty
 
     // Handle Update Password
     const handleUpdatePassword = (value: any) => {
@@ -88,8 +119,11 @@ export default function SecurityForm() {
                     />
                 </Form.Item>
 
-                {/* Progress Bar + Dynamic Rules  */}
-                {password.length > 0 && (
+                {/* GSAP Wrapped Progress Bar + Dynamic Rules */}
+                <div
+                    ref={indicatorRef}
+                    className="h-0 opacity-0 overflow-hidden"
+                >
                     <PasswordStrengthIndicator
                         hasMinLen={strength.hasMinLen}
                         hasNumber={strength.hasNumber}
@@ -98,7 +132,7 @@ export default function SecurityForm() {
                         status={strength.status}
                         color={strength.color}
                     />
-                )}
+                </div>
 
                 {/* Confirm New Password */}
                 <Form.Item
