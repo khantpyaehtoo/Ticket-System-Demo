@@ -21,7 +21,7 @@ export default function DashboardShell({
 
             {/* Right Side: Header + Main Body */}
             <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-                {/* Header Section (Sticky ဖြစ်စေချင်ရင် sticky top-0 z-10 ထည့်နိုင်ပါတယ်) */}
+                {/* Header Section */}
                 <header className="shrink-0">{header}</header>
 
                 {/* Main Page Body */}

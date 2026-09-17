@@ -38,7 +38,7 @@ export default function NavLink({ href, label, icon }: NavLinkProps) {
             >
                 {icon}
             </span>
-            <span>{label}</span>
+            <span className="tracking-wider">{label}</span>
         </Link>
     );
 }
