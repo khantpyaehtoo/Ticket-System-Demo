@@ -7,14 +7,14 @@ import { LockKeyhole, Save, Upload } from "lucide-react";
 export default function ProfileForm() {
     return (
         <div className="space-y-4">
-            <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5">
+            <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">
                 <h1 className="text-2xl text-black">Personal Profile</h1>
                 <p className="text-primary">
                     Manange your public personal and workspace information.
                 </p>
             </div>
 
-            <Form layout="vertical" className="space-y-8!">
+            <Form layout="vertical" className="space-y-8! w-full">
                 {/* Image Section */}
                 <Form.Item>
                     <div className="flex gap-10 items-center bg-[#d4d4d4]/10 p-10 rounded-2xl border-2 border-[#E0E0E0]">
@@ -67,7 +67,7 @@ export default function ProfileForm() {
                     <Input
                         type="text"
                         placeholder="example@gmail.com"
-                        className="h-12 rounded-lg! bg-[#d4d4d4]/40! border-2! border-[#E0E0E0]! "
+                        className="h-12 rounded-lg! bg-[#d4d4d4]/40! border-2! border-[#E0E0E0]!"
                         suffix={<LockKeyhole size="20px" />}
                         disabled
                     />
