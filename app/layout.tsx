@@ -30,10 +30,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             lang="en"
             className={`${roboto.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
-            <body className="h-screen bg-background antialiased">
-                <Providers>
-                    <AntdRegistry>{children}</AntdRegistry>
-                </Providers>
+            <body
+                className="h-screen bg-background font-sans antialiased"
+                suppressHydrationWarning
+            >
+                <AntdRegistry>
+                    <Providers>{children}</Providers>
+                </AntdRegistry>
             </body>
         </html>
     );
