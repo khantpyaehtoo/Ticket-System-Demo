@@ -5,9 +5,9 @@ import { BellRing, LayoutGrid, Package, Settings, Ticket } from "lucide-react";
 
 const customerNavItems: NavItem[] = [
     { label: "Dashboard", href: "/user", icon: <LayoutGrid /> },
-    { label: "My Tickets", href: "/user-tickets", icon: <Ticket /> },
+    { label: "My Tickets", href: "/tickets", icon: <Ticket /> },
     { label: "My Products", href: "/products", icon: <Package /> },
-    { label: "Notifications", href: "/notifications", icon: <BellRing /> },
+    { label: "Notifications", href: "/noti", icon: <BellRing /> },
     { label: "Settings", href: "/settings", icon: <Settings /> },
 ];
 
