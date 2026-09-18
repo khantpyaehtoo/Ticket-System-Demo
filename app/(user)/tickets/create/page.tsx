@@ -2,7 +2,7 @@
 
 import "quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { Form, Select, Input, Button, Upload, Modal } from "antd";
+import { Form, Select, Input, Button, Upload } from "antd";
 import { PlusCircle, UploadIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
