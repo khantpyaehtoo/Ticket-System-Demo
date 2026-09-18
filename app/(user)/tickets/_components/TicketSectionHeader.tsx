@@ -34,7 +34,10 @@ export default function TicketSectionHeader() {
     return (
         <div>
             <Link href="/tickets/create">
-                <Button type="primary" className="flex items-center gap-2">
+                <Button
+                    type="primary"
+                    className="flex items-center gap-2 px-10! py-6!"
+                >
                     <PlusCircle size={20} /> Create Ticket
                 </Button>
             </Link>
