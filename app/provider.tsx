@@ -15,6 +15,15 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                     token: {
                         fontFamily: "var(--font-roboto), sans-serif",
                         colorPrimary: "var(--primary)",
+                        colorBgElevated: "#ffffff",
+                    },
+                    components: {
+                        Select: {
+                            optionSelectedColor: "var(--background)",
+                        },
+                        Form: {
+                            labelColor: "#374151",
+                        },
                     },
                 }}
             >
