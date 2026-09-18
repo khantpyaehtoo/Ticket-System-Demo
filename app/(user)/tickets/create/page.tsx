@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
 import "quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { Form, Select, Input, Button, Upload } from "antd";
+import { Form, Select, Input, Button, Upload, Modal } from "antd";
 import { PlusCircle, UploadIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import DebounceSelect from "./_components/DebounceSelect";
 
 const { Dragger } = Upload;
 
@@ -26,24 +26,52 @@ const quillModules = {
 
 const quillFormats = ["bold", "italic", "underline", "list"];
 
+// Dummy Data
+const MOCK_ISSUE_TYPES = [
+    { label: "Bug Report", value: "bug" },
+    { label: "Feature Request", value: "feature" },
+    { label: "Billing Issue", value: "billing" },
+];
+
 export default function CreateTicketPage() {
     const router = useRouter();
     const [form] = Form.useForm();
 
+    const fetchIssueTypes = async (search: string) => {
+        return MOCK_ISSUE_TYPES.filter((item) =>
+            item.label.toLowerCase().includes(search.toLowerCase()),
+        );
+    };
+
+    // Add New Issue Type Handler
+    // const handleAddOption = (searchValue: string) => {
+    //     Modal.confirm({
+    //         title: "Add New Issue Type",
+    //         content: `Do you want to create "${searchValue}" as a new issue type?`,
+    //         onOk() {
+    //             const newOption = {
+    //                 label: searchValue,
+    //                 value: searchValue.toLowerCase(),
+    //             };
+    //             MOCK_ISSUE_TYPES.push(newOption);
+
+    //             form.setFieldsValue({ issueType: newOption });
+    //         },
+    //     });
+    // };
+
     const onFinish = (values: any) => {
         console.log("Form Values:", values);
-        // Execute API call here, then redirect back to list
         router.push("/tickets");
     };
 
     return (
         <div className="max-w-3xl py-8 px-4 space-y-6">
-            {/* Breadcrumb / Back Link */}
             <Link
                 href="/tickets"
                 className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 transition-colors"
             >
-                Back <span className="text-gray-300">/</span> Create Ticket
+                Back <span className="text-gray-300">{">"}</span> Create Ticket
             </Link>
 
             <div>
@@ -107,12 +135,15 @@ export default function CreateTicketPage() {
                         },
                     ]}
                 >
-                    <Select placeholder="Select your Issue Type" size="large">
-                        <Select.Option value="bug">Bug Report</Select.Option>
-                        <Select.Option value="feature">
-                            Feature Request
-                        </Select.Option>
-                    </Select>
+                    <DebounceSelect
+                        style={{ width: "100%" }}
+                        placeholder="Search or select an issue type"
+                        // className="calendar-inputs!"
+                        size="large"
+                        allowClear
+                        fetchOptions={fetchIssueTypes}
+                        // onAddOption={handleAddOption}
+                    />
                 </Form.Item>
 
                 {/* Issue Summary */}
@@ -165,7 +196,7 @@ export default function CreateTicketPage() {
                         theme="snow"
                         modules={quillModules}
                         formats={quillFormats}
-                        placeholder="Tell us what happened, what you were trying to do, and any error messages you received..."
+                        placeholder="Tell us what happened..."
                         className="bg-white rounded-md [&_.ql-toolbar]:rounded-t-md [&_.ql-container]:rounded-b-md [&_.ql-container]:min-h-[120px]"
                     />
                 </Form.Item>
@@ -178,7 +209,6 @@ export default function CreateTicketPage() {
                         beforeUpload={() => false}
                     >
                         <p className="ant-upload-drag-icon flex justify-center text-indigo-500">
-                            {/* <UploadOutlined size={32} /> */}
                             <UploadIcon size={32} />
                         </p>
                         <p className="text-sm font-medium text-indigo-600">
