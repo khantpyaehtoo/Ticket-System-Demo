@@ -7,23 +7,82 @@ import { useRealTime } from "@/lib/hooks/useRealTime";
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+type HeaderLeftConfig = {
+    type: "search" | "title";
+    title?: string;
+    description?: string;
+    searchPlaceholder?: string;
+};
+
+const headerLeftMap: Record<string, HeaderLeftConfig> = {
+    "/user": {
+        type: "search",
+        searchPlaceholder: "Search systems or users...",
+    },
+    "/tickets": {
+        type: "title",
+        title: "My Tickets",
+        description: "View and manage all your support requests",
+    },
+    "/products": {
+        type: "title",
+        title: "My Products",
+        description: "Your active tools and subscription services",
+    },
+    "/noti": {
+        type: "title",
+        title: "Notifications",
+        description: "Recent alerts and updates",
+    },
+    "/settings": {
+        type: "title",
+        title: "Account Settings",
+        description: "Manage your preferences and profile details",
+    },
+};
 
 export default function UserHeader() {
+    const pathname = usePathname();
     const imageSrc = useUserStore((state) => state.imageSrc);
     const { formattedDate, formattedTime } = useRealTime();
 
     const avatarUrl = imageSrc || profileImg.src;
 
+    const currentLeftConfig = headerLeftMap[pathname] || {
+        type: "title",
+        title: "Dashboard",
+        description: "Welcome to your panel",
+    };
+
     return (
         <header className="flex items-center justify-between p-6 bg-background shadow-md">
-            {/* Left side: Search bar */}
-            <div className="relative w-72">
-                <Search className="absolute left-3 top-2.5 w-4 h-4 text-black" />
-                <input
-                    type="text"
-                    placeholder="Search systems or users..."
-                    className="w-full bg-cancelled/20 text-sm pl-9 pr-4 py-2 rounded-lg text-black border border-cancelled focus:outline-none focus:ring-1 focus:ring-primary"
-                />
+            {/* Dynamic Left Side */}
+            <div className="flex items-center">
+                {currentLeftConfig.type === "search" ? (
+                    /* Search Bar Option */
+                    <div className="relative w-72">
+                        <Search className="absolute left-3 top-2.5 w-4 h-4 text-black" />
+                        <input
+                            type="text"
+                            placeholder={currentLeftConfig.searchPlaceholder}
+                            className="w-full bg-cancelled/20 text-sm pl-9 pr-4 py-2 rounded-lg text-black border border-cancelled focus:outline-none focus:ring-1 focus:ring-primary"
+                        />
+                    </div>
+                ) : (
+                    /* Page Title & Description Option */
+                    <div className="space-y-0.5">
+                        <h1 className="text-xl font-bold text-primary tracking-tight">
+                            {currentLeftConfig.title}
+                        </h1>
+                        {currentLeftConfig.description && (
+                            <p className="text-xs text-primary">
+                                {currentLeftConfig.description}
+                            </p>
+                        )}
+                    </div>
+                )}
             </div>
 
             {/* Right side: Credit Status, Date/Time & Profile */}
