@@ -1,13 +1,10 @@
-import { Button } from "antd";
 import React from "react";
+import DashboardCardHeader from "./_components/DashboardCardHeader";
 
 export default function page() {
     return (
         <>
-            <div className="text-3xl text-hold font-mono">
-                This is User Page
-            </div>
-            <Button type="primary">Test Antd Button</Button>
+            <DashboardCardHeader />
         </>
     );
 }
