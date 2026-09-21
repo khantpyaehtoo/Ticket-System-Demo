@@ -1,8 +1,15 @@
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/dashboardCard";
-import { AlarmClock, CircleCheck, MailCheck, Package } from "lucide-react";
-import React from "react";
+import { Button } from "antd";
+import {
+    AlarmClock,
+    CircleCheck,
+    MailCheck,
+    Package,
+    PlusCircle,
+} from "lucide-react";
+import Link from "next/link";
 
 interface TicketCard {
     title: string;
@@ -70,7 +77,15 @@ const DashboardCards: DashboardCardProps[] = [
 export default function DashboardCardHeader() {
     return (
         <div>
-            <div className="grid grid-cols-4 space-x-6 mx-auto text-black">
+            <Link href="/tickets/create">
+                <Button
+                    type="primary"
+                    className="flex items-center gap-2 px-10! py-6!"
+                >
+                    <PlusCircle size={20} /> Create Ticket
+                </Button>
+            </Link>
+            <div className="grid grid-cols-4 space-x-6 mx-auto text-black  my-10">
                 {DashboardCards.map((card, key) => (
                     <div key={key}>
                         <DashboardCard
