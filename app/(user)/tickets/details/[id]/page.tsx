@@ -4,7 +4,7 @@ import ChatSession from "./_components/ChatSession";
 
 export default function Page() {
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-6">
+        <div className="w-full max-w-7xl mx-auto px-0 sm:px-6 py-4 sm:py-6 space-y-6">
             {/* Breadcrumb Link */}
             <nav className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-500">
                 <Link

@@ -106,14 +106,7 @@ export default function ProfileForm() {
                                         className="object-cover rounded-full"
                                     />
                                 }
-                                size={{
-                                    xs: 60,
-                                    sm: 80,
-                                    md: 90,
-                                    lg: 100,
-                                    xl: 100,
-                                    xxl: 100,
-                                }}
+                                size={100}
                                 className="ring-2 ring-offset-4 ring-primary cursor-pointer relative overflow-hidden border-none!"
                             />
 
@@ -132,7 +125,7 @@ export default function ProfileForm() {
 
                         <div className="space-y-4">
                             <Button
-                                type="button"
+                                htmlType="button"
                                 onClick={handleUploadClick}
                                 className="px-1 py-2 md:px-3! md:py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                             >

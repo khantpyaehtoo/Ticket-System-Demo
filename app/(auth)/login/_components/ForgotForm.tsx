@@ -5,7 +5,7 @@ import { ArrowLeft, LockKeyholeIcon } from "lucide-react";
 
 export interface ForgotFormProps {
     onBackToLogin: () => void;
-    onSuccessSubmit: () => void; // OTP
+    onSuccessSubmit: (email: string) => void; // OTP
 }
 
 export default function ForgotForm({

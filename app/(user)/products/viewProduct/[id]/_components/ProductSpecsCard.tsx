@@ -100,7 +100,7 @@ export default function ProductSpecsCard() {
     ];
 
     return (
-        <div className="w-full max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 sm:space-y-10">
+        <div className="w-full max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-6 space-y-8 sm:space-y-10">
             {/* Top SLA & Product Metadata Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 text-black items-stretch">
                 {/* SLA Tracking Card */}

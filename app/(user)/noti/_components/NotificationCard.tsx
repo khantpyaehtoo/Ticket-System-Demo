@@ -4,30 +4,51 @@ import React from "react";
 
 export default function NotificationCard() {
     return (
-        <div className="flex justify-between items-center mx-auto">
-            <div className="border border-primary w-full py-5 px-7 rounded-2xl">
-                <div className="flex gap-3">
-                    <AlarmClock />
-                    <div className="flex">
-                        <div className="w-[80%]">
-                            <h1 className="text-xl font-medium">
+        <div className="w-full">
+            <div className="border border-primary/20 bg-white hover:border-primary/40 transition-colors p-4 sm:p-5 rounded-2xl shadow-sm">
+                <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                    {/* Icon Section */}
+                    <div className="p-2 sm:p-2.5 bg-amber-500/10 text-amber-600 rounded-xl shrink-0">
+                        <AlarmClock className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+
+                    {/* Content & Metadata Section */}
+                    <div className="flex-1 min-w-0 space-y-2">
+                        <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-2">
+                            {/* Title */}
+                            <h2 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug wrap-break-word">
                                 Your mins are very low: 10 mins remaining
-                            </h1>
-                            <p className="text-gray-400">
-                                You don't have enough remaining minutes to
-                                submit additional tickets. Please contact us if
-                                you want to purchase extra minutes now.
-                            </p>
-                            <a>Check your mins</a>
+                            </h2>
+
+                            {/* Tag & Time */}
+                            <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+                                <Tag
+                                    color="success"
+                                    className="rounded-full! px-2.5! py-0.5! text-xs font-medium border-none m-0!"
+                                >
+                                    new
+                                </Tag>
+                                <span className="text-xs text-gray-400 font-normal">
+                                    15 mins ago
+                                </span>
+                            </div>
                         </div>
-                        <div className="h-full gap-4">
-                            <Tag
-                                color="success"
-                                className="rounded-full! px-3 py-2"
+
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+                            You don't have enough remaining minutes to submit
+                            additional tickets. Please contact us if you want to
+                            purchase extra minutes now.
+                        </p>
+
+                        {/* Action Link */}
+                        <div className="pt-1">
+                            <a
+                                href="#"
+                                className="inline-block text-xs sm:text-sm font-semibold text-primary hover:underline transition-all"
                             >
-                                new
-                            </Tag>
-                            <span>15 mins ago</span>
+                                Check your mins &rarr;
+                            </a>
                         </div>
                     </div>
                 </div>

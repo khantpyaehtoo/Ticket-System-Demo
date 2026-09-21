@@ -1,18 +1,35 @@
 import { useDebounceCallback } from "@/lib/hooks/useDebounceCallback";
-import { Select, Spin } from "antd";
+import { Select, SelectProps, Spin } from "antd";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function DebounceSelect({
+// 1. Option Structure type
+export interface DebounceSelectOption {
+    label: React.ReactNode;
+    value: string | number;
+    [key: string]: unknown;
+}
+
+// 2. DebounceSelect Props Interface
+export interface DebounceSelectProps<ValueType = unknown> extends Omit<
+    SelectProps<ValueType>,
+    "options"
+> {
+    fetchOptions: (search: string) => Promise<DebounceSelectOption[]>;
+    debounceTimeout?: number;
+    onAddOption?: (searchValue: string) => void;
+}
+
+export default function DebounceSelect<ValueType = unknown>({
     fetchOptions,
     debounceTimeout = 300,
     // onAddOption,
     ...props
-}) {
-    const [fetching, setFetching] = useState(false);
-    const [options, setOptions] = useState([]);
-    const [searchText, setSearchText] = useState("");
-    const fetchRef = useRef(0);
-    const isMounted = useRef(true);
+}: DebounceSelectProps<ValueType>) {
+    const [fetching, setFetching] = useState<boolean>(false);
+    const [options, setOptions] = useState<DebounceSelectOption[]>([]);
+    const [searchText, setSearchText] = useState<string>("");
+    const fetchRef = useRef<number>(0);
+    const isMounted = useRef<boolean>(true);
 
     useEffect(() => {
         isMounted.current = true;
@@ -23,13 +40,14 @@ export default function DebounceSelect({
 
     // Fetch Function
     const loadOptions = useCallback(
-        (searchValue = "") => {
+        (searchValue: string = "") => {
             fetchRef.current += 1;
             const fetchId = fetchRef.current;
             setFetching(true);
 
             fetchOptions(searchValue)
-                .then((newOptions) => {
+                .then((newOptions: DebounceSelectOption[]) => {
+                    // newOptions type
                     if (!isMounted.current || fetchId !== fetchRef.current)
                         return;
                     setOptions(newOptions || []);
@@ -43,13 +61,14 @@ export default function DebounceSelect({
     );
 
     // Debouncing Search
-    const debouncedSearch = useDebounceCallback((value) => {
+    const debouncedSearch = useDebounceCallback((value: string) => {
         setSearchText(value);
         loadOptions(value);
     }, debounceTimeout);
 
     // Dropdown Initial List Handler
-    const handleDropdownVisibleChange = (open) => {
+    const handleDropdownVisibleChange = (open: boolean) => {
+        // open: boolean type
         if (open) {
             loadOptions("");
         } else {

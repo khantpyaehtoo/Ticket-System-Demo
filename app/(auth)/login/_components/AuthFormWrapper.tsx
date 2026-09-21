@@ -45,7 +45,7 @@ export default function AuthFormWrapper({
             {view === "otp" && (
                 <OtpForm
                     // email={userEmail}
-                    email={userEmail.email}
+                    email={userEmail}
                     onBackToLogin={() => onSwitchView("forgot")}
                     onSuccessSubmit={() => onSwitchView("reset-password")}
                     onResendOtp={() => {

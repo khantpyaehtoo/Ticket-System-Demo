@@ -5,7 +5,7 @@ import { CheckCheck } from "lucide-react";
 import React, { useState } from "react";
 import NotificationCard from "./NotificationCard";
 
-type tabsItems = {
+type TabsItem = {
     key: string;
     label: string;
     children: React.ReactNode;
@@ -18,44 +18,66 @@ export default function AccountTabs() {
         setActiveKey(key);
     };
 
-    const items: tabsItems[] = [
+    const items: TabsItem[] = [
         {
             key: "1",
             label: "All",
-            children: <NotificationCard />,
+            children: (
+                <div className="space-y-3 sm:space-y-4 pt-4">
+                    <NotificationCard />
+                    <NotificationCard />
+                </div>
+            ),
         },
         {
             key: "2",
             label: "Unread",
-            children: <NotificationCard />,
+            children: (
+                <div className="pt-4">
+                    <NotificationCard />
+                </div>
+            ),
         },
         {
             key: "3",
             label: "Tickets",
-            children: <NotificationCard />,
+            children: (
+                <div className="pt-4">
+                    <NotificationCard />
+                </div>
+            ),
         },
         {
             key: "4",
             label: "System",
-            children: <NotificationCard />,
+            children: (
+                <div className="pt-4">
+                    <NotificationCard />
+                </div>
+            ),
         },
     ];
 
+    const renderExtraContent = () => (
+        <Button
+            type="primary"
+            onClick={() => console.log("Marked all as read")}
+            className="bg-black hover:!bg-gray-800 text-white rounded-lg px-4 py-2 h-9 sm:h-10 text-xs sm:text-sm font-medium flex items-center gap-1.5 border-none shadow-none transition-all cursor-pointer mb-2 sm:mb-0"
+        >
+            <CheckCheck size={16} />
+            <span className="text-xs md:text-base">Mark all read</span>
+        </Button>
+    );
+
     return (
-        <div className="flex justify-between items-start">
+        <div className="w-full">
             <Tabs
                 items={items}
                 onChange={onChange}
                 activeKey={activeKey}
-                className="w-1/2!"
+                tabBarExtraContent={renderExtraContent()}
+                className="w-full [&_.ant-tabs-nav-wrap]:border-b [&_.ant-tabs-nav-wrap]:border-gray-200"
             />
-            <Button
-                htmlType="submit"
-                className="px-3! py-5! h-11 md:h-12 bg-primary! text-background! hover:bg-background! hover:text-primary! hover:border! hover:border-primary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-1 cursor-pointer"
-            >
-                <CheckCheck size={18} />
-                <span>Make all as read</span>
-            </Button>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import TicketCreateForm from "./_components/TicketCreateForm";
 
 export default function CreateTicketPage() {
     return (
-        <div className="w-full max-w-8xl mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-4 sm:space-y-6">
+        <div className="w-full max-w-8xl mx-auto px-0 sm:px-6 py-4 sm:py-8 space-y-4 sm:space-y-6">
             {/* Breadcrumb Navigation */}
             <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
                 <Link
