@@ -2,8 +2,10 @@
 import React from "react";
 
 // import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 // import { usersQueryOptions } from "../page";
 
 export interface TicketType {
@@ -55,14 +57,24 @@ export default function RecentTickets() {
 
     return (
         <div className="w-full bg-background border border-primary/10 rounded-xl p-6 shadow-sm space-y-6 text-black">
-            <div className="pb-4 border-b border-primary/10">
-                <h1 className="text-lg font-bold text-secondary tracking-tight">
-                    All Tickets
-                </h1>
-                <p className="font-light text-sm">
-                    Track the lastest updates and progress of your support
-                    requests
-                </p>
+            <div className="pb-4 border-b border-primary/10 flex justify-between items-center">
+                <div>
+                    <h1 className="text-lg font-bold text-secondary tracking-tight">
+                        All Tickets
+                    </h1>
+                    <p className="font-light text-sm">
+                        Track the lastest updates and progress of your support
+                        requests
+                    </p>
+                </div>
+                <Link href="/tickets">
+                    <Button
+                        type="primary"
+                        className="flex items-center gap-2 px-10! py-6!"
+                    >
+                        View All Tickets <ArrowRight size={20} />
+                    </Button>
+                </Link>
             </div>
             <Table<TicketType>
                 columns={tableColumns}
