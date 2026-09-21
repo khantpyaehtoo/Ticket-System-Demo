@@ -1,4 +1,6 @@
-import DashboardCard from "@/components/ui/dashboardCard";
+import DashboardCard, {
+    DashboardCardProps,
+} from "@/components/ui/dashboardCard";
 import { AlarmClock, CircleCheck, MailCheck, Package } from "lucide-react";
 import React from "react";
 
@@ -7,65 +9,65 @@ interface TicketCard {
     description: string;
 }
 
+const ticketCards: TicketCard[] = [
+    {
+        title: "Purchased Hours",
+        description: "50",
+    },
+    {
+        title: "Used Hours",
+        description: "10",
+    },
+    {
+        title: "Available Hours",
+        description: "40",
+    },
+    {
+        title: "Extra Usage",
+        description: "0",
+    },
+];
+
+const DashboardCards: DashboardCardProps[] = [
+    {
+        title: "Submitted Tickets",
+        icon: <MailCheck />,
+        plength: 5,
+        length: 5,
+        type: "Tickets",
+        inform_1: "Today Submitted",
+        inform_2: "5 Tickets",
+    },
+    {
+        title: "Resolved Tickets",
+        icon: <CircleCheck />,
+        plength: 3,
+        length: 3,
+        type: "Tickets",
+        inform_1: "Today Resolved",
+        inform_2: "3 Tickets",
+    },
+    {
+        title: "SLA Hours",
+        icon: <AlarmClock />,
+        plength: 85,
+        length: "85 / 100",
+        type: "Hours",
+        inform_1: "Expired in Dec 3",
+        inform_2: "20 days remaining Tickets",
+    },
+    {
+        title: "Active Products",
+        icon: <Package />,
+        plength: 0,
+        length: "2 / 2",
+        type: "Products",
+        inform_1: "Expired in Dec 3",
+        inform_2: "20 days remaining Tickets",
+    },
+];
+
 export default function DashboardCardHeader() {
-    const ticketCards: TicketCard[] = [
-        {
-            title: "Purchased Hours",
-            description: "50",
-        },
-        {
-            title: "Used Hours",
-            description: "10",
-        },
-        {
-            title: "Available Hours",
-            description: "40",
-        },
-        {
-            title: "Extra Usage",
-            description: "0",
-        },
-    ];
-
-    const DashboardCards = [
-        {
-            title: "Submitted Tickets",
-            icon: <MailCheck />,
-            plength: 5,
-            length: 5,
-            type: "Tickets",
-            infrom_1: "Today Submitted",
-            infrom_2: "5 Tickets",
-        },
-        {
-            title: "Resolved Tickets",
-            icon: <CircleCheck />,
-            plength: 3,
-            length: 3,
-            type: "Tickets",
-            infrom_1: "Today Resolved",
-            infrom_2: "3 Tickets",
-        },
-        {
-            title: "SLA Hours",
-            icon: <AlarmClock />,
-            plength: 85,
-            length: "85 / 100",
-            type: "Hours",
-            infrom_1: "Expired in Dec 3",
-            infrom_2: "20 days remaining Tickets",
-        },
-        {
-            title: "Active Products",
-            icon: <Package />,
-            plength: 100,
-            length: "2 / 2",
-            type: "Products",
-            infrom_1: "Expired in Dec 3",
-            infrom_2: "20 days remaining Tickets",
-        },
-    ];
-
     return (
         <div>
             <div className="grid grid-cols-4 space-x-6 mx-auto text-black">
@@ -77,8 +79,8 @@ export default function DashboardCardHeader() {
                             plength={card.plength}
                             length={card.length}
                             type={card.type}
-                            inform_1={card.infrom_1}
-                            inform_2={card.infrom_2}
+                            inform_1={card.inform_1}
+                            inform_2={card.inform_2}
                         />
                     </div>
                 ))}

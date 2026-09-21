@@ -1,6 +1,8 @@
 "use client";
 
-import DashboardCard from "@/components/ui/dashboardCard";
+import DashboardCard, {
+    DashboardCardProps,
+} from "@/components/ui/dashboardCard";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { AlarmClock, Package } from "lucide-react";
@@ -11,6 +13,66 @@ export interface TicketType {
     serviceName: string;
     customerName: string;
 }
+
+const DashboardCards: DashboardCardProps[] = [
+    {
+        title: "SLA Hours",
+        icon: <AlarmClock />,
+        plength: 85,
+        length: "85 / 100",
+        type: "Hours",
+        inform_1: "Expired in Dec 3",
+        inform_2: "20 days remaining Tickets",
+    },
+    {
+        title: "SLA Hours",
+        icon: <AlarmClock />,
+        plength: 85,
+        length: "85 / 100",
+        type: "Hours",
+        inform_1: "Expired in Dec 3",
+        inform_2: "20 days remaining Tickets",
+    },
+];
+
+const tableColumns: ColumnsType<TicketType> = [
+    {
+        title: "No.",
+        key: "index",
+        render: (_, __, index) => index + 1,
+    },
+    {
+        title: "Ticket Id",
+        dataIndex: "ticketId",
+        key: "ticketId",
+        render: (val, record) => val || record.id || "-",
+    },
+    {
+        title: "Status",
+        dataIndex: "serviceName",
+        key: "serviceName",
+    },
+    {
+        title: "Issue Type",
+        dataIndex: "customerName",
+        key: "customerName",
+    },
+    {
+        title: "Assigned Team",
+        dataIndex: "customerName",
+        key: "customerName",
+    },
+    {
+        title: "Priority",
+        dataIndex: "customerName",
+        key: "customerName",
+    },
+    {
+        title: "Time Used",
+        dataIndex: "customerName",
+        key: "customerName",
+    },
+];
 
 export default function ProductSpecsCard() {
     // Product Data
@@ -37,67 +99,6 @@ export default function ProductSpecsCard() {
         },
     ];
 
-    // Table Columns
-    const tableColumns: ColumnsType<TicketType> = [
-        {
-            title: "No.",
-            key: "index",
-            render: (_, __, index) => index + 1,
-        },
-        {
-            title: "Ticket Id",
-            dataIndex: "ticketId",
-            key: "ticketId",
-            render: (val, record) => val || record.id || "-",
-        },
-        {
-            title: "Status",
-            dataIndex: "serviceName",
-            key: "serviceName",
-        },
-        {
-            title: "Issue Type",
-            dataIndex: "customerName",
-            key: "customerName",
-        },
-        {
-            title: "Assigned Team",
-            dataIndex: "customerName",
-            key: "customerName",
-        },
-        {
-            title: "Priority",
-            dataIndex: "customerName",
-            key: "customerName",
-        },
-        {
-            title: "Time Used",
-            dataIndex: "customerName",
-            key: "customerName",
-        },
-    ];
-
-    const DashboardCards = [
-        {
-            title: "SLA Hours",
-            icon: <AlarmClock />,
-            plength: 85,
-            length: "85 / 100",
-            type: "Hours",
-            infrom_1: "Expired in Dec 3",
-            infrom_2: "20 days remaining Tickets",
-        },
-        {
-            title: "SLA Hours",
-            icon: <AlarmClock />,
-            plength: 85,
-            length: "85 / 100",
-            type: "Hours",
-            infrom_1: "Expired in Dec 3",
-            infrom_2: "20 days remaining Tickets",
-        },
-    ];
-
     return (
         <div className="space-y-10">
             <div className="flex items-start space-x-8 px-8 text-black">
@@ -121,8 +122,8 @@ export default function ProductSpecsCard() {
                                         plength={card.plength}
                                         length={card.length}
                                         type={card.type}
-                                        inform_1={card.infrom_1}
-                                        inform_2={card.infrom_2}
+                                        inform_1={card.inform_1}
+                                        inform_2={card.inform_2}
                                     />
                                 </div>
                             ))}

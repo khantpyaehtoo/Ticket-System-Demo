@@ -2,7 +2,17 @@
 
 import { Progress } from "antd";
 
-import React from "react";
+import React, { ReactNode } from "react";
+
+export interface DashboardCardProps {
+    title: string;
+    icon: ReactNode;
+    plength: number;
+    length: number | string;
+    type: string;
+    inform_1: string;
+    inform_2: string;
+}
 
 export default function dashboardCard({
     title,
@@ -12,7 +22,7 @@ export default function dashboardCard({
     type,
     inform_1,
     inform_2,
-}) {
+}: DashboardCardProps) {
     return (
         <div className="border border-gray-300 px-8 py-5 rounded-2xl shadow-md">
             <div className="flex justify-between items-center border-b border-b-gray-300 pb-3 text-gray-500">
