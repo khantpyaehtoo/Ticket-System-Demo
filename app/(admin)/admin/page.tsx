@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div>
             <main>
-                <h1 className="font-sans text-[32px] leading-[40px] font-medium text-primary">
+                <h1 className=" text-[32px] leading-[40px] font-medium text-primary">
                     Roboto Heading
                 </h1>
 

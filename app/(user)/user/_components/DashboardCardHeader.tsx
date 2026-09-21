@@ -120,7 +120,7 @@ export default function DashboardCardHeader() {
                     {/* Stats & SLA Card Container */}
                     <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 pt-2">
                         {/* Hours Cards Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 w-full xl:w-auto items-center bg-gray-50 md:bg-transparent p-3 md:p-0 rounded-xl">
+                        <div className="grid grid-cols-2 md:grid-cols-4 w-full xl:w-full items-center bg-gray-50 md:bg-transparent p-3 md:p-0 rounded-xl">
                             {ticketCards.map((list, index) => (
                                 <div
                                     key={index}
@@ -153,7 +153,7 @@ export default function DashboardCardHeader() {
                                     Active
                                 </span>
                             </div>
-                            <div className="text-black font-bold text-xs sm:text-sm md:text-base">
+                            <div className="text-black font-bold text-sm sm:text-sm md:text-base">
                                 01.09.2026 - 31.10.2026
                             </div>
                             {/* <Button block className="text-xs sm:text-sm">Request Plan Upgrade</Button> */}

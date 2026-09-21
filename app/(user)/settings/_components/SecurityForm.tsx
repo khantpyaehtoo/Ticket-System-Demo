@@ -3,13 +3,21 @@
 import { useState, useRef, useEffect } from "react";
 import { Input, Form, Button } from "antd";
 import { Save } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
 import { useNotificationModal } from "@/components/ui/notiModal";
 import gsap from "gsap";
 
-export default function SecurityForm() {
+interface SecurityFormProps {
+    onForgotPasswordClick?: () => void;
+}
+
+export default function SecurityForm({
+    onForgotPasswordClick,
+}: SecurityFormProps) {
     const [form] = Form.useForm();
+    const router = useRouter();
     const { showModal, contextHolder } = useNotificationModal();
 
     const [password, setPassword] = useState("");
@@ -17,12 +25,13 @@ export default function SecurityForm() {
 
     // GSAP Animated Container Ref
     const indicatorRef = useRef<HTMLDivElement>(null);
+    const hasPassword = password.length > 0;
 
     // Handle GSAP Smooth Show / Hide Animation
     useEffect(() => {
         if (!indicatorRef.current) return;
 
-        if (password.length > 0) {
+        if (hasPassword) {
             // Smooth Expansion & Fade In
             gsap.to(indicatorRef.current, {
                 height: "auto",
@@ -43,22 +52,38 @@ export default function SecurityForm() {
                 ease: "power2.in",
             });
         }
-    }, [password.length > 0]); // Trigger when state changes between empty and non-empty
+    }, [hasPassword]); // Trigger cleanly on boolean state toggle
 
     // Handle Update Password
-    const handleUpdatePassword = (value: any) => {
+    const handleUpdatePassword = () => {
         showModal({
             title: "Password Updated Successfully!",
             description: "This notification will close in",
         });
     };
 
+    const userEmail = "user@example.com";
+
+    const handleForgotPassword = () => {
+        localStorage.setItem("reset_email", userEmail);
+
+        if (onForgotPasswordClick) {
+            onForgotPasswordClick();
+        } else {
+            router.push(
+                `/login?view=otp&email=${encodeURIComponent(userEmail)}`,
+            );
+        }
+    };
+
     return (
         <div className="space-y-4">
             {contextHolder}
             <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">
-                <h1 className="text-2xl text-black">Change Password</h1>
-                <p className="text-primary">
+                <h1 className="text-2xl text-black font-semibold">
+                    Change Password
+                </h1>
+                <p className="text-primary text-sm">
                     Ensure your account uses a secure password with at least 12
                     characters.
                 </p>
@@ -77,7 +102,13 @@ export default function SecurityForm() {
                     label={
                         <div className="flex justify-between items-center w-full">
                             <span>Current Password</span>
-                            <a className="hover:underline!">Forgot Password?</a>
+                            <button
+                                type="button"
+                                onClick={handleForgotPassword}
+                                className="text-primary hover:underline cursor-pointer text-xs font-normal"
+                            >
+                                Forgot Password?
+                            </button>
                         </div>
                     }
                     rules={[
@@ -100,7 +131,7 @@ export default function SecurityForm() {
                     label={
                         <div className="flex justify-between items-center w-full">
                             <span>New Password</span>
-                            <span className="font-light tracking-wide text-xs">
+                            <span className="font-light tracking-wide text-xs text-gray-500">
                                 12+ characters, symbols & numbers included
                             </span>
                         </div>
@@ -168,7 +199,7 @@ export default function SecurityForm() {
                 <Form.Item>
                     <Button
                         htmlType="submit"
-                        className="px-3! py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-1 cursor-pointer"
+                        className="px-4! py-5! h-11 md:h-12 border-none! bg-primary! text-white! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                     >
                         <Save size={18} />
                         <span>Save Changes</span>

@@ -38,9 +38,12 @@ export default function dashboardCard({
                 <div className="shrink-0">
                     <Progress
                         type="circle"
-                        percent={plength}
+                        percent={type === "Products" ? 0 : plength}
                         strokeColor={"#15803D"}
                         size={60}
+                        format={() =>
+                            type === "Products" ? length : `${plength}`
+                        }
                     />
                 </div>
                 <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium break-all">

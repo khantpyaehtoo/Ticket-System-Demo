@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { ArrowLeft, MailOpen, RotateCw } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface OtpFormProps {
     email?: string | { email: string };
@@ -12,7 +13,7 @@ interface OtpFormProps {
 }
 
 export default function OtpForm({
-    email = "user@example.com",
+    email: propEmail = "user@example.com",
     onBackToLogin,
     onSuccessSubmit,
     onResendOtp,
@@ -21,7 +22,14 @@ export default function OtpForm({
     const [timer, setTimer] = useState<number>(60);
     const [canResend, setCanResend] = useState<boolean>(false);
 
-    const displayEmail = typeof email === "object" ? email.email : email;
+    const searchParams = useSearchParams();
+
+    const queryEmail = searchParams.get("email");
+
+    const rawEmail = queryEmail || propEmail;
+
+    const displayEmail =
+        typeof rawEmail === "object" ? rawEmail.email : rawEmail;
 
     // Resend Countdown Timer Logic
     useEffect(() => {
@@ -53,8 +61,8 @@ export default function OtpForm({
         <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
             {/* Header Section */}
             <div className="flex justify-center items-center mb-6">
-                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center">
-                    <MailOpen />
+                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center text-white">
+                    <MailOpen className="w-7 h-7" />
                 </p>
             </div>
             <div className="space-y-2 mb-6 text-center md:text-left">
@@ -63,7 +71,7 @@ export default function OtpForm({
                 </h1>
                 <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
                     We&apos;ve sent a 6-digit verification code to{" "}
-                    <span className="font-medium text-black">
+                    <span className="font-semibold text-black">
                         {displayEmail}
                     </span>
                     .

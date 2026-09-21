@@ -8,7 +8,7 @@ import AuthFormWrapper from "./_components/AuthFormWrapper";
 
 export default function LoginPage() {
     const [view, setView] = useState<AuthView>("login");
-    const [userEmail, setUserEmail] = useState<string>("");
+    const [userEmail, setUserEmail] = useState<string>("user@example.com");
 
     const { containerRef, formWrapperRef, handleSwitch } = useAuthAnimation(
         view,
