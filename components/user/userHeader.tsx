@@ -18,8 +18,9 @@ type HeaderLeftConfig = {
 
 const headerLeftMap: Record<string, HeaderLeftConfig> = {
     "/user": {
-        type: "search",
-        searchPlaceholder: "Search systems or users...",
+        type: "title",
+        title: "Welcome Back!",
+        description: "Here's and overview of your tickets and service requests",
     },
     "/tickets": {
         type: "title",
