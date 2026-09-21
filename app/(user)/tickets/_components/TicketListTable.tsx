@@ -10,7 +10,6 @@ export interface TicketType {
     ticketId: string;
     serviceName: string;
     customerName: string;
-    // Add additional properties as needed
 }
 
 export default function TicketListClient() {

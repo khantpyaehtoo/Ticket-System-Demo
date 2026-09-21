@@ -5,7 +5,6 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-// Optional: Type your card items for strict TypeScript checking
 interface TicketCard {
     title: string;
     description: string;
@@ -53,7 +52,7 @@ export default function TicketSectionHeader() {
                         {ticketCards.map((list, index) => (
                             <div
                                 key={index}
-                                className={`px-8 py-5 w-50 min-w-auto space-y-2 ${
+                                className={`px-8 py-5 w-80 min-w-auto space-y-2 ${
                                     index !== ticketCards.length - 1
                                         ? "border-r border-primary"
                                         : ""
