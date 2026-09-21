@@ -109,7 +109,7 @@ export default function UserHeader() {
                     <span className="hidden sm:inline">
                         Available: 85/100 mins Credit
                     </span>
-                    <span className="sm:hidden">85/100 mins</span>
+                    <span className="sm:hidden">85/100 mins Credit</span>
                 </div>
 
                 <div className="hidden md:flex items-center gap-4">
