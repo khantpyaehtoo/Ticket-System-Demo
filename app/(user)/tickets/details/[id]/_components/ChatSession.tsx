@@ -46,7 +46,6 @@ export default function ChatSession() {
         }
     };
 
-    // ရွေးထားတဲ့ File ကို ပြန်ဖျက်ရန်
     const handleRemoveFile = (indexToRemove: number) => {
         setSelectedFiles((prev) =>
             prev.filter((_, index) => index !== indexToRemove),
