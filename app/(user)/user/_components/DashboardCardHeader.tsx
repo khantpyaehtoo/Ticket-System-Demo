@@ -77,28 +77,30 @@ const DashboardCards: DashboardCardProps[] = [
 export default function DashboardCardHeader() {
     return (
         <div>
-            <Link href="/tickets/create">
-                <Button
-                    type="primary"
-                    className="flex items-center gap-2 px-10! py-6!"
-                >
-                    <PlusCircle size={20} /> Create Ticket
-                </Button>
-            </Link>
-            <div className="grid grid-cols-4 space-x-6 mx-auto text-black  my-10">
-                {DashboardCards.map((card, key) => (
-                    <div key={key}>
-                        <DashboardCard
-                            title={card.title}
-                            icon={card.icon}
-                            plength={card.plength}
-                            length={card.length}
-                            type={card.type}
-                            inform_1={card.inform_1}
-                            inform_2={card.inform_2}
-                        />
-                    </div>
-                ))}
+            <div className="sticky top-10 bg-background">
+                <Link href="/tickets/create">
+                    <Button
+                        type="primary"
+                        className="flex items-center gap-2 px-10! py-6!"
+                    >
+                        <PlusCircle size={20} /> Create Ticket
+                    </Button>
+                </Link>
+                <div className="grid grid-cols-4 space-x-6 mx-auto text-black  my-10">
+                    {DashboardCards.map((card, key) => (
+                        <div key={key}>
+                            <DashboardCard
+                                title={card.title}
+                                icon={card.icon}
+                                plength={card.plength}
+                                length={card.length}
+                                type={card.type}
+                                inform_1={card.inform_1}
+                                inform_2={card.inform_2}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
             <div>
                 <div className="flex justify-between items-start my-10 text-primary border-b border-primary pb-10 gap-6">

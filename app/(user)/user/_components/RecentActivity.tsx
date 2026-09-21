@@ -4,10 +4,12 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 
 export default function RecentActivity() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     useGSAP(
         () => {
@@ -25,6 +27,20 @@ export default function RecentActivity() {
 
     const activity = [
         {
+            id: 1,
+            title: (
+                <p>
+                    Ticket{" "}
+                    <span className="font-jetbrains group-hover:underline group-hover:text-secondary">
+                        DB-TK1
+                    </span>{" "}
+                    was assigned to Application Team
+                </p>
+            ),
+            updated: <p className="font-light">5 mins ago</p>,
+        },
+        {
+            id: 2,
             title: (
                 <p>
                     Ticket <span className="font-jetbrains">DB-TK1</span> was
@@ -34,6 +50,7 @@ export default function RecentActivity() {
             updated: <p className="font-light">5 mins ago</p>,
         },
         {
+            id: 3,
             title: (
                 <p>
                     Ticket <span className="font-jetbrains">DB-TK1</span> was
@@ -43,15 +60,7 @@ export default function RecentActivity() {
             updated: <p className="font-light">5 mins ago</p>,
         },
         {
-            title: (
-                <p>
-                    Ticket <span className="font-jetbrains">DB-TK1</span> was
-                    assigned to Application Team
-                </p>
-            ),
-            updated: <p className="font-light">5 mins ago</p>,
-        },
-        {
+            id: 4,
             title: (
                 <p>
                     Ticket <span className="font-jetbrains">DB-TK1</span> was
@@ -84,7 +93,8 @@ export default function RecentActivity() {
                 {activity.map((i, key) => (
                     <div
                         key={key}
-                        className="flex items-center gap-6 border-b border-dashed border-b-[#d5d5d5] py-5"
+                        className="flex items-center gap-6 border-b border-dashed border-b-[#d5d5d5] py-5 group w-full px-4 transition-all"
+                        onClick={() => router.push(`/tickets/details/${i.id}`)}
                     >
                         <div className="w-4 h-4 rounded-full ring-2 ring-[#d5d5d5] ring-offset-2 flex items-center justify-center border border-background">
                             {/* Animated Inner Circle */}
