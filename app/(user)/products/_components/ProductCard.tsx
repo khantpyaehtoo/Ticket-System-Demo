@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type Status = "active" | "inactive" | "pending";
@@ -121,10 +122,12 @@ export default function ProductCard() {
 
                         {/* Action Button */}
                         <div className="mt-6">
-                            <button className="w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center space-x-2 rounded-lg hover:bg-gray-50 transition-colors">
-                                <span>View Product Ticket</span>
-                                <ArrowRight size={18} />
-                            </button>
+                            <Link href="/products/viewProduct/1">
+                                <button className="w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center space-x-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <span>View Product Ticket</span>
+                                    <ArrowRight size={18} />
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 );

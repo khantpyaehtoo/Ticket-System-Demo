@@ -42,11 +42,11 @@ const cards: cardSpec[] = [
 
 export default function HeaderCards() {
     return (
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10">
             {cards.map((item, key) => (
                 <div
                     key={key}
-                    className="shadow border border-zinc-100 p-10 rounded-xl"
+                    className="shadow-md border border-gray-200 p-10 rounded-xl"
                 >
                     <div className="flex items-center justify-between">
                         <div className="space-y-3">
