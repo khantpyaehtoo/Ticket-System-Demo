@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 // import { useQuery } from "@tanstack/react-query";
 import { Button, Table } from "antd";
@@ -56,32 +55,43 @@ export default function RecentTickets() {
     ];
 
     return (
-        <div className="w-full bg-background border border-primary/10 rounded-xl p-6 shadow-sm space-y-6 text-black">
-            <div className="pb-4 border-b border-primary/10 flex justify-between items-center">
-                <div>
-                    <h1 className="text-lg font-bold text-secondary tracking-tight">
+        <div className="w-full bg-background border border-primary/10 rounded-xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
+            {/* Header */}
+            <div className="pb-4 border-b border-primary/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                <div className="space-y-0.5">
+                    <h1 className="text-base sm:text-lg font-bold text-secondary tracking-tight">
                         All Tickets
                     </h1>
-                    <p className="font-light text-sm">
-                        Track the lastest updates and progress of your support
+                    <p className="font-light text-xs sm:text-sm text-gray-500">
+                        Track the latest updates and progress of your support
                         requests
                     </p>
                 </div>
-                <Link href="/tickets">
+                <Link
+                    href="/tickets"
+                    className="shrink-0 self-start sm:self-auto"
+                >
                     <Button
                         type="primary"
-                        className="flex items-center gap-2 px-10! py-6!"
+                        className="flex items-center gap-2 !px-4 sm:!px-6 !py-3 sm:!py-5 text-xs sm:text-sm"
                     >
-                        View All Tickets <ArrowRight size={20} />
+                        View All Tickets{" "}
+                        <ArrowRight size={16} className="sm:w-5 sm:h-5" />
                     </Button>
                 </Link>
             </div>
-            <Table<TicketType>
-                columns={tableColumns}
-                // dataSource={users}
-                // loading={isLoading}
-                rowKey="id"
-            />
+
+            {/* Table with Horizontal Scroll Support */}
+            <div className="w-full overflow-x-auto">
+                <Table<TicketType>
+                    columns={tableColumns}
+                    // dataSource={users}
+                    // loading={isLoading}
+                    rowKey="id"
+                    scroll={{ x: 600 }}
+                    pagination={{ pageSize: 5, responsive: true }}
+                />
+            </div>
         </div>
     );
 }

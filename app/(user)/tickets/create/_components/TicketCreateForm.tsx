@@ -43,31 +43,15 @@ export default function TicketCreateForm() {
         );
     };
 
-    // Add New Issue Type Handler
-    // const handleAddOption = (searchValue: string) => {
-    //     Modal.confirm({
-    //         title: "Add New Issue Type",
-    //         content: `Do you want to create "${searchValue}" as a new issue type?`,
-    //         onOk() {
-    //             const newOption = {
-    //                 label: searchValue,
-    //                 value: searchValue.toLowerCase(),
-    //             };
-    //             MOCK_ISSUE_TYPES.push(newOption);
-
-    //             form.setFieldsValue({ issueType: newOption });
-    //         },
-    //     });
-    // };
     const onFinish = (values: any) => {
         console.log("Form Values:", values);
         router.push("/tickets");
     };
 
     return (
-        <div className="max-w-3xl py-5 px-4 space-y-4">
+        <div className="w-full max-w-3xl py-4 sm:py-6 px-4 sm:px-6 bg-white border border-gray-100 rounded-2xl shadow-sm space-y-4">
             <div>
-                <h1 className="text-xl font-semibold text-secondary">
+                <h1 className="text-lg sm:text-xl font-semibold text-secondary">
                     Ticket Information
                 </h1>
             </div>
@@ -76,14 +60,14 @@ export default function TicketCreateForm() {
                 form={form}
                 layout="vertical"
                 onFinish={onFinish}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
             >
                 {/* Product Selection */}
                 <Form.Item
                     name="product"
                     label={
                         <div>
-                            <p className="font-semibold text-primary text-base">
+                            <p className="font-semibold text-primary text-sm sm:text-base">
                                 Which product do you need help with?
                             </p>
                             <p className="text-xs text-gray-500 font-normal">
@@ -96,7 +80,11 @@ export default function TicketCreateForm() {
                         { required: true, message: "Please select a product" },
                     ]}
                 >
-                    <Select placeholder="Choose a Product" size="large">
+                    <Select
+                        placeholder="Choose a Product"
+                        size="large"
+                        className="w-full"
+                    >
                         <Select.Option value="service-a">
                             Service A
                         </Select.Option>
@@ -111,7 +99,7 @@ export default function TicketCreateForm() {
                     name="issueType"
                     label={
                         <div>
-                            <p className="font-semibold text-gray-800 text-base">
+                            <p className="font-semibold text-gray-800 text-sm sm:text-base">
                                 Issue Type
                             </p>
                             <p className="text-xs text-gray-500 font-normal">
@@ -130,11 +118,9 @@ export default function TicketCreateForm() {
                     <DebounceSelect
                         style={{ width: "100%" }}
                         placeholder="Search or select an issue type"
-                        // className="calendar-inputs!"
                         size="large"
                         allowClear
                         fetchOptions={fetchIssueTypes}
-                        // onAddOption={handleAddOption}
                     />
                 </Form.Item>
 
@@ -143,7 +129,7 @@ export default function TicketCreateForm() {
                     name="summary"
                     label={
                         <div>
-                            <p className="font-semibold text-gray-800 text-base">
+                            <p className="font-semibold text-gray-800 text-sm sm:text-base">
                                 Issue Summary
                             </p>
                             <p className="text-xs text-gray-500 font-normal">
@@ -161,15 +147,16 @@ export default function TicketCreateForm() {
                     <Input
                         placeholder="e.g. Unable to log in to my account"
                         size="large"
+                        className="w-full"
                     />
                 </Form.Item>
 
-                {/* Description */}
+                {/* Description (React Quill) */}
                 <Form.Item
                     name="description"
                     label={
                         <div>
-                            <p className="font-semibold text-gray-800 text-base">
+                            <p className="font-semibold text-gray-800 text-sm sm:text-base">
                                 Description
                             </p>
                             <p className="text-xs text-gray-500 font-normal">
@@ -189,7 +176,7 @@ export default function TicketCreateForm() {
                         modules={quillModules}
                         formats={quillFormats}
                         placeholder="Tell us what happened..."
-                        className="bg-white rounded-md [&_.ql-toolbar]:rounded-t-md [&_.ql-container]:rounded-b-md [&_.ql-container]:min-h-[120px]"
+                        className="bg-white rounded-md [&_.ql-toolbar]:rounded-t-md [&_.ql-container]:rounded-b-md [&_.ql-container]:min-h-[120px] sm:[&_.ql-container]:min-h-[160px]"
                     />
                 </Form.Item>
 
@@ -199,39 +186,40 @@ export default function TicketCreateForm() {
                         name="files"
                         multiple={true}
                         beforeUpload={() => false}
+                        className="p-2 sm:p-4"
                     >
-                        <p className="ant-upload-drag-icon flex justify-center text-indigo-500">
-                            <UploadIcon size={32} />
+                        <p className="ant-upload-drag-icon flex justify-center text-indigo-500 mb-2">
+                            <UploadIcon size={28} className="sm:w-8 sm:h-8" />
                         </p>
-                        <p className="text-sm font-medium text-indigo-600">
+                        <p className="text-xs sm:text-sm font-medium text-indigo-600">
                             Drag and drop files{" "}
-                            <span className="text-gray-500 font-normal">
+                            <span className="text-gray-500 font-normal block sm:inline">
                                 here or browse files
                             </span>
                         </p>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-[11px] sm:text-xs text-gray-400 mt-1">
                             (20 MB max file size)
                         </p>
                     </Dragger>
                 </Form.Item>
 
                 {/* Form Action Buttons */}
-                <div className="flex items-center gap-4 pt-4">
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        size="large"
-                        className="bg-zinc-800 hover:!bg-zinc-700 flex items-center gap-2 px-6"
-                    >
-                        <PlusCircle size={18} /> Create Ticket
-                    </Button>
+                <div className="flex flex-col-reverse sm:flex-row items-center justify-start gap-3 sm:gap-4 pt-4">
                     <Button
                         type="text"
                         size="large"
                         onClick={() => router.back()}
-                        className="text-gray-600"
+                        className="w-full sm:w-auto text-gray-600"
                     >
                         Cancel
+                    </Button>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        size="large"
+                        className="w-full sm:w-auto bg-zinc-800 hover:!bg-zinc-700 flex items-center justify-center gap-2 px-6"
+                    >
+                        <PlusCircle size={18} /> Create Ticket
                     </Button>
                 </div>
             </Form>

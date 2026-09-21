@@ -5,10 +5,10 @@ import { Search, Menu } from "lucide-react";
 import Image from "next/image";
 import { useRealTime } from "@/lib/hooks/useRealTime";
 import { useUserStore } from "@/store/useUserStore";
-import { useSidebarStore } from "@/store/useSidebarStore"; // Import Zustand store
 import profileImg from "@/public/defaultProfile.jpg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MobileHamburgerBtn from "../ui/MobileHamburgerBtn";
 
 type HeaderLeftConfig = {
     type: "search" | "title";
@@ -50,9 +50,6 @@ export default function UserHeader() {
     const imageSrc = useUserStore((state) => state.imageSrc);
     const { formattedDate, formattedTime } = useRealTime();
 
-    // Connect to Zustand store
-    const toggleSidebar = useSidebarStore((state) => state.toggleSidebar);
-
     const avatarUrl = imageSrc || profileImg.src;
 
     const currentLeftConfig = headerLeftMap[pathname] || {
@@ -66,13 +63,7 @@ export default function UserHeader() {
             {/* Dynamic Left Side + Mobile Hamburger Button */}
             <div className="flex items-center gap-3">
                 {/* Hamburger Menu Button (Mobile/Tablet Only) */}
-                <button
-                    onClick={toggleSidebar}
-                    className="lg:hidden p-2 rounded-lg text-primary hover:bg-zinc-100 transition-colors focus:outline-none"
-                    aria-label="Open Sidebar"
-                >
-                    <Menu size={24} />
-                </button>
+                <MobileHamburgerBtn />
 
                 {/* Left Title Config (Hidden on mobile if desired, or keep visible) */}
                 <div className="hidden sm:block">

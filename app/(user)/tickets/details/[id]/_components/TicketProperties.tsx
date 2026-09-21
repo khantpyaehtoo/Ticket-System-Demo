@@ -51,10 +51,10 @@ export default function TicketProperties() {
     ];
 
     return (
-        <div className="w-full bg-background border border-primary/10 rounded-xl p-6 shadow-sm space-y-6">
+        <div className="w-full bg-background border border-primary/10 rounded-xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6">
             {/* Header */}
-            <div className="pb-4 border-b border-primary/10">
-                <h2 className="text-lg font-bold text-secondary tracking-tight">
+            <div className="pb-3 sm:pb-4 border-b border-primary/10">
+                <h2 className="text-base sm:text-lg font-bold text-secondary tracking-tight">
                     Ticket Properties
                 </h2>
                 <p className="text-xs text-muted-foreground mt-0.5">
@@ -63,11 +63,11 @@ export default function TicketProperties() {
             </div>
 
             {/* Properties List */}
-            <div className="space-y-4 text-sm">
+            <div className="space-y-3 sm:space-y-4 text-sm">
                 {properties.map((item, index) => (
                     <div
                         key={index}
-                        className="flex items-center justify-between gap-4 py-1.5 border-b border-primary/5 last:border-none"
+                        className="flex items-center justify-between gap-3 py-1.5 border-b border-primary/5 last:border-none"
                     >
                         {/* Label */}
                         <span className="text-muted-foreground text-xs font-medium shrink-0">

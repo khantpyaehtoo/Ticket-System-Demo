@@ -55,25 +55,25 @@ export default function ChatSession() {
     return (
         <div className="w-full bg-background border border-primary/10 rounded-xl shadow-sm overflow-hidden text-primary">
             {/* Header */}
-            <div className="flex flex-wrap justify-between items-center p-6 border-b border-primary/10 bg-primary/5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-primary/10 bg-primary/5 gap-2">
                 <div>
                     <h2 className="font-bold text-base md:text-lg">
                         Support Activity & Thread
                     </h2>
                     <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                        <Lock className="w-3 h-3 text-green-600" /> All
+                        <Lock className="w-3 h-3 text-green-600 shrink-0" /> All
                         communication is encrypted & logged
                     </p>
                 </div>
-                <span className="text-xs font-semibold px-2.5 py-1 bg-primary/10 text-primary rounded-md mt-2 sm:mt-0">
+                <span className="self-start sm:self-auto text-xs font-semibold px-2.5 py-1 bg-primary/10 text-primary rounded-md">
                     2 Messages
                 </span>
             </div>
 
             {/* Communication Thread Section */}
-            <div className="p-4 md:p-6 space-y-6 max-h-[550px] overflow-y-auto">
+            <div className="p-4 md:p-6 space-y-4 sm:space-y-6 max-h-[550px] overflow-y-auto">
                 {/* System Message */}
-                <div className="flex gap-3 md:gap-4 items-start">
+                <div className="flex gap-2.5 sm:gap-4 items-start">
                     <Avatar
                         src={
                             <div className="relative w-full h-full">
@@ -87,20 +87,20 @@ export default function ChatSession() {
                                 />
                             </div>
                         }
-                        size={40}
-                        className="ring-2 ring-primary/20 shrink-0 border-none"
+                        size={36}
+                        className="ring-2 ring-primary/20 shrink-0 border-none sm:w-[40px] sm:h-[40px]"
                     />
-                    <div className="flex-1 bg-muted/40 border border-primary/10 rounded-2xl p-4 md:p-5 space-y-2">
-                        <div className="flex justify-between items-center border-b border-primary/5 pb-2">
-                            <h3 className="font-bold text-sm text-primary">
+                    <div className="flex-1 bg-muted/40 border border-primary/10 rounded-2xl p-3.5 sm:p-5 space-y-2 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-primary/5 pb-2 gap-1">
+                            <h3 className="font-bold text-xs sm:text-sm text-primary">
                                 System Team
                             </h3>
                             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                                <Clock className="w-3.5 h-3.5" />
+                                <Clock className="w-3.5 h-3.5 shrink-0" />
                                 <span>15 Sep 11:30 AM</span>
                             </div>
                         </div>
-                        <p className="text-sm leading-relaxed text-foreground/90">
+                        <p className="text-xs sm:text-sm leading-relaxed text-foreground/90">
                             Hi Megan Fox, We’ve received your technical issue
                             and our support team is currently investigating it.
                         </p>
@@ -108,7 +108,7 @@ export default function ChatSession() {
                 </div>
 
                 {/* User Message */}
-                <div className="flex gap-3 md:gap-4 items-start">
+                <div className="flex gap-2.5 sm:gap-4 items-start">
                     <Avatar
                         src={
                             <div className="relative w-full h-full">
@@ -122,20 +122,20 @@ export default function ChatSession() {
                                 />
                             </div>
                         }
-                        size={40}
-                        className="ring-2 ring-primary/20 shrink-0 border-none"
+                        size={36}
+                        className="ring-2 ring-primary/20 shrink-0 border-none sm:w-[40px] sm:h-[40px]"
                     />
-                    <div className="flex-1 bg-primary/5 border border-primary/15 rounded-2xl p-4 md:p-5 space-y-2">
-                        <div className="flex justify-between items-center border-b border-primary/5 pb-2">
-                            <h3 className="font-bold text-sm text-secondary">
+                    <div className="flex-1 bg-primary/5 border border-primary/15 rounded-2xl p-3.5 sm:p-5 space-y-2 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-primary/5 pb-2 gap-1">
+                            <h3 className="font-bold text-xs sm:text-sm text-secondary">
                                 Megan Fox
                             </h3>
                             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                                <Clock className="w-3.5 h-3.5" />
+                                <Clock className="w-3.5 h-3.5 shrink-0" />
                                 <span>15 Sep 11:35 AM</span>
                             </div>
                         </div>
-                        <p className="text-sm leading-relaxed text-foreground/90">
+                        <p className="text-xs sm:text-sm leading-relaxed text-foreground/90">
                             Hi Support Team, I’ve attached a screenshot of the
                             issue.
                         </p>
@@ -157,14 +157,14 @@ export default function ChatSession() {
 
                 {/* Selected Files List Preview */}
                 {selectedFiles.length > 0 && (
-                    <div className="flex flex-wrap gap-2 pb-2">
+                    <div className="flex flex-wrap gap-2 pb-1">
                         {selectedFiles.map((file, index) => (
                             <div
                                 key={index}
-                                className="flex items-center gap-2 text-xs bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-lg"
+                                className="flex items-center gap-2 text-xs bg-primary/10 text-primary border border-primary/20 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg"
                             >
                                 <FileText className="w-3.5 h-3.5 shrink-0" />
-                                <span className="max-w-[150px] truncate font-medium">
+                                <span className="max-w-[120px] sm:max-w-[150px] truncate font-medium">
                                     {file.name}
                                 </span>
                                 <button
@@ -188,27 +188,27 @@ export default function ChatSession() {
                         modules={quillModules}
                         formats={quillFormats}
                         placeholder="Type your reply here..."
-                        className="bg-white [&_.ql-toolbar]:border-none [&_.ql-toolbar]:bg-muted/20 [&_.ql-container]:border-none [&_.ql-container]:min-h-[100px] [&_.ql-editor]:text-sm"
+                        className="bg-white [&_.ql-toolbar]:border-none [&_.ql-toolbar]:bg-muted/20 [&_.ql-container]:border-none [&_.ql-container]:min-h-[90px] sm:[&_.ql-container]:min-h-[110px] [&_.ql-editor]:text-xs sm:[&_.ql-editor]:text-sm"
                     />
                 </div>
 
                 {/* Editor Action Buttons */}
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
                     <button
                         type="button"
                         onClick={handleAttachClick}
-                        className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-md hover:bg-muted/50 cursor-pointer"
+                        className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md hover:bg-muted/50 cursor-pointer"
                     >
-                        <Paperclip className="w-4 h-4" />
+                        <Paperclip className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         <span>Attach files</span>
                     </button>
 
                     <button
                         type="button"
-                        className="flex items-center text-background gap-2 px-5 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-95 cursor-pointer"
+                        className="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-xs sm:text-sm font-semibold rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-95 cursor-pointer ml-auto"
                     >
-                        <span>Send Reply</span>
-                        <Send className="w-4 h-4" />
+                        <span className="text-background">Send Reply</span>
+                        <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-background" />
                     </button>
                 </div>
             </div>

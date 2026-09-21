@@ -106,7 +106,14 @@ export default function ProfileForm() {
                                         className="object-cover rounded-full"
                                     />
                                 }
-                                size={100}
+                                size={{
+                                    xs: 60,
+                                    sm: 80,
+                                    md: 90,
+                                    lg: 100,
+                                    xl: 100,
+                                    xxl: 100,
+                                }}
                                 className="ring-2 ring-offset-4 ring-primary cursor-pointer relative overflow-hidden border-none!"
                             />
 
@@ -127,12 +134,14 @@ export default function ProfileForm() {
                             <Button
                                 type="button"
                                 onClick={handleUploadClick}
-                                className="px-3! py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                                className="px-1 py-2 md:px-3! md:py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <Upload size="20px" />{" "}
-                                <span>Upload new Photo</span>
+                                <span className="text-xs md:text-base ">
+                                    Upload Photo
+                                </span>
                             </Button>
-                            <p className="text-[#25272C]/80">
+                            <p className="text-[#25272C]/80 text-xs md:text-base">
                                 JPG, PNG or GIF up to 5MB. Recommended dimension
                                 400x400px.
                             </p>

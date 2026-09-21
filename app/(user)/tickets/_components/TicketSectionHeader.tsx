@@ -31,38 +31,42 @@ export default function TicketSectionHeader() {
     ];
 
     return (
-        <div>
-            <Link href="/tickets/create">
+        <div className="w-full space-y-6 ">
+            {/* Create Ticket Button */}
+            <Link href="/tickets/create" className="inline-block">
                 <Button
                     type="primary"
-                    className="flex items-center gap-2 px-10! py-6!"
+                    className="flex items-center gap-2 !px-6 sm:!px-10 !py-4 sm:!py-6 text-sm sm:text-base"
                 >
                     <PlusCircle size={20} /> Create Ticket
                 </Button>
             </Link>
 
-            <div className="flex justify-between items-start my-10 text-primary border-b border-primary pb-10 gap-6">
-                <div className="space-y-4 flex-1">
-                    <p className="text-gray-600">
+            {/* Main Header Container */}
+            <div className="flex flex-col lg:flex-row justify-between items-start my-6 md:my-10 text-primary border-b border-primary pb-8 md:pb-10 gap-6 lg:gap-8">
+                {/* Left Section: Description & Hours Grid */}
+                <div className="space-y-4 md:space-y-6 flex-1 w-full">
+                    <p className="text-gray-600 text-sm sm:text-base max-w-2xl">
                         Track your support hours, monitor usage, and view your
                         remaining SLA balance.
                     </p>
 
-                    <div className="flex w-full items-center">
+                    {/* Ticket Cards Responsive Container */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 w-full items-center bg-gray-50 md:bg-transparent p-4 md:p-0 rounded-xl">
                         {ticketCards.map((list, index) => (
                             <div
                                 key={index}
-                                className={`px-8 py-5 w-80 min-w-auto space-y-2 ${
+                                className={`px-2 sm:px-4 md:px-6 py-2 md:py-4 w-full space-y-1 sm:space-y-2 ${
                                     index !== ticketCards.length - 1
-                                        ? "border-r border-primary"
+                                        ? "md:border-r md:border-primary/40"
                                         : ""
                                 }`}
                             >
-                                <p className="text-gray-600 text-sm">
+                                <p className="text-gray-600 text-xs sm:text-sm font-medium truncate">
                                     {list.title}
                                 </p>
-                                <p>
-                                    <span className="font-medium text-2xl">
+                                <p className="text-sm sm:text-base">
+                                    <span className="font-semibold text-xl sm:text-2xl text-black">
                                         {list.description}
                                     </span>{" "}
                                     Hours
@@ -72,17 +76,20 @@ export default function TicketSectionHeader() {
                     </div>
                 </div>
 
-                <div className="border-l-4 border-amber-500 rounded-r-2xl bg-amber-50/50 px-6 py-5 w-80 space-y-4 shadow-sm">
-                    <div className="flex justify-between items-center font-semibold">
+                {/* Right Section: SLA Plan Card */}
+                <div className="border-l-4 border-amber-500 rounded-r-2xl bg-amber-50/50 p-4 sm:p-5 w-full lg:w-80 space-y-4 shadow-sm shrink-0">
+                    <div className="flex justify-between items-center font-semibold text-sm sm:text-base">
                         <p>Standard SLA Plan</p>
-                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
+                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-medium">
                             Active
                         </span>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-xs sm:text-sm text-gray-500">
                         01.09.2026 ~ 31.10.2026
                     </div>
-                    <Button block>Request Plan Upgrade</Button>
+                    <Button block className="text-xs sm:text-sm">
+                        Request Plan Upgrade
+                    </Button>
                 </div>
             </div>
         </div>

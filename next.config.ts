@@ -34,6 +34,14 @@ const nextConfig: NextConfig = {
             },
         },
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "via.placeholder.com",
+            },
+        ],
+    },
 
     // SVG Loader Config
     webpack(config) {

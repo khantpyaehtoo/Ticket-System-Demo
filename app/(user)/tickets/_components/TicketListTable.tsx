@@ -19,38 +19,45 @@ export default function TicketListClient() {
         {
             title: "No.",
             key: "index",
+            width: 60,
             render: (_, __, index) => index + 1,
         },
         {
             title: "Ticket Id",
             dataIndex: "ticketId",
             key: "ticketId",
+            width: 120,
             render: (val, record) => val || record.id || "-",
         },
         {
             title: "Status",
             dataIndex: "serviceName",
             key: "serviceName",
+            width: 120,
         },
         {
             title: "Issue Type",
             dataIndex: "customerName",
             key: "customerName",
+            width: 140,
         },
         {
             title: "Assigned Team",
             dataIndex: "customerName",
             key: "customerName",
+            width: 150,
         },
         {
             title: "Priority",
             dataIndex: "customerName",
             key: "customerName",
+            width: 100,
         },
         {
             title: "Duration",
             dataIndex: "customerName",
             key: "customerName",
+            width: 120,
         },
     ];
 
@@ -69,29 +76,48 @@ export default function TicketListClient() {
     ];
 
     return (
-        <>
-            <div className="flex justify-between items-end mb-10">
-                <div className="text-primary">
-                    <h1 className="text-xl font-medium">All Tickets</h1>
-                    <p className="font-light text-sm">
-                        (Track the lastest updates and progress of your support
+        <div className="w-full space-y-6">
+            {/* Header Controls Container */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 md:mb-10">
+                {/* Title & Subtitle */}
+                <div className="text-primary space-y-1">
+                    <h1 className="text-lg sm:text-xl font-medium">
+                        All Tickets
+                    </h1>
+                    <p className="font-light text-xs sm:text-sm text-gray-500">
+                        (Track the latest updates and progress of your support
                         requests)
                     </p>
                 </div>
-                <div className="flex items-center gap-5">
+
+                {/* Search Input & Select Filter */}
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
                     <Input.Search
                         placeholder="Search Ticket ID"
-                        className="w-100!"
+                        className="w-full sm:w-64 md:w-72 lg:w-80"
                     />
-                    <Select options={options} className="w-40" />
+                    <Select
+                        defaultValue="all"
+                        options={options}
+                        className="w-full sm:w-40"
+                    />
                 </div>
             </div>
-            <Table<TicketType>
-                columns={tableColumns}
-                // dataSource={users}
-                // loading={isLoading}
-                rowKey="id"
-            />
-        </>
+
+            {/* Table Container with Horizontal Scroll Support */}
+            <div className="w-full overflow-x-auto">
+                <Table<TicketType>
+                    columns={tableColumns}
+                    // dataSource={users}
+                    // loading={isLoading}
+                    rowKey="id"
+                    scroll={{ x: 800 }}
+                    pagination={{
+                        responsive: true,
+                        pageSize: 10,
+                    }}
+                />
+            </div>
+        </div>
     );
 }
