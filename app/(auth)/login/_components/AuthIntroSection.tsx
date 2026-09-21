@@ -43,7 +43,7 @@ export default function AuthIntroSection() {
                         key={step}
                         className="stepper-item flex items-center space-x-4 relative z-10"
                     >
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-background text-primary flex items-center justify-center font-medium text-xs border shrink-0">
+                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-background text-primary flex items-center justify-center font-medium text-xs  shrink-0">
                             {index + 1}
                         </div>
                         <span className="text-background text-xs md:text-sm">

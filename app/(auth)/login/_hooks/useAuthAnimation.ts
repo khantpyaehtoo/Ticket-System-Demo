@@ -32,7 +32,10 @@ export function useAuthAnimation(
                 gsap.timeline({
                     defaults: { ease: "power3.out", duration: 0.7 },
                 })
-                    .from(selector(".intro-header"), { y: -20, opacity: 0 })
+                    .from(selector(".intro-header"), {
+                        y: -20,
+                        opacity: 0,
+                    })
                     .from(
                         selector(".form-container"),
                         { y: 20, opacity: 0 },
