@@ -42,7 +42,7 @@ const cards: cardSpec[] = [
 
 export default function HeaderCards() {
     return (
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5">
             {cards.map((item, key) => (
                 <div
                     key={key}

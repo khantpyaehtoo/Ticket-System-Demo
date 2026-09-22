@@ -102,7 +102,7 @@ export default function ProductCard() {
     const isNavigationHidden = prevBtnDisabled && nextBtnDisabled;
 
     return (
-        <div className="relative p-5 max-w-full">
+        <div className="relative max-w-full">
             {/* Carousel Header Controls */}
             <div className="flex justify-between items-center mb-4">
                 <div className="my-10 ps-2">
@@ -147,7 +147,7 @@ export default function ProductCard() {
             </div>
 
             {/* Carousel Viewport Container */}
-            <div className="overflow-hidden" ref={emblaRef}>
+            <div className="overflow-hidden pb-10" ref={emblaRef}>
                 {/* Carousel Track */}
                 <div className="flex -ml-4">
                     {productDetails.map((product) => {
