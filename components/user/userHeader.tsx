@@ -9,10 +9,11 @@ import profileImg from "@/public/defaultProfile.jpg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MobileHamburgerBtn from "../ui/MobileHamburgerBtn";
+import { ReactNode } from "react";
 
 type HeaderLeftConfig = {
     type: "search" | "title";
-    title?: string;
+    title?: string | ReactNode;
     description?: string;
     searchPlaceholder?: string;
 };
@@ -28,10 +29,36 @@ const headerLeftMap: Record<string, HeaderLeftConfig> = {
         title: "My Tickets",
         description: "View and manage all your support requests",
     },
+    "/tickets/create": {
+        type: "title",
+        title: "My Tickets",
+        description:
+            "Describe your issue and provide any details that may help our support team understand and resolve it.",
+    },
+    "/tickets/details/1": {
+        type: "title",
+        title: (
+            <div className="font-jetbrains flex space-x-4">
+                <span>Cr </span>
+                <span className="underline">Technical Issues</span>
+            </div>
+        ),
+        description:
+            "View your ticket status, details and conversation with our support team.",
+    },
     "/products": {
         type: "title",
         title: "My Products",
         description: "Your active tools and subscription services",
+    },
+    "/products/viewProduct/1": {
+        type: "title",
+        title: (
+            <div className="flex space-x-4">
+                <span>Product Name </span>
+            </div>
+        ),
+        description: "Service Booking and Management System",
     },
     "/noti": {
         type: "title",

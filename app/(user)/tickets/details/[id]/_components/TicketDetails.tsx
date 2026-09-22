@@ -17,7 +17,7 @@ export default function TicketDetails() {
             {/* Main Wrapper: Responsive Layout */}
             <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8 w-full text-primary">
                 {/* Main Content Area */}
-                <div className="flex-1 w-full border border-primary/20 rounded-xl p-4 sm:p-6 md:p-8 bg-background shadow-sm space-y-6 md:space-y-8">
+                <div className="flex-1 w-full border border-primary/10 rounded-xl p-4 sm:p-6 md:p-8 bg-background shadow-sm space-y-6 md:space-y-8">
                     {/* Ticket Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-6 border-b border-primary/10">
                         <div className="flex items-center gap-3 flex-wrap">
@@ -118,7 +118,7 @@ export default function TicketDetails() {
                 </div>
 
                 {/* Ticket Properties Sidebar */}
-                <div className="w-full lg:w-80 shrink-0">
+                <div className="w-full lg:w-90 shrink-0">
                     <TicketProperties />
                 </div>
             </div>

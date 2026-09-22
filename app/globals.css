@@ -6,16 +6,16 @@
   --background: #FAFAFA;
 
   /* Status Colors */
-  --submitted: #6B21A8;
-  --reviewing: #1D4ED8;
-  --assigned: #0369A1;
-  --progress: #B45309;
-  --hold: #D97706;
-  --resolved: #15803D;
-  --reopen: #C2410C;
-  --closed: #475569;
-  --cancelled: #6B7280;
-  --rejected: #B91C1C;
+  --submitted: #0284c7;
+  --reviewing: #d97706;
+  --assigned: #7c3aed;
+  --progress: #0284c7;
+  --hold: #ea580c;
+  --resolved: #16a34a;
+  --reopen: #9333ea;
+  --closed: #6b7280;
+  --cancelled: #e50000;
+  --rejected: #dc2626;
 }
 
 @theme inline {

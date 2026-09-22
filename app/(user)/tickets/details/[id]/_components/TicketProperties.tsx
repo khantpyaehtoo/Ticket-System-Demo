@@ -1,53 +1,40 @@
 "use client";
 
 import React from "react";
-import { Avatar } from "antd";
-import {
-    User,
-    ShieldAlert,
-    Tag,
-    Calendar,
-    UserCheck,
-    Layers,
-} from "lucide-react";
 
 export default function TicketProperties() {
     const properties = [
         { label: "Ticket ID", value: "DB-TK1", isCopyable: true },
         {
+            label: "Issue Type",
+            value: "Technical Issues",
+        },
+        {
+            label: "Assign Team",
+            value: "System Team",
+        },
+        {
+            label: "Related Service",
+            value: "Nail Salon",
+        },
+        {
             label: "Status",
-            value: "Open",
+            value: "Submitted",
             type: "badge",
-            badgeClass: "bg-blue-500/10 text-blue-600 border-blue-200",
+            badgeClass: "bg-submitted/70 border-submitted",
+            textColor: "text-submitted",
         },
         {
             label: "Priority",
-            value: "High",
+            value: "Medium",
             type: "badge",
-            badgeClass: "bg-red-500/10 text-red-600 border-red-200",
+            badgeClass: "bg-hold/70 border-hold",
+            textColor: "text-hold",
         },
-        {
-            label: "Assignee",
-            value: "Alex Rivera",
-            type: "user",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
-        },
-        {
-            label: "Reporter",
-            value: "Megan Fox",
-            type: "user",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Megan",
-        },
-        { label: "Category", value: "Database / Server" },
+
+        { label: "Estimated Resolution Time", value: "2 Hours" },
         { label: "Created Date", value: "15 Sep 2026, 11:00 AM" },
-        { label: "Last Updated", value: "2 hours ago" },
-        { label: "Department", value: "Digital Base" },
-        {
-            label: "SLA Status",
-            value: "Within SLA",
-            type: "badge",
-            badgeClass: "bg-green-500/10 text-green-600 border-green-200",
-        },
+        { label: "Last Updated", value: "15 Sep 2026, 11:30 AM" },
     ];
 
     return (
@@ -78,21 +65,13 @@ export default function TicketProperties() {
                         <div className="font-medium text-right min-w-0">
                             {item.type === "badge" ? (
                                 <span
-                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border ${item.badgeClass}`}
+                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${item.textColor}`}
                                 >
+                                    <div
+                                        className={`w-3 h-3 rounded-full mr-2 border ${item.badgeClass}`}
+                                    />
                                     {item.value}
                                 </span>
-                            ) : item.type === "user" ? (
-                                <div className="flex items-center gap-2 justify-end">
-                                    <Avatar
-                                        src={item.avatar}
-                                        size={22}
-                                        className="shrink-0"
-                                    />
-                                    <span className="truncate text-xs">
-                                        {item.value}
-                                    </span>
-                                </div>
                             ) : (
                                 <span className="text-xs font-semibold text-foreground/90 truncate block">
                                     {item.value}

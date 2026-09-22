@@ -5,7 +5,13 @@ import DashboardCard, {
 } from "@/components/ui/dashboardCard";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { AlarmClock, Package } from "lucide-react";
+import {
+    AlarmClock,
+    CalendarCheck2,
+    CalendarX2,
+    Package,
+    Shield,
+} from "lucide-react";
 
 export interface TicketType {
     id: string | number;
@@ -25,10 +31,10 @@ const DashboardCards: DashboardCardProps[] = [
         inform_2: "20 days remaining",
     },
     {
-        title: "SLA Hours",
+        title: "Extra Hours",
         icon: <AlarmClock />,
-        plength: 85,
-        length: "85 / 100",
+        plength: 100,
+        length: "100 / 100",
         type: "Hours",
         inform_1: "Expired in Dec 3",
         inform_2: "20 days remaining",
@@ -83,17 +89,17 @@ export default function ProductSpecsCard() {
             infrom: "Mari",
         },
         {
-            icon: <Package size={18} />,
+            icon: <Shield size={18} />,
             title: "Support Plan",
             infrom: "Standard SLA Plan",
         },
         {
-            icon: <Package size={18} />,
+            icon: <CalendarCheck2 size={18} />,
             title: "Purchased Date",
             infrom: "01 Sep 2026",
         },
         {
-            icon: <Package size={18} />,
+            icon: <CalendarX2 size={18} />,
             title: "Plan End Date",
             infrom: "30 Oct 2026",
         },
