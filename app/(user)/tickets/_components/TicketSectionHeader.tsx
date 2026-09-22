@@ -79,17 +79,17 @@ export default function TicketSectionHeader() {
                 </div>
 
                 {/* Right Section: SLA Plan Card */}
-                <div className="border-l-4 border-amber-500 rounded-r-2xl bg-amber-50/50 p-4 sm:p-5 w-full lg:w-80 space-y-4 shadow-sm shrink-0">
-                    <div className="flex justify-between items-center font-semibold text-sm sm:text-base">
+                <div className="border-l-2 border-[#d97706] rounded-2xl p-4 sm:p-5 w-full lg:w-80 space-y-4 shrink-0">
+                    <div className="flex justify-between items-center font-light text-sm sm:text-base">
                         <p>Standard SLA Plan</p>
-                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-medium">
+                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-light">
                             Active
                         </span>
                     </div>
-                    <div className="text-xs sm:text-sm text-gray-500">
-                        01.09.2026 ~ 31.10.2026
+                    <div className="text-xs sm:text-lg text-black font-medium">
+                        01.09.2026 - 31.10.2026
                     </div>
-                    <Button block className="text-xs sm:text-sm">
+                    <Button block className="text-xs sm:text-sm shadow-sm!">
                         Request Plan Upgrade
                     </Button>
                 </div>
