@@ -3,14 +3,9 @@
 // import { useQuery } from "@tanstack/react-query";
 import { Input, Select, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { Search } from "lucide-react";
+import { dummyTicketData, TicketType } from "./dummydata";
 // import { usersQueryOptions } from "../page";
-
-export interface TicketType {
-    id: string | number;
-    ticketId: string;
-    serviceName: string;
-    customerName: string;
-}
 
 export default function TicketListClient() {
     // const { data: users, isLoading } = useQuery(usersQueryOptions);
@@ -31,32 +26,32 @@ export default function TicketListClient() {
         },
         {
             title: "Status",
-            dataIndex: "serviceName",
-            key: "serviceName",
+            dataIndex: "status",
+            key: "status",
             width: 120,
         },
         {
             title: "Issue Type",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "issueType",
+            key: "issueType",
             width: 140,
         },
         {
             title: "Assigned Team",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "assign",
+            key: "assign",
             width: 150,
         },
         {
             title: "Priority",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "priority",
+            key: "priority",
             width: 100,
         },
         {
             title: "Duration",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "duration",
+            key: "duration",
             width: 120,
         },
     ];
@@ -92,14 +87,15 @@ export default function TicketListClient() {
 
                 {/* Search Input & Select Filter */}
                 <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-                    <Input.Search
+                    <Input
+                        suffix={<Search className="w-4 h-4 text-gray-400" />}
                         placeholder="Search Ticket ID"
-                        className="w-full sm:w-64 md:w-72 lg:w-80"
+                        className="w-full sm:w-64! md:w-72! lg:w-80! xl:w-100! rounded-lg!"
                     />
                     <Select
                         defaultValue="all"
                         options={options}
-                        className="w-full sm:w-40"
+                        className="w-full sm:w-40! rounded-lg!"
                     />
                 </div>
             </div>
@@ -112,6 +108,7 @@ export default function TicketListClient() {
                     // loading={isLoading}
                     rowKey="id"
                     scroll={{ x: 800 }}
+                    dataSource={dummyTicketData}
                     pagination={{
                         responsive: true,
                         pageSize: 10,

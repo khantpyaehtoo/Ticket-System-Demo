@@ -1,5 +1,9 @@
 "use client";
 
+import {
+    dummyTicketData,
+    TicketType,
+} from "@/app/(user)/tickets/_components/dummydata";
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/dashboardCard";
@@ -12,13 +16,6 @@ import {
     Package,
     Shield,
 } from "lucide-react";
-
-export interface TicketType {
-    id: string | number;
-    ticketId: string;
-    serviceName: string;
-    customerName: string;
-}
 
 const DashboardCards: DashboardCardProps[] = [
     {
@@ -44,38 +41,45 @@ const tableColumns: ColumnsType<TicketType> = [
     {
         title: "No.",
         key: "index",
+        width: 60,
         render: (_, __, index) => index + 1,
     },
     {
         title: "Ticket Id",
         dataIndex: "ticketId",
         key: "ticketId",
+        width: 120,
         render: (val, record) => val || record.id || "-",
     },
     {
         title: "Status",
-        dataIndex: "serviceName",
-        key: "serviceName",
+        dataIndex: "status",
+        key: "status",
+        width: 120,
     },
     {
         title: "Issue Type",
-        dataIndex: "customerName",
-        key: "customerName",
+        dataIndex: "issueType",
+        key: "issueType",
+        width: 140,
     },
     {
         title: "Assigned Team",
-        dataIndex: "customerName",
-        key: "customerName",
+        dataIndex: "assign",
+        key: "assign",
+        width: 150,
     },
     {
         title: "Priority",
-        dataIndex: "customerName",
-        key: "customerName",
+        dataIndex: "priority",
+        key: "priority",
+        width: 100,
     },
     {
-        title: "Time Used",
-        dataIndex: "customerName",
-        key: "customerName",
+        title: "Duration",
+        dataIndex: "duration",
+        key: "duration",
+        width: 120,
     },
 ];
 
@@ -179,14 +183,18 @@ export default function ProductSpecsCard() {
                             Related Support Tickets
                         </h3>
                         <span className="bg-gray-700 rounded-full text-white text-xs font-medium px-3 py-1">
-                            3 records
+                            6 records
                         </span>
                     </div>
                 </div>
 
                 {/* Responsive Table Wrapper */}
                 <div className="w-full overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
-                    <Table columns={tableColumns} />
+                    <Table
+                        columns={tableColumns}
+                        dataSource={dummyTicketData}
+                        pagination={{ pageSize: 5, responsive: true }}
+                    />
                 </div>
             </div>
         </div>

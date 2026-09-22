@@ -69,6 +69,46 @@ export default function RecentActivity() {
             ),
             updated: <p className="font-light">5 mins ago</p>,
         },
+        {
+            id: 5,
+            title: (
+                <p>
+                    Ticket <span className="font-jetbrains">DB-TK1</span> was
+                    assigned to Application Team
+                </p>
+            ),
+            updated: <p className="font-light">5 mins ago</p>,
+        },
+        {
+            id: 6,
+            title: (
+                <p>
+                    Ticket <span className="font-jetbrains">DB-TK1</span> was
+                    assigned to Application Team
+                </p>
+            ),
+            updated: <p className="font-light">5 mins ago</p>,
+        },
+        {
+            id: 7,
+            title: (
+                <p>
+                    Ticket <span className="font-jetbrains">DB-TK1</span> was
+                    assigned to Application Team
+                </p>
+            ),
+            updated: <p className="font-light">5 mins ago</p>,
+        },
+        {
+            id: 8,
+            title: (
+                <p>
+                    Ticket <span className="font-jetbrains">DB-TK1</span> was
+                    assigned to Application Team
+                </p>
+            ),
+            updated: <p className="font-light">5 mins ago</p>,
+        },
     ];
 
     return (
@@ -94,7 +134,7 @@ export default function RecentActivity() {
             {/* Activity List */}
             <div
                 ref={containerRef}
-                className="space-y-2 sm:space-y-3 text-xs sm:text-sm"
+                className="space-y-2 sm:space-y-3 text-xs sm:text-sm overflow-y-auto h-120"
             >
                 {activity.map((i, key) => (
                     <div

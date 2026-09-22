@@ -5,62 +5,66 @@ import { Button, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import {
+    dummyTicketData,
+    TicketType,
+} from "../../tickets/_components/dummydata";
 // import { usersQueryOptions } from "../page";
-
-export interface TicketType {
-    id: string | number;
-    ticketId: string;
-    serviceName: string;
-    customerName: string;
-}
 
 export default function RecentTickets() {
     const tableColumns: ColumnsType<TicketType> = [
         {
             title: "No.",
             key: "index",
+            width: 60,
             render: (_, __, index) => index + 1,
         },
         {
             title: "Ticket Id",
             dataIndex: "ticketId",
             key: "ticketId",
+            width: 120,
             render: (val, record) => val || record.id || "-",
         },
         {
             title: "Status",
-            dataIndex: "serviceName",
-            key: "serviceName",
+            dataIndex: "status",
+            key: "status",
+            width: 120,
         },
         {
             title: "Issue Type",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "issueType",
+            key: "issueType",
+            width: 140,
         },
         {
             title: "Assigned Team",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "assign",
+            key: "assign",
+            width: 150,
         },
         {
             title: "Priority",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "priority",
+            key: "priority",
+            width: 100,
         },
         {
             title: "Duration",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "duration",
+            key: "duration",
+            width: 120,
         },
     ];
 
     return (
         <div className="w-full bg-background border border-primary/10 rounded-xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
             {/* Header */}
-            <div className="pb-4 border-b border-primary/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <div className="pb-4 border-b border-primary/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                 <div className="space-y-0.5">
                     <h1 className="text-base sm:text-lg font-bold text-secondary tracking-tight">
-                        All Tickets
+                        Recent Tickets
                     </h1>
                     <p className="font-light text-xs sm:text-sm text-gray-500">
                         Track the latest updates and progress of your support
@@ -85,7 +89,7 @@ export default function RecentTickets() {
             <div className="w-full overflow-x-auto">
                 <Table<TicketType>
                     columns={tableColumns}
-                    // dataSource={users}
+                    dataSource={dummyTicketData}
                     // loading={isLoading}
                     rowKey="id"
                     scroll={{ x: 600 }}
