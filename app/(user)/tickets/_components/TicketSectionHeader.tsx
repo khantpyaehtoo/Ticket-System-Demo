@@ -33,14 +33,16 @@ export default function TicketSectionHeader() {
     return (
         <div className="w-full space-y-6 ">
             {/* Create Ticket Button */}
-            <Link href="/tickets/create" className="inline-block">
-                <Button
-                    type="primary"
-                    className="flex items-center gap-2 !px-6 sm:!px-10 !py-4 sm:!py-6 text-sm sm:text-base"
-                >
-                    <PlusCircle size={20} /> Create Ticket
-                </Button>
-            </Link>
+            <div className="w-full flex justify-end items-center">
+                <Link href="/tickets/create" className="inline-block">
+                    <Button
+                        type="primary"
+                        className="flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base"
+                    >
+                        <PlusCircle size={20} /> Create Ticket
+                    </Button>
+                </Link>
+            </div>
 
             {/* Main Header Container */}
             <div className="flex flex-col lg:flex-row justify-between items-start my-6 md:my-10 text-primary border-b border-primary pb-8 md:pb-10 gap-6 lg:gap-8">

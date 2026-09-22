@@ -24,8 +24,7 @@ const DashboardCards: DashboardCardProps[] = [
     {
         title: "SLA Hours",
         icon: <AlarmClock />,
-        plength: 85,
-        length: "85 / 100",
+        length: "",
         type: "Hours",
         inform_1: "Expired in Dec 3",
         inform_2: "20 days remaining",

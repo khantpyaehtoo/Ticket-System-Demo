@@ -92,7 +92,7 @@ export default function ProductCard() {
                 return (
                     <div
                         key={product.id}
-                        className="border border-gray-200 shadow-md p-5 rounded-xl flex flex-col justify-between"
+                        className="border border-gray-200 shadow-md p-5 rounded-xl flex flex-col justify-between hover:shadow-lg"
                     >
                         <div>
                             {/* Header Details */}
@@ -159,7 +159,7 @@ export default function ProductCard() {
                         {/* Action Button */}
                         <div className="mt-6">
                             <Link href="/products/viewProduct/1">
-                                <button className="w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center space-x-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                <button className="w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center space-x-2 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                                     <span>View Product Ticket</span>
                                     <ArrowRight size={18} />
                                 </button>

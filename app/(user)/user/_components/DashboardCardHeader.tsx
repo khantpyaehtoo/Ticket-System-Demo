@@ -39,6 +39,14 @@ const ticketCards: TicketCard[] = [
 
 const DashboardCards: DashboardCardProps[] = [
     {
+        title: "SLA Hours",
+        icon: <AlarmClock />,
+        length: "",
+        type: "Hours",
+        inform_1: "Expired in Dec 3",
+        inform_2: "20 days remaining",
+    },
+    {
         title: "Submitted Tickets",
         icon: <MailCheck />,
         plength: 5,
@@ -57,18 +65,9 @@ const DashboardCards: DashboardCardProps[] = [
         inform_2: "3 Tickets",
     },
     {
-        title: "SLA Hours",
-        icon: <AlarmClock />,
-        plength: 85,
-        length: "85 / 100",
-        type: "Hours",
-        inform_1: "Expired in Dec 3",
-        inform_2: "20 days remaining",
-    },
-    {
         title: "Active Products",
         icon: <Package />,
-        plength: 0,
+        plength: 2,
         length: "2",
         type: "Products",
         inform_1: "Expired in Dec 3",
@@ -80,14 +79,16 @@ export default function DashboardCardHeader() {
     return (
         <div>
             <div className="block lg:sticky lg:top-10 bg-background z-10">
-                <Link href="/tickets/create" className="inline-block">
-                    <Button
-                        type="primary"
-                        className="flex items-center gap-2 !px-6 sm:!px-10 !py-4 sm:!py-6 text-sm sm:text-base"
-                    >
-                        <PlusCircle size={20} /> Create Ticket
-                    </Button>
-                </Link>
+                <div className="w-full flex justify-end items-center">
+                    <Link href="/tickets/create" className="inline-block">
+                        <Button
+                            type="primary"
+                            className="flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base"
+                        >
+                            <PlusCircle size={20} /> Create Ticket
+                        </Button>
+                    </Link>
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 text-black my-6 md:my-10 items-stretch">
                     {DashboardCards.map((card, key) => (

@@ -1,98 +1,34 @@
 "use client";
 
-import { Avatar } from "antd";
-import { Search, Menu } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useParams } from "next/navigation";
+import { Avatar } from "antd";
+import { Search } from "lucide-react";
+
 import { useRealTime } from "@/lib/hooks/useRealTime";
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import MobileHamburgerBtn from "../ui/MobileHamburgerBtn";
-import { ReactNode } from "react";
-
-type HeaderLeftConfig = {
-    type: "search" | "title";
-    title?: string | ReactNode;
-    description?: string;
-    searchPlaceholder?: string;
-};
-
-const headerLeftMap: Record<string, HeaderLeftConfig> = {
-    "/user": {
-        type: "title",
-        title: "Welcome Back!",
-        description: "Here's and overview of your tickets and service requests",
-    },
-    "/tickets": {
-        type: "title",
-        title: "My Tickets",
-        description: "View and manage all your support requests",
-    },
-    "/tickets/create": {
-        type: "title",
-        title: "My Tickets",
-        description:
-            "Describe your issue and provide any details that may help our support team understand and resolve it.",
-    },
-    "/tickets/details/1": {
-        type: "title",
-        title: (
-            <div className="font-jetbrains flex space-x-4">
-                <span>Cr </span>
-                <span className="underline">Technical Issues</span>
-            </div>
-        ),
-        description:
-            "View your ticket status, details and conversation with our support team.",
-    },
-    "/products": {
-        type: "title",
-        title: "My Products",
-        description: "Your active tools and subscription services",
-    },
-    "/products/viewProduct/1": {
-        type: "title",
-        title: (
-            <div className="flex space-x-4">
-                <span>Product Name </span>
-            </div>
-        ),
-        description: "Service Booking and Management System",
-    },
-    "/noti": {
-        type: "title",
-        title: "Notifications",
-        description: "Recent alerts and updates",
-    },
-    "/settings": {
-        type: "title",
-        title: "Account Settings",
-        description: "Manage your preferences and profile details",
-    },
-};
+import { getHeaderConfig } from "@/lib/getHeaderConfig";
 
 export default function UserHeader() {
     const pathname = usePathname();
+    const params = useParams();
     const imageSrc = useUserStore((state) => state.imageSrc);
     const { formattedDate, formattedTime } = useRealTime();
 
     const avatarUrl = imageSrc || profileImg.src;
 
-    const currentLeftConfig = headerLeftMap[pathname] || {
-        type: "title",
-        title: "Dashboard",
-        description: "Welcome to your panel",
-    };
+    // Resolve config dynamically
+    const currentLeftConfig = getHeaderConfig(pathname, params);
 
     return (
         <header className="sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 bg-background shadow-md">
             {/* Dynamic Left Side + Mobile Hamburger Button */}
             <div className="flex items-center gap-3">
-                {/* Hamburger Menu Button (Mobile/Tablet Only) */}
                 <MobileHamburgerBtn />
 
-                {/* Left Title Config (Hidden on mobile if desired, or keep visible) */}
                 <div className="hidden sm:block">
                     {currentLeftConfig.type === "search" ? (
                         <div className="relative w-72">
@@ -151,7 +87,7 @@ export default function UserHeader() {
                                 />
                             }
                             size={40}
-                            className="ring-2 ring-offset-2 ring-primary cursor-pointer relative overflow-hidden !border-none"
+                            className="ring-2 ring-offset-2 ring-primary cursor-pointer relative overflow-hidden border-none!"
                         />
                     </Link>
                 </div>

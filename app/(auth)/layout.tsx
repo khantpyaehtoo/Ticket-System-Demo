@@ -1,9 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function AuthLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    return <div className="bg-background">{children}</div>;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <div className="bg-background">{children}</div>;
+        </Suspense>
+    );
 }
