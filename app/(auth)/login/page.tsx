@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useAuthAnimation, AuthView } from "./_hooks/useAuthAnimation";
 import AuthIntroSection from "./_components/AuthIntroSection";

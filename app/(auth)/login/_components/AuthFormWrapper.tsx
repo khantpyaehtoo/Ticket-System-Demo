@@ -1,13 +1,10 @@
-"use client";
-
-import { RefObject, useEffect } from "react";
+import { RefObject } from "react";
 import LoginForm from "./LoginForm";
 import ForgotForm from "./ForgotForm";
 import OtpForm from "./OtpForm";
 import ResetPasswordForm from "./ResetPassFrom";
 import { AuthView } from "../_hooks/useAuthAnimation";
 import SuccessForm from "./SuccessForm";
-import { useSearchParams } from "next/navigation";
 
 interface AuthFormWrapperProps {
     view: AuthView;
@@ -24,21 +21,6 @@ export default function AuthFormWrapper({
     onSwitchView,
     onSetUserEmail,
 }: AuthFormWrapperProps) {
-    const searchParams = useSearchParams();
-
-    useEffect(() => {
-        const queryView = searchParams.get("view") as AuthView | null;
-        const queryEmail = searchParams.get("email");
-
-        if (queryEmail) {
-            onSetUserEmail(queryEmail);
-        }
-
-        if (queryView && queryView !== view) {
-            onSwitchView(queryView);
-        }
-    }, [searchParams]);
-
     return (
         <div
             ref={formWrapperRef}

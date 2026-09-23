@@ -74,36 +74,60 @@ export default function ProductCard() {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: false,
         align: "start",
-        // draggable: true,
         dragFree: true,
     });
 
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
     const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
     const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
     const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
     const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+    const scrollTo = useCallback(
+        (index: number) => emblaApi?.scrollTo(index),
+        [emblaApi],
+    );
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
-        // Updates button disabled status automatically based on screen width & slides
+        setSelectedIndex(emblaApi.selectedScrollSnap());
         setPrevBtnDisabled(!emblaApi.canScrollPrev());
         setNextBtnDisabled(!emblaApi.canScrollNext());
     }, [emblaApi]);
 
     useEffect(() => {
         if (!emblaApi) return;
+        setScrollSnaps(emblaApi.scrollSnapList());
         onSelect();
         emblaApi.on("select", onSelect);
         emblaApi.on("reInit", onSelect);
     }, [emblaApi, onSelect]);
 
-    // Check if total slides cannot fill the current viewport width at all
     const isNavigationHidden = prevBtnDisabled && nextBtnDisabled;
+
+    // Dots Component (Mobile နှင့် Desktop နှစ်နေရာလုံးတွင် အသုံးပြုရန်)
+    const renderDots = () => (
+        <div className="flex justify-center items-center gap-2">
+            {scrollSnaps.map((_, index) => (
+                <button
+                    key={index}
+                    onClick={() => scrollTo(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                    className={cn(
+                        "h-2.5 rounded-full transition-all duration-300 cursor-pointer",
+                        index === selectedIndex
+                            ? "w-7 bg-black"
+                            : "w-2.5 bg-gray-300 hover:bg-gray-400",
+                    )}
+                />
+            ))}
+        </div>
+    );
 
     return (
         <div className="relative max-w-full">
-            {/* Carousel Header Controls */}
+            {/* Header Section */}
             <div className="flex justify-between items-center mb-4">
                 <div className="my-10 ps-2">
                     <h1 className="font-medium text-2xl">Your Products</h1>
@@ -111,9 +135,16 @@ export default function ProductCard() {
                         Products and services available under your account.
                     </p>
                 </div>
+
+                {/* MOBILE ONLY: Arrows */}
+                {!isNavigationHidden && (
+                    <div className="md:hidden">{renderDots()}</div>
+                )}
+
+                {/* DESKTOP ONLY: Arrows */}
                 <div
                     className={cn(
-                        "flex space-x-2 transition-opacity duration-200",
+                        "hidden md:flex space-x-2 transition-opacity duration-200",
                         isNavigationHidden && "opacity-0 pointer-events-none",
                     )}
                 >
@@ -146,42 +177,84 @@ export default function ProductCard() {
                 </div>
             </div>
 
-            {/* Carousel Viewport Container */}
-            <div className="overflow-hidden pb-10" ref={emblaRef}>
-                {/* Carousel Track */}
-                <div className="flex -ml-4">
-                    {productDetails.map((product) => {
-                        const detailsList = [
-                            {
-                                label: "Product Type",
-                                value: product.productType,
-                            },
-                            {
-                                label: "Support Plan",
-                                value: product.supportPlan,
-                            },
-                            {
-                                label: "Purchased Date",
-                                value: product.purchasedDate,
-                            },
-                            {
-                                label: "Plan End Date",
-                                value: product.planEndDate,
-                            },
-                            {
-                                label: "Available Hours",
-                                value: `${product.availableHours} hrs`,
-                            },
-                        ];
+            {/* DESKTOP ONLY: Dot Position */}
+            {!isNavigationHidden && (
+                <div className="hidden md:flex justify-center mb-6">
+                    {renderDots()}
+                </div>
+            )}
 
-                        return (
-                            <PerProductCard
-                                key={product.id}
-                                detailsList={detailsList}
-                                product={product}
-                            />
-                        );
-                    })}
+            {/* Carousel Viewport Container */}
+            <div className="relative group">
+                {/* MOBILE ONLY: Arrows Left Right */}
+                {!isNavigationHidden && (
+                    <>
+                        <button
+                            onClick={scrollPrev}
+                            disabled={prevBtnDisabled}
+                            aria-label="Previous Slide"
+                            className={cn(
+                                "md:hidden absolute -left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/90 border border-gray-200 shadow-md transition-all",
+                                prevBtnDisabled
+                                    ? "opacity-0 pointer-events-none"
+                                    : "hover:bg-gray-100 cursor-pointer opacity-100",
+                            )}
+                        >
+                            <ArrowLeft size={18} />
+                        </button>
+
+                        <button
+                            onClick={scrollNext}
+                            disabled={nextBtnDisabled}
+                            aria-label="Next Slide"
+                            className={cn(
+                                "md:hidden absolute -right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/90 border border-gray-200 shadow-md transition-all",
+                                nextBtnDisabled
+                                    ? "opacity-0 pointer-events-none"
+                                    : "hover:bg-gray-100 cursor-pointer opacity-100",
+                            )}
+                        >
+                            <ArrowRight size={18} />
+                        </button>
+                    </>
+                )}
+
+                {/* Carousel Track */}
+                <div className="overflow-hidden pb-10" ref={emblaRef}>
+                    <div className="flex -ml-4">
+                        {productDetails.map((product) => {
+                            const detailsList = [
+                                {
+                                    label: "Product Type",
+                                    value: product.productType,
+                                },
+                                {
+                                    label: "Support Plan",
+                                    value: product.supportPlan,
+                                },
+                                {
+                                    label: "Purchased Date",
+                                    value: product.purchasedDate,
+                                },
+                                {
+                                    label: "Plan End Date",
+                                    value: product.planEndDate,
+                                },
+                                {
+                                    label: "Available Hours",
+                                    value: `${product.availableHours} hrs`,
+                                },
+                            ];
+
+                            return (
+                                <PerProductCard
+                                    key={product.id}
+                                    detailsList={detailsList}
+                                    product={product}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
