@@ -7,6 +7,8 @@ import {
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/dashboardCard";
+import { getPriorityColor } from "@/lib/getPriorityConfig";
+import { getStatusColor } from "@/lib/getStatusColors";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import {
@@ -37,52 +39,6 @@ const DashboardCards: DashboardCardProps[] = [
     },
 ];
 
-const tableColumns: ColumnsType<TicketType> = [
-    {
-        title: "No.",
-        key: "index",
-        width: 60,
-        render: (_, __, index) => index + 1,
-    },
-    {
-        title: "Ticket Id",
-        dataIndex: "ticketId",
-        key: "ticketId",
-        width: 120,
-        render: (val, record) => val || record.id || "-",
-    },
-    {
-        title: "Status",
-        dataIndex: "status",
-        key: "status",
-        width: 120,
-    },
-    {
-        title: "Issue Type",
-        dataIndex: "issueType",
-        key: "issueType",
-        width: 140,
-    },
-    {
-        title: "Assigned Team",
-        dataIndex: "assign",
-        key: "assign",
-        width: 150,
-    },
-    {
-        title: "Priority",
-        dataIndex: "priority",
-        key: "priority",
-        width: 100,
-    },
-    {
-        title: "Duration",
-        dataIndex: "duration",
-        key: "duration",
-        width: 120,
-    },
-];
-
 export default function ProductSpecsCard() {
     // Product Data
     const productData = [
@@ -105,6 +61,86 @@ export default function ProductSpecsCard() {
             icon: <CalendarX2 size={18} />,
             title: "Plan End Date",
             infrom: "30 Oct 2026",
+        },
+    ];
+
+    const tableColumns: ColumnsType<TicketType> = [
+        {
+            title: "No.",
+            key: "key",
+            width: 60,
+            render: (_, __, key) => key + 1,
+        },
+        {
+            title: "Ticket Id",
+            dataIndex: "ticketId",
+            key: "ticketId",
+            width: 120,
+            render: (val, record) => val || record.id || "-",
+        },
+        {
+            title: "Status",
+            dataIndex: "status",
+            key: "status",
+            width: 120,
+            render: (status) => {
+                const color = getStatusColor(status);
+                return (
+                    <span
+                        className="px-2.5 py-1 rounded-full text-sm font-medium inline-block"
+                        style={{
+                            color: color,
+                            // backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, // Soft background pill effect
+                        }}
+                    >
+                        {status}
+                    </span>
+                );
+            },
+        },
+        {
+            title: "Issue Type",
+            dataIndex: "issueType",
+            key: "issueType",
+            width: 140,
+            render: (issue) => (
+                <span className="underline text-link-blue hover:text-gray-400 cursor-default">
+                    {issue}
+                </span>
+            ),
+        },
+        {
+            title: "Assigned Team",
+            dataIndex: "assign",
+            key: "assign",
+            width: 150,
+        },
+        {
+            title: "Priority",
+            dataIndex: "priority",
+            key: "priority",
+            width: 100,
+            render: (priority: string) => {
+                const color = getPriorityColor(priority);
+
+                return (
+                    <div className="flex items-center gap-2">
+                        <span
+                            className="w-2 h-2 rounded-full inline-block shrink-0"
+                            style={{ backgroundColor: color }}
+                        />
+                        <span className="text-sm capitalize font-medium text-gray-700">
+                            {priority}
+                        </span>
+                    </div>
+                );
+            },
+        },
+        {
+            title: "Duration",
+            dataIndex: "duration",
+            key: "duration",
+            width: 120,
         },
     ];
 
@@ -148,7 +184,7 @@ export default function ProductSpecsCard() {
                             System Meta Data
                         </h2>
 
-                        <div className="divide-y divide-gray-200">
+                        <div className="divide-y space-y-6 divide-gray-200">
                             {productData.map((data, key) => (
                                 <div
                                     key={key}
@@ -158,13 +194,13 @@ export default function ProductSpecsCard() {
                                         <span className="shrink-0 text-base">
                                             {data.icon}
                                         </span>
-                                        <span className="truncate font-medium text-xs">
+                                        <span className="truncate font-medium text-sm">
                                             {data.title}
                                         </span>
                                     </div>
 
                                     <div className="shrink-0 text-right">
-                                        <p className="text-gray-900 font-medium text-xs">
+                                        <p className="text-gray-900 font-medium text-sm">
                                             {data.infrom}
                                         </p>
                                     </div>
@@ -191,6 +227,7 @@ export default function ProductSpecsCard() {
                 {/* Responsive Table Wrapper */}
                 <div className="w-full overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
                     <Table
+                        rowKey="key"
                         columns={tableColumns}
                         dataSource={dummyTicketData}
                         pagination={{ pageSize: 5, responsive: true }}

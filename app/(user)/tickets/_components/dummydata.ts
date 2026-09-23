@@ -1,12 +1,14 @@
+import { TicketStatus } from "@/lib/getStatusColors";
+
 // 1. Ticket Data Type Definition
 export interface TicketType {
     key: string;
     id: string;
     ticketId: string;
-    status: "Pending" | "In Progress" | "Resolved" | "Closed";
+    status: TicketStatus;
     issueType: string;
     assign: string;
-    priority: "Low" | "Medium" | "High" | "Urgent";
+    priority: "Low" | "Medium" | "High" | "Critical";
     duration: string;
 }
 
@@ -16,7 +18,7 @@ export const dummyTicketData: TicketType[] = [
         key: "1",
         id: "TCK-1001",
         ticketId: "TCK-1001",
-        status: "In Progress",
+        status: "Submitted",
         issueType: "Technical Issue",
         assign: "DevOps Team",
         priority: "High",
@@ -26,7 +28,7 @@ export const dummyTicketData: TicketType[] = [
         key: "2",
         id: "TCK-1002",
         ticketId: "TCK-1002",
-        status: "Pending",
+        status: "Reviewing",
         issueType: "Billing & Payment",
         assign: "Finance Support",
         priority: "Medium",
@@ -36,10 +38,10 @@ export const dummyTicketData: TicketType[] = [
         key: "3",
         id: "TCK-1003",
         ticketId: "TCK-1003",
-        status: "Resolved",
+        status: "Assigned",
         issueType: "Account Access",
         assign: "IT Helpdesk",
-        priority: "Urgent",
+        priority: "Critical",
         duration: "1h 15m",
     },
     {
@@ -66,7 +68,37 @@ export const dummyTicketData: TicketType[] = [
         key: "6",
         id: "TCK-1006",
         ticketId: "TCK-1006",
-        status: "Pending",
+        status: "On Hold",
+        issueType: "API Integration",
+        assign: "Backend Team",
+        priority: "High",
+        duration: "1h 50m",
+    },
+    {
+        key: "7",
+        id: "TCK-1005",
+        ticketId: "TCK-1005",
+        status: "Reopened",
+        issueType: "Bug Report",
+        assign: "QA & Support",
+        priority: "Medium",
+        duration: "3h 20m",
+    },
+    {
+        key: "8",
+        id: "TCK-1006",
+        ticketId: "TCK-1006",
+        status: "Cancelled",
+        issueType: "API Integration",
+        assign: "Backend Team",
+        priority: "High",
+        duration: "1h 50m",
+    },
+    {
+        key: "9",
+        id: "TCK-1006",
+        ticketId: "TCK-1006",
+        status: "Rejected",
         issueType: "API Integration",
         assign: "Backend Team",
         priority: "High",

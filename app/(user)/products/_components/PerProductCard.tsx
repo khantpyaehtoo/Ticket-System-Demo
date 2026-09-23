@@ -71,9 +71,11 @@ export default function PerProductCard({
 
                     {/* Action Button */}
                     <div className="mt-6">
-                        <button className="w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center space-x-2 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                        <button className="relative w-full border border-dashed border-gray-800 py-3 font-medium shadow-sm flex items-center justify-center rounded-lg hover:bg-gray-50 cursor-pointer group transition-all">
                             <span>View Product Ticket</span>
-                            <ArrowRight size={18} />
+                            <div className="max-w-0 opacity-0 overflow-hidden transition-all duration-200 group-hover:max-w-6 group-hover:opacity-100 group-hover:ml-4">
+                                <ArrowRight size={18} />
+                            </div>
                         </button>
                     </div>
                 </div>

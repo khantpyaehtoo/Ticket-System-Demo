@@ -5,17 +5,21 @@ import { Input, Select, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Search } from "lucide-react";
 import { dummyTicketData, TicketType } from "./dummydata";
+import { getStatusColor } from "@/lib/getStatusColors";
+import { getPriorityColor } from "@/lib/getPriorityConfig";
+import { useRouter } from "next/navigation";
 // import { usersQueryOptions } from "../page";
 
 export default function TicketListClient() {
     // const { data: users, isLoading } = useQuery(usersQueryOptions);
+    const router = useRouter();
 
     const tableColumns: ColumnsType<TicketType> = [
         {
             title: "No.",
-            key: "index",
+            key: "id",
             width: 60,
-            render: (_, __, index) => index + 1,
+            render: (_, __, id) => id + 1,
         },
         {
             title: "Ticket Id",
@@ -29,12 +33,31 @@ export default function TicketListClient() {
             dataIndex: "status",
             key: "status",
             width: 120,
+            render: (status) => {
+                const color = getStatusColor(status);
+                return (
+                    <span
+                        className="px-2.5 py-1 rounded-full text-sm font-medium inline-block"
+                        style={{
+                            color: color,
+                            // backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, // Soft background pill effect
+                        }}
+                    >
+                        {status}
+                    </span>
+                );
+            },
         },
         {
             title: "Issue Type",
             dataIndex: "issueType",
             key: "issueType",
             width: 140,
+            render: (issue) => (
+                <span className="underline text-link-blue hover:text-gray-400">
+                    {issue}
+                </span>
+            ),
         },
         {
             title: "Assigned Team",
@@ -47,6 +70,21 @@ export default function TicketListClient() {
             dataIndex: "priority",
             key: "priority",
             width: 100,
+            render: (priority: string) => {
+                const color = getPriorityColor(priority);
+
+                return (
+                    <div className="flex items-center gap-2">
+                        <span
+                            className="w-2 h-2 rounded-full inline-block shrink-0"
+                            style={{ backgroundColor: color }}
+                        />
+                        <span className="text-sm capitalize font-medium text-gray-700">
+                            {priority}
+                        </span>
+                    </div>
+                );
+            },
         },
         {
             title: "Duration",
@@ -113,6 +151,14 @@ export default function TicketListClient() {
                         responsive: true,
                         pageSize: 10,
                     }}
+                    onRow={(record) => ({
+                        onClick: () => {
+                            const targetId = record.ticketId || record.id;
+                            router.push(`/tickets/details/${targetId}`);
+                        },
+                        className:
+                            "cursor-pointer hover:bg-gray-50 transition-colors",
+                    })}
                 />
             </div>
         </div>

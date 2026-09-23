@@ -27,7 +27,7 @@ export default function PasswordStrengthIndicator({
     ];
 
     return (
-        <div className="space-y-3 mt-2 p-3 bg-gray-50/80 rounded-lg border border-gray-100">
+        <div className="space-y-3 p-3 bg-gray-50/80 rounded-lg border border-gray-100">
             {/* Progress Bar & Status */}
             <div className="space-y-1">
                 <div className="flex justify-between items-center text-xs font-medium">

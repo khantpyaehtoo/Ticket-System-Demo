@@ -9,15 +9,19 @@ import {
     dummyTicketData,
     TicketType,
 } from "../../tickets/_components/dummydata";
+import { getStatusColor } from "@/lib/getStatusColors";
+import { getPriorityColor } from "@/lib/getPriorityConfig";
+import { useRouter } from "next/navigation";
 // import { usersQueryOptions } from "../page";
 
 export default function RecentTickets() {
+    const router = useRouter();
     const tableColumns: ColumnsType<TicketType> = [
         {
             title: "No.",
-            key: "index",
+            key: "id",
             width: 60,
-            render: (_, __, index) => index + 1,
+            render: (_, __, id) => id + 1,
         },
         {
             title: "Ticket Id",
@@ -31,12 +35,31 @@ export default function RecentTickets() {
             dataIndex: "status",
             key: "status",
             width: 120,
+            render: (status) => {
+                const color = getStatusColor(status);
+                return (
+                    <span
+                        className="px-2.5 py-1 rounded-full text-sm font-medium inline-block"
+                        style={{
+                            color: color,
+                            // backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, // Soft background pill effect
+                        }}
+                    >
+                        {status}
+                    </span>
+                );
+            },
         },
         {
             title: "Issue Type",
             dataIndex: "issueType",
             key: "issueType",
             width: 140,
+            render: (issue) => (
+                <span className="underline text-link-blue hover:text-gray-400">
+                    {issue}
+                </span>
+            ),
         },
         {
             title: "Assigned Team",
@@ -49,6 +72,21 @@ export default function RecentTickets() {
             dataIndex: "priority",
             key: "priority",
             width: 100,
+            render: (priority: string) => {
+                const color = getPriorityColor(priority);
+
+                return (
+                    <div className="flex items-center gap-2">
+                        <span
+                            className="w-2 h-2 rounded-full inline-block shrink-0"
+                            style={{ backgroundColor: color }}
+                        />
+                        <span className="text-sm capitalize font-medium text-gray-700">
+                            {priority}
+                        </span>
+                    </div>
+                );
+            },
         },
         {
             title: "Duration",
@@ -77,7 +115,7 @@ export default function RecentTickets() {
                 >
                     <Button
                         type="primary"
-                        className="flex items-center gap-2 !px-4 sm:!px-6 !py-3 sm:!py-5 text-xs sm:text-sm"
+                        className="flex items-center gap-2 px-4! sm:px-6! py-3! sm:py-5! text-xs sm:text-sm"
                     >
                         View All Tickets{" "}
                         <ArrowRight size={16} className="sm:w-5 sm:h-5" />
@@ -91,9 +129,17 @@ export default function RecentTickets() {
                     columns={tableColumns}
                     dataSource={dummyTicketData}
                     // loading={isLoading}
-                    rowKey="id"
+                    key="id"
                     scroll={{ x: 600 }}
                     pagination={{ pageSize: 5, responsive: true }}
+                    onRow={(record) => ({
+                        onClick: () => {
+                            const targetId = record.ticketId || record.id;
+                            router.push(`/tickets/details/${targetId}`);
+                        },
+                        className:
+                            "cursor-pointer hover:bg-gray-50 transition-colors",
+                    })}
                 />
             </div>
         </div>
