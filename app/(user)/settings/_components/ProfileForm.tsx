@@ -6,7 +6,7 @@ import Image from "next/image";
 import { LockKeyhole, Save, Trash, Upload } from "lucide-react";
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
-import { useNotificationModal } from "@/components/ui/notiModal";
+import { useAppModal } from "@/components/ui/SuccessModal";
 
 const getBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -18,7 +18,7 @@ const getBase64 = (file: File): Promise<string> =>
 
 export default function ProfileForm() {
     const [form] = Form.useForm();
-    const { showModal, contextHolder } = useNotificationModal();
+    const { showModal, contextHolder } = useAppModal();
 
     const storeImageSrc = useUserStore((state) => state.imageSrc);
     const setImageSrc = useUserStore((state) => state.setImageSrc);
@@ -61,8 +61,10 @@ export default function ProfileForm() {
         setImageSrc(tempImageSrc);
         setIsDirty(false);
         showModal({
+            variant: "notification",
             title: "Profile Updated Successfully!",
-            description: "This notification will close in",
+            // description: "This notification will close in",
+            type: "success",
         });
     };
 
@@ -127,7 +129,7 @@ export default function ProfileForm() {
                             <Button
                                 htmlType="button"
                                 onClick={handleUploadClick}
-                                className="px-1 py-2 md:px-3! md:py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                                className="px-0 py-1 sm:px-1 sm:py-2 md:px-3! md:py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <Upload size="20px" />{" "}
                                 <span className="text-xs md:text-base ">

@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import "quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { Form, Select, Input, Button, Upload } from "antd";
 import { PlusCircle, UploadIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DebounceSelect from "./DebounceSelect";
+import { useAppModal } from "@/components/ui/SuccessModal";
 
 const { Dragger } = Upload;
 
@@ -36,6 +37,9 @@ const MOCK_ISSUE_TYPES = [
 export default function TicketCreateForm() {
     const router = useRouter();
     const [form] = Form.useForm();
+    const { showModal, contextHolder } = useAppModal();
+
+    const [isDirty, setIsDirty] = useState(false);
 
     const fetchIssueTypes = async (search: string) => {
         return MOCK_ISSUE_TYPES.filter((item) =>
@@ -44,12 +48,22 @@ export default function TicketCreateForm() {
     };
 
     const onFinish = (values: any) => {
-        console.log("Form Values:", values);
-        router.push("/tickets");
+        setIsDirty(false);
+        showModal({
+            variant: "ticket-success",
+            ticketId: "DB-TK1",
+            description:
+                "Our support team will review your ticket within 24 hours.",
+            type: "success",
+            onResetForm: () => {
+                console.log("Form reset executed!");
+            },
+        });
     };
 
     return (
         <div className="w-full max-w-3xl py-4 sm:py-6 px-4 sm:px-6 bg-white border border-gray-100 rounded-2xl shadow-sm space-y-4">
+            {contextHolder}
             <div>
                 <h1 className="text-lg sm:text-xl font-semibold text-secondary">
                     Ticket Information
@@ -76,9 +90,9 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        { required: true, message: "Please select a product" },
-                    ]}
+                    // rules={[
+                    //     { required: true, message: "Please select a product" },
+                    // ]}
                 >
                     <Select
                         placeholder="Choose a Product"
@@ -108,12 +122,14 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please select an issue type",
-                        },
-                    ]}
+                    rules={
+                        [
+                            // {
+                            //     required: true,
+                            //     message: "Please select an issue type",
+                            // },
+                        ]
+                    }
                 >
                     <DebounceSelect
                         style={{ width: "100%" }}
@@ -137,12 +153,14 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter issue summary",
-                        },
-                    ]}
+                    rules={
+                        [
+                            // {
+                            //     required: true,
+                            //     message: "Please enter issue summary",
+                            // },
+                        ]
+                    }
                 >
                     <Input
                         placeholder="e.g. Unable to log in to my account"
@@ -188,7 +206,7 @@ export default function TicketCreateForm() {
                         beforeUpload={() => false}
                         className="p-2 sm:p-4"
                     >
-                        <p className="ant-upload-drag-icon flex justify-center text-indigo-500 mb-2">
+                        <p className="ant-upload-drag-icon flex justify-center text-gray-500 mb-2 font-light!">
                             <UploadIcon size={28} className="sm:w-8 sm:h-8" />
                         </p>
                         <p className="text-xs sm:text-sm font-medium text-indigo-600">
@@ -204,7 +222,16 @@ export default function TicketCreateForm() {
                 </Form.Item>
 
                 {/* Form Action Buttons */}
-                <div className="flex flex-col-reverse sm:flex-row items-center justify-start gap-3 sm:gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row items-center justify-start gap-3 sm:gap-4 pt-4">
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        // disabled={!isDirty}
+                        size="large"
+                        className="w-full sm:w-auto bg-primary flex items-center justify-center gap-2 px-6"
+                    >
+                        <PlusCircle size={18} /> Create Ticket
+                    </Button>
                     <Button
                         type="text"
                         size="large"
@@ -212,14 +239,6 @@ export default function TicketCreateForm() {
                         className="w-full sm:w-auto text-gray-600"
                     >
                         Cancel
-                    </Button>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        size="large"
-                        className="w-full sm:w-auto bg-zinc-800 hover:!bg-zinc-700 flex items-center justify-center gap-2 px-6"
-                    >
-                        <PlusCircle size={18} /> Create Ticket
                     </Button>
                 </div>
             </Form>

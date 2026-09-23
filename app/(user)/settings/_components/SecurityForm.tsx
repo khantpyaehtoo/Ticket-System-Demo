@@ -6,8 +6,8 @@ import { Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
-import { useNotificationModal } from "@/components/ui/notiModal";
 import gsap from "gsap";
+import { useAppModal } from "@/components/ui/SuccessModal";
 
 interface SecurityFormProps {
     onForgotPasswordClick?: () => void;
@@ -18,7 +18,7 @@ export default function SecurityForm({
 }: SecurityFormProps) {
     const [form] = Form.useForm();
     const router = useRouter();
-    const { showModal, contextHolder } = useNotificationModal();
+    const { showModal, contextHolder } = useAppModal();
 
     const [password, setPassword] = useState("");
     const strength = usePasswordStrength(password);
@@ -92,7 +92,7 @@ export default function SecurityForm({
             <Form
                 form={form}
                 layout="vertical"
-                className="w-full space-y-10!"
+                className="w-full"
                 onFinish={handleUpdatePassword}
             >
                 {/* Current Password */}
@@ -105,7 +105,7 @@ export default function SecurityForm({
                             <button
                                 type="button"
                                 onClick={handleForgotPassword}
-                                className="text-primary hover:underline cursor-pointer text-xs font-normal"
+                                className="text-primary hover:underline hover:text-secondary cursor-pointer text-xs font-normal"
                             >
                                 Forgot Password?
                             </button>
@@ -131,7 +131,7 @@ export default function SecurityForm({
                     label={
                         <div className="flex justify-between items-center w-full">
                             <span>New Password</span>
-                            <span className="font-light tracking-wide text-xs text-gray-500">
+                            <span className="font-light tracking-wide text-xs text-gray-500 text-end">
                                 12+ characters, symbols & numbers included
                             </span>
                         </div>
@@ -145,7 +145,7 @@ export default function SecurityForm({
                 >
                     <Input.Password
                         placeholder="Enter your new password"
-                        className="h-12 bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
+                        className="h-12! bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Item>
@@ -199,7 +199,7 @@ export default function SecurityForm({
                 <Form.Item>
                     <Button
                         htmlType="submit"
-                        className="px-4! py-5! h-11 md:h-12 border-none! bg-primary! text-white! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                        className="px-4! py-5! h-11 md:h-12 border-none! bg-primary! text-white! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer mt-2!"
                     >
                         <Save size={18} />
                         <span>Save Changes</span>
