@@ -38,6 +38,7 @@ export default function AuthFormWrapper({
             onSwitchView(queryView);
         }
     }, [searchParams]);
+
     return (
         <div
             ref={formWrapperRef}

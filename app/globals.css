@@ -16,12 +16,18 @@
   --closed: #6b7280;
   --cancelled: #e50000;
   --rejected: #dc2626;
+
+  --critical: #b91c1c;
+  --high: #f97316;
+  --medium: #f59e0b;
+  --low: #0640b6;
 }
 
 @theme inline {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-background: var(--background);
+  --color-link-blue: #0059c0;
   
   --font-sans: var(--font-roboto);
   --font-jetbrains: var(--font-jetbrains-mono);

@@ -57,7 +57,7 @@ export default function ForgotForm({
                     <Button
                         block
                         htmlType="submit"
-                        className="h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all cursor-pointer"
+                        className="h-11! md:h-12! border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all cursor-pointer"
                     >
                         Send OTP Code
                     </Button>

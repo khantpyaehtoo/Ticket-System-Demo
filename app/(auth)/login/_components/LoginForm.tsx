@@ -93,7 +93,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                     <Button
                         block
                         htmlType="submit"
-                        className="h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                        className="h-11! md:h-12! border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                     >
                         <span>Sign In</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                 </Form.Item>
 
                 {/* Security Footer Notice */}
-                <div className="flex items-center justify-center gap-2 text-xs text-cancelled mt-4">
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-400 mt-4">
                     <Info className="w-4 h-4 shrink-0" />
                     <span className="text-center">
                         Authorized Personnel Only. System activity is logged.

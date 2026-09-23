@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Image from "next/image";
 import { useAuthAnimation, AuthView } from "./_hooks/useAuthAnimation";
 import AuthIntroSection from "./_components/AuthIntroSection";
@@ -37,7 +37,7 @@ export default function LoginPage() {
                 </div>
             ) : (
                 /* Forgot / OTP / Reset Views Container */
-                <div className="relative w-full h-full bg-gradient-to-b from-primary to-secondary flex items-center justify-center p-4">
+                <div className="relative w-full h-full bg-linear-to-b from-primary to-secondary flex items-center justify-center p-4">
                     <div className="absolute top-0 left-4 py-8 px-10">
                         <Image
                             src="/logo&text.svg"

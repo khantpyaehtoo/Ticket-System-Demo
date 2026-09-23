@@ -6,8 +6,8 @@ export default function AuthLayout({
     children: React.ReactNode;
 }) {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <div className="bg-background">{children}</div>;
+        <Suspense fallback={null}>
+            <div className="bg-background">{children}</div>
         </Suspense>
     );
 }
