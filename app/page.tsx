@@ -16,7 +16,7 @@ export default async function RootPage() {
         case "TECH_TEAM":
             redirect("/team");
         case "USER":
-            redirect("/user");
+            redirect("/dashboard");
         default:
             redirect("/login");
     }

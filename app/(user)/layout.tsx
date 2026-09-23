@@ -1,13 +1,13 @@
 import DashboardShell from "@/components/shared/DashboardShell";
-import UserHeader from "@/components/user/userHeader";
-import { NavItem } from "@/types/user";
+import { NavItem } from "@/types/dashboard";
 import { BellRing, LayoutGrid, Package, Settings, Ticket } from "lucide-react";
+import UserHeader from "./_components/UserHeader";
 
 const customerNavItems: NavItem[] = [
-    { label: "Dashboard", href: "/user", icon: <LayoutGrid /> },
+    { label: "Dashboard", href: "/dashboard", icon: <LayoutGrid /> },
     { label: "My Tickets", href: "/tickets", icon: <Ticket /> },
     { label: "My Products", href: "/products", icon: <Package /> },
-    { label: "Notifications", href: "/noti", icon: <BellRing /> },
+    { label: "Notifications", href: "/notifications", icon: <BellRing /> },
     { label: "Settings", href: "/settings", icon: <Settings /> },
 ];
 
@@ -19,7 +19,7 @@ export default function CustomerLayout({
     return (
         <DashboardShell
             navItems={customerNavItems}
-            homeHref="/user"
+            homeHref="/dashboard"
             header={<UserHeader />}
         >
             {children}

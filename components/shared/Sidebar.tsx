@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
-import { NavItem } from "@/types/user";
+import { NavItem } from "@/types/dashboard";
 import SignOutBtn from "./SignOutBtn";
 import MobileSideBar from "./MobileSideBar";
 

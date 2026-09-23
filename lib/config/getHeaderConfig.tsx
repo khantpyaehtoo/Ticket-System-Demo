@@ -9,7 +9,7 @@ export type HeaderLeftConfig = {
 
 // Static route configurations
 export const staticHeaderLeftMap: Record<string, HeaderLeftConfig> = {
-    "/user": {
+    "/dashboard": {
         type: "title",
         title: "Welcome Back!",
         description: "Here's an overview of your tickets and service requests",
@@ -30,7 +30,7 @@ export const staticHeaderLeftMap: Record<string, HeaderLeftConfig> = {
         title: "My Products",
         description: "Your active tools and subscription services",
     },
-    "/noti": {
+    "/notifications": {
         type: "title",
         title: "Notifications",
         description: "Recent alerts and updates",

@@ -1,6 +1,6 @@
 import DashboardShell from "@/components/shared/DashboardShell";
 import TeamHeader from "@/components/team/teamHeader";
-import { NavItem } from "@/types/user";
+import { NavItem } from "@/types/dashboard";
 import { BellRing, LayoutGrid, Package, Settings, Ticket } from "lucide-react";
 
 const TeamNavItems: NavItem[] = [
@@ -19,7 +19,7 @@ export default function CustomerLayout({
     return (
         <DashboardShell
             navItems={TeamNavItems}
-            homeHref="/user"
+            homeHref="/dashboard"
             header={<TeamHeader />} // Pass User Header Component
         >
             {children}

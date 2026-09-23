@@ -9,7 +9,7 @@ import TicketListClient from "./_components/TicketListTable";
 import TicketSectionHeader from "./_components/TicketSectionHeader";
 
 // async function getUsers() {
-//     const res = await fetch("https://jsonplaceholder.typicode.com/users/10");
+//     const res = await fetch("https://jsonplaceholder.typicode.com/dashboards/10");
 //     if (!res.ok) throw new Error("Failed to fetch users");
 //     return res.json();
 // }

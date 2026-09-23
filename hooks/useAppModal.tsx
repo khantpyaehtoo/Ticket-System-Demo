@@ -166,7 +166,7 @@ export function useAppModal() {
                                 type="text"
                                 onClick={() => {
                                     instance.destroy();
-                                    router.push("/user");
+                                    router.push("/dashboard");
                                 }}
                                 className="rounded-lg h-10 px-5 text-sm font-medium hover:underline cursor-pointer"
                             >

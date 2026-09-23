@@ -1,6 +1,6 @@
 import AdminHeader from "@/components/admin/adminHeader";
 import DashboardShell from "@/components/shared/DashboardShell";
-import { NavItem } from "@/types/user";
+import { NavItem } from "@/types/dashboard";
 import {
     LayoutGrid,
     Package,
@@ -27,7 +27,7 @@ export default function CustomerLayout({
     return (
         <DashboardShell
             navItems={AdminNavItems}
-            homeHref="/user"
+            homeHref="/dashboard"
             header={<AdminHeader />}
         >
             {children}

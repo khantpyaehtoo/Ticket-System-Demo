@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
-import MobileHamburgerBtn from "../ui/MobileHamburgerBtn";
+import MobileHamburgerBtn from "../../../components/ui/MobileHamburgerBtn";
 import { getHeaderConfig } from "@/lib/config/getHeaderConfig";
 import { useRealTime } from "@/hooks/useRealTime";
 
