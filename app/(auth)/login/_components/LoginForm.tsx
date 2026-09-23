@@ -93,7 +93,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                     <Button
                         block
                         htmlType="submit"
-                        className="h-11! md:h-12! border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                        className="loginFormBtn! group flex items-center justify-center gap-2"
                     >
                         <span>Sign In</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

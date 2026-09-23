@@ -1,4 +1,4 @@
-import DashboardShell from "@/components/shared/dashboardShell";
+import DashboardShell from "@/components/shared/DashboardShell";
 import UserHeader from "@/components/user/userHeader";
 import { NavItem } from "@/types/user";
 import { BellRing, LayoutGrid, Package, Settings, Ticket } from "lucide-react";

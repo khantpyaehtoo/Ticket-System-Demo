@@ -6,7 +6,7 @@ import Image from "next/image";
 import { LockKeyhole, Save, Trash, Upload } from "lucide-react";
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
-import { useAppModal } from "@/components/ui/SuccessModal";
+import { useAppModal } from "@/hooks/useAppModal";
 
 const getBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {

@@ -3,11 +3,11 @@
 import { X } from "lucide-react";
 import { useSidebarStore } from "@/store/useSidebarStore";
 
-import NavLink from "./navLink";
-import SignOutBtn from "./signOutBtn";
+import NavLink from "./NavLink";
+import SignOutBtn from "./SignOutBtn";
 import Link from "next/link";
 import Image from "next/image";
-import { SidebarProps } from "./sidebar";
+import { SidebarProps } from "./Sidebar";
 
 export default function MobileSideBar({ navItems, homeHref }: SidebarProps) {
     const { isOpen, closeSidebar } = useSidebarStore();

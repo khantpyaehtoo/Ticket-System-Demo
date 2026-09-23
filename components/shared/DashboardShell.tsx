@@ -1,5 +1,5 @@
 import { NavItem } from "@/types/user";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 interface DashboardShellProps {
     navItems: NavItem[];

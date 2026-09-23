@@ -6,9 +6,9 @@ import {
 } from "@/app/(user)/tickets/_components/dummydata";
 import DashboardCard, {
     DashboardCardProps,
-} from "@/components/ui/dashboardCard";
-import { getPriorityColor } from "@/lib/getPriorityConfig";
-import { getStatusColor } from "@/lib/getStatusColors";
+} from "@/components/ui/DashboardCard";
+import { getPriorityColor } from "@/lib/config/getPriorityConfig";
+import { getStatusColor } from "@/lib/config/getStatusColors";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import {

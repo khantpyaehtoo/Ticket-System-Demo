@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
 import gsap from "gsap";
-import { useAppModal } from "@/components/ui/SuccessModal";
+import { useAppModal } from "@/hooks/useAppModal";
 
 interface SecurityFormProps {
     onForgotPasswordClick?: () => void;

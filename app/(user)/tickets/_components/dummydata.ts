@@ -1,4 +1,4 @@
-import { TicketStatus } from "@/lib/getStatusColors";
+import { TicketStatus } from "@/lib/config/getStatusColors";
 
 // 1. Ticket Data Type Definition
 export interface TicketType {

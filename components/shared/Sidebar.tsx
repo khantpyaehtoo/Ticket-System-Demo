@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import NavLink from "./navLink";
+import NavLink from "./NavLink";
 import { NavItem } from "@/types/user";
-import SignOutBtn from "./signOutBtn";
+import SignOutBtn from "./SignOutBtn";
 import MobileSideBar from "./MobileSideBar";
 
 export interface SidebarProps {

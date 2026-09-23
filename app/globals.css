@@ -57,3 +57,15 @@ body {
   color: var(--background);
 }
 
+@utility loginFormBtn {
+  @apply h-11 md:h-12 border-none bg-primary text-background hover:bg-secondary rounded-xl font-medium text-sm transition-all cursor-pointer
+}
+
+@utility createTicketBtn {
+  @apply flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base
+}
+
+@utility slaCardsContainer {
+  @apply flex flex-col lg:flex-row justify-between items-start my-6 md:my-10 text-primary border-b border-primary pb-8 md:pb-10 gap-6 lg:gap-8
+}
+

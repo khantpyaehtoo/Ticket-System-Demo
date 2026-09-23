@@ -6,11 +6,11 @@ import { usePathname, useParams } from "next/navigation";
 import { Avatar } from "antd";
 import { Search } from "lucide-react";
 
-import { useRealTime } from "@/lib/hooks/useRealTime";
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
 import MobileHamburgerBtn from "../ui/MobileHamburgerBtn";
-import { getHeaderConfig } from "@/lib/getHeaderConfig";
+import { getHeaderConfig } from "@/lib/config/getHeaderConfig";
+import { useRealTime } from "@/hooks/useRealTime";
 
 export default function UserHeader() {
     const pathname = usePathname();

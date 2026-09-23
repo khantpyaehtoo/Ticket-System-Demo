@@ -4,14 +4,10 @@ import { Button } from "antd";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-
-interface TicketCard {
-    title: string;
-    description: string;
-}
+import HoursCardGrid from "../../_components/HoursCardGrid";
 
 export default function TicketSectionHeader() {
-    const ticketCards: TicketCard[] = [
+    const ticketCards = [
         {
             title: "Purchased Hours",
             description: "50",
@@ -35,17 +31,14 @@ export default function TicketSectionHeader() {
             {/* Create Ticket Button */}
             <div className="w-full flex justify-end items-center">
                 <Link href="/tickets/create" className="inline-block">
-                    <Button
-                        type="primary"
-                        className="flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base"
-                    >
+                    <Button type="primary" className="createTicketBtn">
                         <PlusCircle size={20} /> Create Ticket
                     </Button>
                 </Link>
             </div>
 
             {/* Main Header Container */}
-            <div className="flex flex-col lg:flex-row justify-between items-start my-6 md:my-10 text-primary border-b border-primary pb-8 md:pb-10 gap-6 lg:gap-8">
+            <div className="slaCardsContainer">
                 {/* Left Section: Description & Hours Grid */}
                 <div className="space-y-4 md:space-y-6 flex-1 w-full">
                     <p className="text-gray-600 text-sm sm:text-base max-w-2xl">
@@ -54,28 +47,7 @@ export default function TicketSectionHeader() {
                     </p>
 
                     {/* Ticket Cards Responsive Container */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 w-full items-center bg-gray-50 md:bg-transparent p-4 md:p-0 rounded-xl">
-                        {ticketCards.map((list, index) => (
-                            <div
-                                key={index}
-                                className={`px-2 sm:px-4 md:px-6 py-2 md:py-4 w-full space-y-1 sm:space-y-2 ${
-                                    index !== ticketCards.length - 1
-                                        ? "md:border-r md:border-primary/40"
-                                        : ""
-                                }`}
-                            >
-                                <p className="text-gray-600 text-xs sm:text-sm font-medium truncate">
-                                    {list.title}
-                                </p>
-                                <p className="text-sm sm:text-base">
-                                    <span className="font-semibold text-xl sm:text-2xl text-black">
-                                        {list.description}
-                                    </span>{" "}
-                                    Hours
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+                    <HoursCardGrid ticketCards={ticketCards} />
                 </div>
 
                 {/* Right Section: SLA Plan Card */}

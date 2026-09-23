@@ -2,7 +2,7 @@
 
 import DashboardCard, {
     DashboardCardProps,
-} from "@/components/ui/dashboardCard";
+} from "@/components/ui/DashboardCard";
 import { Button } from "antd";
 import {
     AlarmClock,
@@ -12,6 +12,7 @@ import {
     PlusCircle,
 } from "lucide-react";
 import Link from "next/link";
+import HoursCardGrid from "../../_components/HoursCardGrid";
 
 interface TicketCard {
     title: string;
@@ -81,10 +82,7 @@ export default function DashboardCardHeader() {
             <div className="block lg:sticky lg:top-10 bg-background z-10">
                 <div className="w-full flex justify-end items-center">
                     <Link href="/tickets/create" className="inline-block">
-                        <Button
-                            type="primary"
-                            className="flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base"
-                        >
+                        <Button type="primary" className="createTicketBtn">
                             <PlusCircle size={20} /> Create Ticket
                         </Button>
                     </Link>
@@ -107,7 +105,7 @@ export default function DashboardCardHeader() {
                 </div>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-start my-6 md:my-10 text-primary border-b border-primary pb-8 md:pb-10 gap-6">
+            <div className="slaCardsContainer">
                 <div className="space-y-4 flex-1 w-full">
                     {/* Title & Description */}
                     <p className="text-xl sm:text-2xl font-medium text-black">
@@ -121,28 +119,7 @@ export default function DashboardCardHeader() {
                     {/* Stats & SLA Card Container */}
                     <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 pt-2">
                         {/* Hours Cards Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 w-full xl:w-full items-center bg-gray-50 md:bg-transparent p-3 md:p-0 rounded-xl">
-                            {ticketCards.map((list, index) => (
-                                <div
-                                    key={index}
-                                    className={`px-3 sm:px-6 md:px-8 py-3 sm:py-5 w-full space-y-1 sm:space-y-2 ${
-                                        index !== ticketCards.length - 1
-                                            ? "md:border-r md:border-primary/40"
-                                            : ""
-                                    }`}
-                                >
-                                    <p className="text-gray-600 text-xs sm:text-sm font-medium truncate">
-                                        {list.title}
-                                    </p>
-                                    <p className="text-sm sm:text-base">
-                                        <span className="font-medium text-lg sm:text-2xl text-black">
-                                            {list.description}
-                                        </span>{" "}
-                                        Hours
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
+                        <HoursCardGrid ticketCards={ticketCards} />
 
                         {/* Standard SLA Plan Card */}
                         <div className="px-4 sm:px-6 py-4 sm:py-5 w-full xl:w-80 space-y-3 bg-gray-50/80 xl:bg-transparent rounded-xl border border-gray-100 xl:border-none shrink-0">

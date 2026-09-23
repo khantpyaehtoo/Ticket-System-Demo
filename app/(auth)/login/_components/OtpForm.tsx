@@ -127,11 +127,7 @@ export default function OtpForm({
 
                 {/* Submit Button */}
                 <Form.Item className="mt-6 mb-2">
-                    <Button
-                        block
-                        htmlType="submit"
-                        className="h-11! md:h-12! border-none! bg-primary! text-background! hover:bg-secondary! rounded-xl! font-medium text-sm transition-all cursor-pointer"
-                    >
+                    <Button block htmlType="submit" className="loginFormBtn!">
                         Verify & Continue
                     </Button>
                 </Form.Item>

@@ -9,8 +9,8 @@ import {
     dummyTicketData,
     TicketType,
 } from "../../tickets/_components/dummydata";
-import { getStatusColor } from "@/lib/getStatusColors";
-import { getPriorityColor } from "@/lib/getPriorityConfig";
+import { getStatusColor } from "@/lib/config/getStatusColors";
+import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { useRouter } from "next/navigation";
 // import { usersQueryOptions } from "../page";
 

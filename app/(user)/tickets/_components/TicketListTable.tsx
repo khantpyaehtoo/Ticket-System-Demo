@@ -5,8 +5,8 @@ import { Input, Select, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Search } from "lucide-react";
 import { dummyTicketData, TicketType } from "./dummydata";
-import { getStatusColor } from "@/lib/getStatusColors";
-import { getPriorityColor } from "@/lib/getPriorityConfig";
+import { getStatusColor } from "@/lib/config/getStatusColors";
+import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { useRouter } from "next/navigation";
 // import { usersQueryOptions } from "../page";
 

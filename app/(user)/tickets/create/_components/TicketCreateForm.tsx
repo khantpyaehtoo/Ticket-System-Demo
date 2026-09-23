@@ -7,7 +7,7 @@ import { Form, Select, Input, Button, Upload } from "antd";
 import { PlusCircle, UploadIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DebounceSelect from "./DebounceSelect";
-import { useAppModal } from "@/components/ui/SuccessModal";
+import { useAppModal } from "@/hooks/useAppModal";
 
 const { Dragger } = Upload;
 

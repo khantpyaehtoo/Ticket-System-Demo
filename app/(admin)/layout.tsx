@@ -1,5 +1,5 @@
 import AdminHeader from "@/components/admin/adminHeader";
-import DashboardShell from "@/components/shared/dashboardShell";
+import DashboardShell from "@/components/shared/DashboardShell";
 import { NavItem } from "@/types/user";
 import {
     LayoutGrid,
