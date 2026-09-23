@@ -2,12 +2,14 @@
 
 import { Button, Checkbox, Form, Input } from "antd";
 import { ArrowRight, Info } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface LoginFormProps {
     onForgotPassword: () => void;
 }
 
 export default function LoginForm({ onForgotPassword }: LoginFormProps) {
+    const router = useRouter();
     return (
         <div className="w-full max-w-md mx-auto p-6 md:p-10 flex flex-col justify-center">
             {/* Form Header */}
@@ -26,6 +28,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                 layout="vertical"
                 requiredMark={false}
                 autoComplete="off"
+                onFinish={() => router.push("/dashboard")}
             >
                 {/* Email Field */}
                 <Form.Item

@@ -136,11 +136,6 @@ export default function ProductCard() {
                     </p>
                 </div>
 
-                {/* MOBILE ONLY: Arrows */}
-                {!isNavigationHidden && (
-                    <div className="md:hidden">{renderDots()}</div>
-                )}
-
                 {/* DESKTOP ONLY: Arrows */}
                 <div
                     className={cn(
@@ -177,12 +172,9 @@ export default function ProductCard() {
                 </div>
             </div>
 
-            {/* DESKTOP ONLY: Dot Position */}
-            {!isNavigationHidden && (
-                <div className="hidden md:flex justify-center mb-6">
-                    {renderDots()}
-                </div>
-            )}
+            {/* Dot Position */}
+
+            <div className="flex justify-center mb-6">{renderDots()}</div>
 
             {/* Carousel Viewport Container */}
             <div className="relative group">
