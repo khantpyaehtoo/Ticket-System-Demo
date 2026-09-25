@@ -105,7 +105,7 @@ export default function SecurityForm({
         });
     };
 
-    // Forgot Password  > Confirmation Modal အရင်ဖွင့်မည်
+    // Forgot Password  > Confirmation Modal
     const handleForgotClick = () => {
         setIsConfirmModalOpen(true);
         if (onForgotPasswordClick) {
@@ -117,7 +117,6 @@ export default function SecurityForm({
     const handleConfirmSendOtp = async () => {
         setIsSendingOtp(true);
         try {
-            // TODO: Backend API သို့ Mail ပို့ရန် Request လှမ်းပို့ပါ
             // await axios.post("/api/auth/send-otp", { email: userEmail });
 
             message.success(`OTP code sent to ${userEmail}`);
@@ -229,7 +228,7 @@ export default function SecurityForm({
                         <div className="flex justify-between items-center w-full">
                             <span>New Password</span>
                             <span className="font-light tracking-wide text-xs text-gray-500 text-end">
-                                12+ characters, symbols & numbers included
+                                12+ characters
                             </span>
                         </div>
                     }
