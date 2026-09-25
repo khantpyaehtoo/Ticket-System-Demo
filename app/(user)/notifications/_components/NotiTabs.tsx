@@ -2,9 +2,10 @@
 
 import { Button, Tabs, Select } from "antd";
 import { CheckCheck } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NotificationCard from "./NotificationCard";
 import { NotificationItem } from "../notificationConfig";
+import { useNotificationStore } from "@/store/useNotificationsStore";
 
 // Dummy Notification Dataset
 const INITIAL_NOTIFICATIONS: (NotificationItem & {
@@ -62,11 +63,21 @@ export default function AccountTabs() {
     const [activeKey, setActiveKey] = useState("1");
     const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
+    // Zustand Store Actions
+    const { setUnreadCount, clearUnread } = useNotificationStore();
+
+    // store sync when noti changes
+    useEffect(() => {
+        const unreadCount = notifications.filter((n) => n.isNew).length;
+        setUnreadCount(unreadCount);
+    }, [notifications, setUnreadCount]);
+
     // Mark all currently visible notifications as read
     const handleMarkAllRead = () => {
         setNotifications((prev) =>
             prev.map((item) => ({ ...item, isNew: false })),
         );
+        clearUnread();
     };
 
     const renderNotificationList = (
