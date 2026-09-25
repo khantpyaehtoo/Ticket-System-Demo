@@ -177,7 +177,7 @@ export default function ProductCard() {
             <div className="flex justify-center mb-6">{renderDots()}</div>
 
             {/* Carousel Viewport Container */}
-            <div className="relative group">
+            <div className="relative">
                 {/* MOBILE ONLY: Arrows Left Right */}
                 {!isNavigationHidden && (
                     <>
