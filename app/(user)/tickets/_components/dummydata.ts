@@ -76,8 +76,8 @@ export const dummyTicketData: TicketType[] = [
     },
     {
         key: "7",
-        id: "TCK-1005",
-        ticketId: "TCK-1005",
+        id: "TCK-1007",
+        ticketId: "TCK-1007",
         status: "Reopened",
         issueType: "Bug Report",
         assign: "QA & Support",
@@ -86,8 +86,8 @@ export const dummyTicketData: TicketType[] = [
     },
     {
         key: "8",
-        id: "TCK-1006",
-        ticketId: "TCK-1006",
+        id: "TCK-1008",
+        ticketId: "TCK-1008",
         status: "Cancelled",
         issueType: "API Integration",
         assign: "Backend Team",
@@ -96,8 +96,8 @@ export const dummyTicketData: TicketType[] = [
     },
     {
         key: "9",
-        id: "TCK-1006",
-        ticketId: "TCK-1006",
+        id: "TCK-1009",
+        ticketId: "TCK-1009",
         status: "Rejected",
         issueType: "API Integration",
         assign: "Backend Team",

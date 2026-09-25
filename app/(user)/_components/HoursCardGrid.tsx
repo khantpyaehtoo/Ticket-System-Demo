@@ -21,7 +21,7 @@ export default function HoursCardGrid({ ticketCards }: HoursCardGridProps) {
                             : ""
                     }`}
                 >
-                    <p className="text-gray-600 text-xs sm:text-sm font-medium truncate">
+                    <p className="text-gray-600 text-xs sm:text-sm font-medium">
                         {list.title}
                     </p>
                     <p className="text-sm sm:text-base">

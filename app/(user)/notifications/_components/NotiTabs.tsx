@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Tabs } from "antd";
+import { Button, Tabs, Select } from "antd";
 import { CheckCheck } from "lucide-react";
 import React, { useState } from "react";
 import NotificationCard from "./NotificationCard";
@@ -8,7 +8,7 @@ import { NotificationItem } from "../notificationConfig";
 
 // Dummy Notification Dataset
 const INITIAL_NOTIFICATIONS: (NotificationItem & {
-    category: "tickets" | "system";
+    category: "tickets" | "system" | "remainder";
 })[] = [
     {
         id: "1",
@@ -18,9 +18,9 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
         type: "warning",
         time: "15 mins ago",
         isNew: true,
-        category: "system",
+        category: "remainder",
         linkText: "Check your mins",
-        linkHref: "/billing",
+        linkHref: "/tickets",
     },
     {
         id: "2",
@@ -32,7 +32,7 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
         isNew: true,
         category: "tickets",
         linkText: "View ticket details",
-        linkHref: "/tickets/TK-8492",
+        linkHref: "/tickets/details/TK-8492",
     },
     {
         id: "3",
@@ -44,7 +44,7 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
         isNew: false,
         category: "tickets",
         linkText: "View ticket details",
-        linkHref: "/tickets/TK-9102",
+        linkHref: "/tickets/details/TK-9102",
     },
     {
         id: "4",
@@ -57,12 +57,6 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
         category: "system",
     },
 ];
-
-type TabsItem = {
-    key: string;
-    label: string;
-    children: React.ReactNode;
-};
 
 export default function AccountTabs() {
     const [activeKey, setActiveKey] = useState("1");
@@ -88,7 +82,7 @@ export default function AccountTabs() {
         if (filtered.length === 0) {
             return (
                 <div className="py-12 text-center text-gray-400 text-sm">
-                    No notifications found in this tab.
+                    No notifications found in this category.
                 </div>
             );
         }
@@ -105,50 +99,68 @@ export default function AccountTabs() {
         );
     };
 
-    const items: TabsItem[] = [
-        {
-            key: "1",
-            label: "All",
-            children: renderNotificationList("all"),
-        },
+    const tabsConfig = [
+        { key: "1", label: "All", type: "all" as const },
         {
             key: "2",
             label: `Unread (${notifications.filter((n) => n.isNew).length})`,
-            children: renderNotificationList("unread"),
+            type: "unread" as const,
         },
-        {
-            key: "3",
-            label: "Tickets",
-            children: renderNotificationList("tickets"),
-        },
-        {
-            key: "4",
-            label: "System",
-            children: renderNotificationList("system"),
-        },
+        { key: "3", label: "Tickets", type: "tickets" as const },
+        { key: "4", label: "System", type: "system" as const },
     ];
 
-    const renderExtraContent = () => (
+    const currentTab =
+        tabsConfig.find((tab) => tab.key === activeKey) || tabsConfig[0];
+
+    // Read All Button UI
+    const renderReadMoreBtn = () => (
         <Button
             type="primary"
             onClick={handleMarkAllRead}
             disabled={!notifications.some((n) => n.isNew)}
-            className="disabled:bg-gray-200 text-white rounded-lg px-4 py-2 h-9 sm:h-10 text-xs sm:text-sm font-medium flex items-center gap-1.5 border-none shadow-none transition-all cursor-pointer mb-2 sm:mb-0"
+            className="disabled:bg-gray-200 text-white rounded-lg px-3 sm:px-4 py-2 h-9 sm:h-10 text-xs sm:text-sm font-medium flex items-center gap-1.5 border-none shadow-none transition-all cursor-pointer"
         >
             <CheckCheck size={16} />
-            <span className="text-xs md:text-base">Mark as read</span>
+            <span>Read All</span>
         </Button>
     );
 
     return (
         <div className="w-full">
-            <Tabs
-                items={items}
-                onChange={(key) => setActiveKey(key)}
-                activeKey={activeKey}
-                tabBarExtraContent={renderExtraContent()}
-                className="w-full [&_.ant-tabs-nav-wrap]:border-b [&_.ant-tabs-nav-wrap]:border-gray-200"
-            />
+            {/* MOBILE ONLY: Dropdown + Read All Button */}
+            <div className="flex md:hidden items-center justify-between gap-3 mb-4 pb-2 border-b border-gray-200">
+                <Select
+                    value={activeKey}
+                    onChange={(val) => setActiveKey(val)}
+                    className="w-44 h-9"
+                    options={tabsConfig.map((tab) => ({
+                        value: tab.key,
+                        label: tab.label,
+                    }))}
+                />
+                {renderReadMoreBtn()}
+            </div>
+
+            {/* DESKTOP ONLY: Tabs */}
+            <div className="hidden md:block">
+                <Tabs
+                    items={tabsConfig.map((tab) => ({
+                        key: tab.key,
+                        label: tab.label,
+                        children: renderNotificationList(tab.type),
+                    }))}
+                    onChange={(key) => setActiveKey(key)}
+                    activeKey={activeKey}
+                    tabBarExtraContent={renderReadMoreBtn()}
+                    className="w-full [&_.ant-tabs-nav-wrap]:border-b [&_.ant-tabs-nav-wrap]:border-gray-200"
+                />
+            </div>
+
+            {/* MOBILE ONLY: Notification Content Display */}
+            <div className="block md:hidden">
+                {renderNotificationList(currentTab.type)}
+            </div>
         </div>
     );
 }

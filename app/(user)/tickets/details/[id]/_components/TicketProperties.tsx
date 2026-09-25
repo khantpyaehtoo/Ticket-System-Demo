@@ -1,40 +1,62 @@
 "use client";
 
 import React from "react";
+import { getStatusColor, TicketStatus } from "@/lib/config/getStatusColors";
+import { getPriorityColor, Priority } from "@/lib/config/getPriorityConfig";
 
-export default function TicketProperties() {
+interface TicketPropertiesProps {
+    data?: {
+        ticketId?: string;
+        issueType?: string;
+        assignTeam?: string;
+        relatedService?: string;
+        status?: TicketStatus;
+        priority?: Priority;
+        estimatedResolutionTime?: string;
+        createdDate?: string;
+        lastUpdated?: string;
+    };
+}
+
+export default function TicketProperties({ data }: TicketPropertiesProps) {
+    const currentStatus = data?.status || "Submitted";
+    const currentPriority = data?.priority || "Medium";
+
+    const statusColor = getStatusColor(currentStatus);
+    const priorityColor = getPriorityColor(currentPriority);
+
     const properties = [
-        { label: "Ticket ID", value: "DB-TK1", isCopyable: true },
-        {
-            label: "Issue Type",
-            value: "Technical Issues",
-        },
-        {
-            label: "Assign Team",
-            value: "System Team",
-        },
+        { label: "Ticket ID", value: data?.ticketId || "DB-TK1" },
+        { label: "Issue Type", value: data?.issueType || "Technical Issues" },
+        { label: "Assign Team", value: data?.assignTeam || "System Team" },
         {
             label: "Related Service",
-            value: "Nail Salon",
+            value: data?.relatedService || "Nail Salon",
         },
         {
             label: "Status",
-            value: "Submitted",
+            value: currentStatus,
             type: "badge",
-            badgeClass: "bg-submitted/70 border-submitted",
-            textColor: "text-submitted",
+            color: statusColor,
         },
         {
             label: "Priority",
-            value: "Medium",
+            value: currentPriority,
             type: "badge",
-            badgeClass: "bg-hold/70 border-hold",
-            textColor: "text-hold",
+            color: priorityColor,
         },
-
-        { label: "Estimated Resolution Time", value: "2 Hours" },
-        { label: "Created Date", value: "15 Sep 2026, 11:00 AM" },
-        { label: "Last Updated", value: "15 Sep 2026, 11:30 AM" },
+        {
+            label: "Estimated Resolution Time",
+            value: data?.estimatedResolutionTime || "2 Hours",
+        },
+        {
+            label: "Created Date",
+            value: data?.createdDate || "15 Sep 2026, 11:00 AM",
+        },
+        {
+            label: "Last Updated",
+            value: data?.lastUpdated || "15 Sep 2026, 11:30 AM",
+        },
     ];
 
     return (
@@ -65,10 +87,14 @@ export default function TicketProperties() {
                         <div className="font-medium text-right min-w-0">
                             {item.type === "badge" ? (
                                 <span
-                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${item.textColor}`}
+                                    style={{
+                                        color: item.color,
+                                    }}
+                                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border-none transition-all"
                                 >
                                     <div
-                                        className={`w-3 h-3 rounded-full mr-2 border ${item.badgeClass}`}
+                                        style={{ backgroundColor: item.color }}
+                                        className="w-2 h-2 rounded-full mr-2 shrink-0"
                                     />
                                     {item.value}
                                 </span>

@@ -150,7 +150,7 @@ export function useAppModal() {
                     </div>
                 ),
                 footer: (
-                    <div className="mt-6 space-y-3">
+                    <div className="mt-6 space-y-4">
                         <div className="flex flex-col sm:flex-row gap-2 justify-center">
                             <Button
                                 type="primary"
@@ -181,7 +181,7 @@ export function useAppModal() {
                                     instance.destroy();
                                     if (onResetForm) onResetForm();
                                 }}
-                                className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-black hover:underline transition-all cursor-pointer"
+                                className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-black hover:underline transition-all cursor-pointer mt-3"
                             >
                                 <PlusCircle size={15} />
                                 <span>Create Another Ticket</span>

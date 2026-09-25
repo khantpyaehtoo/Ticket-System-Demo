@@ -3,7 +3,14 @@
 import "quill/dist/quill.snow.css";
 
 import React, { useState, useRef } from "react";
-import { Clock, Send, Paperclip, Lock, X, FileText } from "lucide-react";
+import {
+    Clock,
+    Paperclip,
+    Lock,
+    X,
+    FileText,
+    SendHorizonal,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import { Avatar } from "antd";
 import Image from "next/image";
@@ -55,7 +62,7 @@ export default function ChatSession() {
     return (
         <div className="w-full bg-background border border-primary/10 rounded-xl shadow-sm overflow-hidden text-primary">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-primary/10 bg-primary/5 gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-primary/10 gap-2">
                 <div>
                     <h2 className="font-bold text-base md:text-lg">
                         Support Activity & Thread
@@ -88,7 +95,7 @@ export default function ChatSession() {
                             </div>
                         }
                         size={36}
-                        className="ring-2 ring-primary/20 shrink-0 border-none sm:w-[40px] sm:h-[40px]"
+                        className="ring-2 ring-primary/70 ring-offset-2 shrink-0 border-none! sm:w-[40px] sm:h-[40px]"
                     />
                     <div className="flex-1 bg-muted/40 border border-primary/10 rounded-2xl p-3.5 sm:p-5 space-y-2 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-primary/5 pb-2 gap-1">
@@ -123,9 +130,9 @@ export default function ChatSession() {
                             </div>
                         }
                         size={36}
-                        className="ring-2 ring-primary/20 shrink-0 border-none sm:w-[40px] sm:h-[40px]"
+                        className="ring-2 ring-primary/70 ring-offset-2 shrink-0 border-none! sm:w-[40px] sm:h-[40px]"
                     />
-                    <div className="flex-1 bg-primary/5 border border-primary/15 rounded-2xl p-3.5 sm:p-5 space-y-2 min-w-0">
+                    <div className="flex-1 border border-primary/15 rounded-2xl p-3.5 sm:p-5 space-y-2 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-primary/5 pb-2 gap-1">
                             <h3 className="font-bold text-xs sm:text-sm text-secondary">
                                 Megan Fox
@@ -144,7 +151,7 @@ export default function ChatSession() {
             </div>
 
             {/* Reply / Typing Section */}
-            <div className="p-4 md:p-6 border-t border-primary/10 bg-background space-y-4">
+            <div className="p-4 md:p-6 border-t border-primary/10 bg-background space-y-3">
                 {/* Hidden File Input */}
                 <input
                     type="file"
@@ -170,7 +177,7 @@ export default function ChatSession() {
                                 <button
                                     type="button"
                                     onClick={() => handleRemoveFile(index)}
-                                    className="hover:text-red-500 transition-colors p-0.5"
+                                    className="hover:text-red-500 transition-colors p-0.5 cursor-pointer"
                                 >
                                     <X className="w-3.5 h-3.5" />
                                 </button>
@@ -179,8 +186,8 @@ export default function ChatSession() {
                     </div>
                 )}
 
-                {/* Editor */}
-                <div className="rounded-lg overflow-hidden border border-primary/20 focus-within:ring-1 focus-within:ring-primary">
+                {/* Unified Editor Box with Send Button Inside */}
+                <div className="rounded-xl border border-primary/20 focus-within:border-primary transition-all overflow-hidden bg-white">
                     <ReactQuill
                         theme="snow"
                         value={editorValue}
@@ -188,28 +195,27 @@ export default function ChatSession() {
                         modules={quillModules}
                         formats={quillFormats}
                         placeholder="Type your reply here..."
-                        className="bg-white [&_.ql-toolbar]:border-none [&_.ql-toolbar]:bg-muted/20 [&_.ql-container]:border-none [&_.ql-container]:min-h-[90px] sm:[&_.ql-container]:min-h-[110px] [&_.ql-editor]:text-xs sm:[&_.ql-editor]:text-sm"
+                        className="[&_.ql-toolbar]:border-none! [&_.ql-toolbar]:bg-muted/10 [&_.ql-container]:border-none! [&_.ql-container]:min-h-[100px]! sm:[&_.ql-container]:min-h-[120px]! [&_.ql-editor]:text-xs sm:[&_.ql-editor]:text-sm [&_.ql-editor]:pb-12"
                     />
-                </div>
 
-                {/* Editor Action Buttons */}
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <button
-                        type="button"
-                        onClick={handleAttachClick}
-                        className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-md hover:bg-muted/50 cursor-pointer"
-                    >
-                        <Paperclip className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                        <span>Attach files</span>
-                    </button>
+                    {/* Integrated Bottom Actions Bar inside the Editor Frame */}
+                    <div className="flex items-center justify-between p-2.5 bg-muted/10 border-t border-primary/10">
+                        <button
+                            type="button"
+                            onClick={handleAttachClick}
+                            className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1.5 rounded-md hover:bg-muted/50 cursor-pointer"
+                        >
+                            <Paperclip className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                            <span>Attach files</span>
+                        </button>
 
-                    <button
-                        type="button"
-                        className="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-xs sm:text-sm font-semibold rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-95 cursor-pointer ml-auto"
-                    >
-                        <span className="text-background">Send Reply</span>
-                        <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-background" />
-                    </button>
+                        <button
+                            type="button"
+                            className="flex items-center justify-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 bg-primary text-white text-xs sm:text-sm font-medium rounded-lg shadow-sm hover:opacity-90 transition-all active:scale-95 cursor-pointer"
+                        >
+                            <SendHorizonal className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

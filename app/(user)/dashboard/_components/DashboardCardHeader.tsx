@@ -79,7 +79,7 @@ const DashboardCards: DashboardCardProps[] = [
 export default function DashboardCardHeader() {
     return (
         <div>
-            <div className="block lg:sticky lg:top-10 bg-background z-10">
+            <div className="block sm:block md:block lg:block xl:block 2xl:sticky 2xl:top-10 bg-background z-10">
                 <div className="w-full flex justify-end items-center">
                     <Link href="/tickets/create" className="inline-block">
                         <Button type="primary" className="createTicketBtn">

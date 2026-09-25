@@ -40,16 +40,14 @@ export default function dashboardCard({
                     "flex justify-between items-center pb-3 border-b",
                 )}
             >
-                <p className="text-xs sm:text-sm md:text-base font-medium truncate">
-                    {title}
-                </p>
+                <p className="text-xs sm:text-sm ">{title}</p>
 
                 {!plength ? (
                     <div className="flex items-center space-x-2">
-                        <p className="sm:text-md shrink-0">
+                        <p className="text-xs shrink-0">
                             (100 <small>Hours</small>)
                         </p>
-                        <p className="text-base sm:text-lg shrink-0">{icon}</p>
+                        <p className="text-xs! shrink-0">{icon}</p>
                     </div>
                 ) : (
                     <p className="text-base sm:text-lg shrink-0">{icon}</p>
@@ -83,7 +81,7 @@ export default function dashboardCard({
 
                 {!plength && (
                     <>
-                        <span className="text-base sm:text-lg md:text-xl lg:text-4xl font-medium break-all text-white space-y-3">
+                        <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium break-all text-white space-y-3">
                             <p>
                                 {" "}
                                 5 <small>Hrs</small> 30 <small>Mins</small>
@@ -105,8 +103,8 @@ export default function dashboardCard({
                     "border-t  pt-3 sm:pt-4  flex justify-between items-center text-xs gap-2",
                 )}
             >
-                <p className="truncate">{inform_1}</p>
-                <p className="truncate text-right">{inform_2}</p>
+                <p className="">{inform_1}</p>
+                <p className="text-right">{inform_2}</p>
             </div>
         </div>
     );

@@ -104,7 +104,7 @@ export default function NotificationCard({
                                     href={notification.linkHref || "#"}
                                     className="inline-block text-xs sm:text-sm font-semibold text-link hover:underline cursor-pointer group transition-all"
                                 >
-                                    <span>
+                                    <span className="text-indigo-500 hover:text-indigo-300">
                                         {notification.linkText}{" "}
                                         <ArrowRight
                                             size={18}
