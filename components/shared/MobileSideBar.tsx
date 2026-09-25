@@ -55,6 +55,7 @@ export default function MobileSideBar({ navItems, homeHref }: SidebarProps) {
                                     href={item.href}
                                     label={item.label}
                                     icon={item.icon}
+                                    hasBadge={item.hasBadge}
                                 />
                             </div>
                         ))}

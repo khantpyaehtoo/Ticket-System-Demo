@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Tabs, Select } from "antd";
+import { Button, Tabs, Select, Pagination } from "antd";
 import { CheckCheck } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import NotificationCard from "./NotificationCard";
@@ -57,22 +57,53 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
         isNew: false,
         category: "system",
     },
+    {
+        id: "5",
+        title: "Scheduled System Maintenance Alert",
+        description:
+            "The dashboard will undergo routine maintenance on Sunday at 02:00 UTC. Expect up to 15 mins of downtime.",
+        type: "pending",
+        time: "3 days ago",
+        isNew: false,
+        category: "system",
+    },
+    {
+        id: "6",
+        title: "Scheduled System Maintenance Alert",
+        description:
+            "The dashboard will undergo routine maintenance on Sunday at 02:00 UTC. Expect up to 15 mins of downtime.",
+        type: "pending",
+        time: "3 days ago",
+        isNew: false,
+        category: "system",
+    },
+    {
+        id: "7",
+        title: "Scheduled System Maintenance Alert",
+        description:
+            "The dashboard will undergo routine maintenance on Sunday at 02:00 UTC. Expect up to 15 mins of downtime.",
+        type: "pending",
+        time: "3 days ago",
+        isNew: false,
+        category: "system",
+    },
 ];
 
 export default function AccountTabs() {
     const [activeKey, setActiveKey] = useState("1");
     const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
-    // Zustand Store Actions
+    // Pagination States
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+
     const { setUnreadCount, clearUnread } = useNotificationStore();
 
-    // store sync when noti changes
     useEffect(() => {
         const unreadCount = notifications.filter((n) => n.isNew).length;
         setUnreadCount(unreadCount);
     }, [notifications, setUnreadCount]);
 
-    // Mark all currently visible notifications as read
     const handleMarkAllRead = () => {
         setNotifications((prev) =>
             prev.map((item) => ({ ...item, isNew: false })),
@@ -80,51 +111,38 @@ export default function AccountTabs() {
         clearUnread();
     };
 
-    const renderNotificationList = (
-        filterType: "all" | "unread" | "tickets" | "system",
-    ) => {
-        const filtered = notifications.filter((item) => {
+    // Filter Logic
+    const getFilteredList = (filterType: string) => {
+        return notifications.filter((item) => {
             if (filterType === "unread") return item.isNew;
             if (filterType === "tickets") return item.category === "tickets";
             if (filterType === "system") return item.category === "system";
             return true;
         });
-
-        if (filtered.length === 0) {
-            return (
-                <div className="py-12 text-center text-gray-400 text-sm">
-                    No notifications found in this category.
-                </div>
-            );
-        }
-
-        return (
-            <div className="space-y-3 sm:space-y-4 pt-4">
-                {filtered.map((notification) => (
-                    <NotificationCard
-                        key={notification.id}
-                        notification={notification}
-                    />
-                ))}
-            </div>
-        );
     };
 
     const tabsConfig = [
-        { key: "1", label: "All", type: "all" as const },
+        { key: "1", label: "All", type: "all" },
         {
             key: "2",
             label: `Unread (${notifications.filter((n) => n.isNew).length})`,
-            type: "unread" as const,
+            type: "unread",
         },
-        { key: "3", label: "Tickets", type: "tickets" as const },
-        { key: "4", label: "System", type: "system" as const },
+        { key: "3", label: "Tickets", type: "tickets" },
+        { key: "4", label: "System", type: "system" },
     ];
 
     const currentTab =
         tabsConfig.find((tab) => tab.key === activeKey) || tabsConfig[0];
 
-    // Read All Button UI
+    const filteredNotifications = getFilteredList(currentTab.type);
+
+    // Paginated Data
+    const paginatedNotifications = filteredNotifications.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize,
+    );
+
     const renderReadMoreBtn = () => (
         <Button
             type="primary"
@@ -138,39 +156,80 @@ export default function AccountTabs() {
     );
 
     return (
-        <div className="w-full">
-            {/* MOBILE ONLY: Dropdown + Read All Button */}
-            <div className="flex md:hidden items-center justify-between gap-3 mb-4 pb-2 border-b border-gray-200">
-                <Select
-                    value={activeKey}
-                    onChange={(val) => setActiveKey(val)}
-                    className="w-44 h-9"
-                    options={tabsConfig.map((tab) => ({
-                        value: tab.key,
-                        label: tab.label,
-                    }))}
-                />
-                {renderReadMoreBtn()}
+        <div className="flex flex-col h-[calc(100vh-160px)] w-full bg-background overflow-hidden">
+            {/* Header Section */}
+            <div className="shrink-0 p-4 sm:p-6 pb-0 z-10">
+                {/* MOBILE ONLY: Dropdown + Read All Button */}
+                <div className="flex md:hidden items-center justify-between gap-3 mb-4 pb-2 border-b border-gray-200">
+                    <Select
+                        value={activeKey}
+                        onChange={(val) => {
+                            setActiveKey(val);
+                            setCurrentPage(1);
+                        }}
+                        className="w-44 h-9"
+                        options={tabsConfig.map((tab) => ({
+                            value: tab.key,
+                            label: tab.label,
+                        }))}
+                    />
+                    {renderReadMoreBtn()}
+                </div>
+
+                {/* DESKTOP ONLY: Tabs */}
+                <div className="hidden md:block">
+                    <Tabs
+                        items={tabsConfig.map((tab) => ({
+                            key: tab.key,
+                            label: tab.label,
+                        }))}
+                        onChange={(key) => {
+                            setActiveKey(key);
+                            setCurrentPage(1);
+                        }}
+                        activeKey={activeKey}
+                        tabBarExtraContent={renderReadMoreBtn()}
+                        className="w-full [&_.ant-tabs-nav-wrap]:border-b [&_.ant-tabs-nav-wrap]:border-gray-200"
+                    />
+                </div>
             </div>
 
-            {/* DESKTOP ONLY: Tabs */}
-            <div className="hidden md:block">
-                <Tabs
-                    items={tabsConfig.map((tab) => ({
-                        key: tab.key,
-                        label: tab.label,
-                        children: renderNotificationList(tab.type),
-                    }))}
-                    onChange={(key) => setActiveKey(key)}
-                    activeKey={activeKey}
-                    tabBarExtraContent={renderReadMoreBtn()}
-                    className="w-full [&_.ant-tabs-nav-wrap]:border-b [&_.ant-tabs-nav-wrap]:border-gray-200"
-                />
+            {/* Scrollable Main Content */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4">
+                {paginatedNotifications.length === 0 ? (
+                    <div className="py-16 text-center text-gray-400 text-sm">
+                        No notifications found in this category.
+                    </div>
+                ) : (
+                    paginatedNotifications.map((notification) => (
+                        <NotificationCard
+                            key={notification.id}
+                            notification={notification}
+                        />
+                    ))
+                )}
             </div>
 
-            {/* MOBILE ONLY: Notification Content Display */}
-            <div className="block md:hidden">
-                {renderNotificationList(currentTab.type)}
+            {/* Footer Section (Pagination) */}
+            <div className="shrink-0 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 bg-background flex items-center justify-between flex-wrap gap-3">
+                <span className="text-xs sm:text-sm text-gray-500 font-medium">
+                    Showing {paginatedNotifications.length} of{" "}
+                    {filteredNotifications.length} notifications
+                </span>
+
+                <Pagination
+                    current={currentPage}
+                    pageSize={pageSize}
+                    total={filteredNotifications.length}
+                    onChange={(page, pSize) => {
+                        setCurrentPage(page);
+                        setPageSize(pSize);
+                    }}
+                    responsive={true}
+                    // showSizeChanger
+                    size="small"
+                    className="text-xs sm:text-sm"
+                />
             </div>
         </div>
     );

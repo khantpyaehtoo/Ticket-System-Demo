@@ -96,7 +96,7 @@ export default function ProfileForm() {
             >
                 {/* Image Section */}
                 <Form.Item>
-                    <div className="flex gap-10 items-center bg-[#d4d4d4]/10 p-10 rounded-2xl border-2 border-[#E0E0E0]">
+                    <div className="flex flex-col sm:flex-row gap-10 items-center bg-[#d4d4d4]/10 p-10 rounded-2xl border-2 border-[#E0E0E0]">
                         <div className="relative group">
                             <Avatar
                                 src={
@@ -113,30 +113,42 @@ export default function ProfileForm() {
                             />
 
                             {tempImageSrc && (
-                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex justify-center items-center z-10 rounded-full">
+                                <>
+                                    {/* Desktop View: Dark Overlay with Delete Button on Hover */}
+                                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex justify-center items-center z-10 rounded-full">
+                                        <button
+                                            type="button"
+                                            onClick={handleDeleteImage}
+                                            className="p-2 bg-red-600 hover:bg-red-700 rounded-full transform scale-75 group-hover:scale-100 transition-all duration-300 shadow-lg cursor-pointer text-white"
+                                        >
+                                            <Trash size={20} />
+                                        </button>
+                                    </div>
+
+                                    {/* Mobile View: Delete Button at Bottom Right */}
                                     <button
                                         type="button"
                                         onClick={handleDeleteImage}
-                                        className="p-2 bg-red-600 hover:bg-red-700 rounded-full transform scale-75 group-hover:scale-100 transition-all duration-300 shadow-lg cursor-pointer"
+                                        className="sm:hidden absolute bottom-0 right-0 z-20 p-1.5 bg-red-600 hover:bg-red-700 rounded-full shadow-lg text-white cursor-pointer translate-x-1 translate-y-1"
                                     >
-                                        <Trash size={20} />
+                                        <Trash size={16} />
                                     </button>
-                                </div>
+                                </>
                             )}
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 flex flex-col items-center justify-center sm:items-start">
                             <Button
                                 htmlType="button"
                                 onClick={handleUploadClick}
-                                className="px-0 py-1 sm:px-1 sm:py-2 md:px-3! md:py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
+                                className="px-3! py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <Upload size="20px" />{" "}
                                 <span className="text-xs md:text-base ">
                                     Upload Photo
                                 </span>
                             </Button>
-                            <p className="text-[#25272C]/80 text-xs md:text-base">
+                            <p className="text-[#25272C]/80 text-xs text-center sm:text-start">
                                 JPG, PNG or GIF up to 5MB. Recommended dimension
                                 400x400px.
                             </p>

@@ -7,7 +7,12 @@ const customerNavItems: NavItem[] = [
     { label: "Dashboard", href: "/dashboard", icon: <LayoutGrid /> },
     { label: "My Tickets", href: "/tickets", icon: <Ticket /> },
     { label: "My Products", href: "/products", icon: <Package /> },
-    { label: "Notifications", href: "/notifications", icon: <BellRing /> },
+    {
+        label: "Notifications",
+        href: "/notifications",
+        icon: <BellRing />,
+        hasBadge: true,
+    },
     { label: "Settings", href: "/settings", icon: <Settings /> },
 ];
 

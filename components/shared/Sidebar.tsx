@@ -37,6 +37,7 @@ export default function Sidebar({ navItems, homeHref }: SidebarProps) {
                                 href={item.href}
                                 label={item.label}
                                 icon={item.icon}
+                                hasBadge={item.hasBadge}
                             />
                         ))}
                     </nav>
