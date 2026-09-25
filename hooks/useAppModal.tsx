@@ -47,7 +47,7 @@ export function useAppModal() {
             let secondsToGo = duration;
 
             const iconColor = isSuccess
-                ? "bg-emerald-500 text-white w-10 h-10 rounded-full p-2.5"
+                ? "bg-green-500 text-white w-10 h-10 rounded-full p-2.5"
                 : "bg-red-500 text-white w-10 h-10 rounded-full p-2.5";
 
             const instance = modal[type]({

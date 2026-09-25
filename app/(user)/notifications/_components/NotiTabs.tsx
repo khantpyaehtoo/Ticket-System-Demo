@@ -2,7 +2,7 @@
 
 import { Button, Tabs, Select, Pagination } from "antd";
 import { CheckCheck } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NotificationCard from "./NotificationCard";
 import { NotificationItem } from "../notificationConfig";
 import { useNotificationStore } from "@/store/useNotificationsStore";
@@ -99,10 +99,26 @@ export default function AccountTabs() {
 
     const { setUnreadCount, clearUnread } = useNotificationStore();
 
+    const notificationsRef = useRef(notifications);
+    useEffect(() => {
+        notificationsRef.current = notifications;
+    }, [notifications]);
+
     useEffect(() => {
         const unreadCount = notifications.filter((n) => n.isNew).length;
         setUnreadCount(unreadCount);
     }, [notifications, setUnreadCount]);
+
+    useEffect(() => {
+        return () => {
+            // Check if there are any unread notifications before leaving
+            const hasUnread = notificationsRef.current.some((n) => n.isNew);
+            if (hasUnread) {
+                // await axios.post("/api/notifications/mark-all-read");
+                clearUnread();
+            }
+        };
+    }, [clearUnread]);
 
     const handleMarkAllRead = () => {
         setNotifications((prev) =>

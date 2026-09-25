@@ -22,7 +22,7 @@ export default function NotificationCard({
                     <div className="hidden sm:block md:flex items-start space-x-3 sm:space-x-5">
                         {/* Dot indicator shown ONLY if the notification is new */}
                         {notification.isNew ? (
-                            <span className="relative flex h-3 w-3 mt-2">
+                            <span className="relative flex h-3 w-3 mt-2 shrink-0">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
                             </span>

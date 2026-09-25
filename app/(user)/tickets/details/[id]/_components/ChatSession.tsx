@@ -85,7 +85,7 @@ export default function ChatSession() {
                         src={
                             <div className="relative w-full h-full">
                                 <Image
-                                    src={avatarUrl}
+                                    src={profileImg.src}
                                     alt="Support Team Avatar"
                                     fill
                                     priority
