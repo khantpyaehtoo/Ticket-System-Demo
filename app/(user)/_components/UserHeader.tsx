@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useParams } from "next/navigation";
 import { Avatar } from "antd";
-import { Search } from "lucide-react";
 
 import { useUserStore } from "@/store/useUserStore";
 import profileImg from "@/public/defaultProfile.jpg";
@@ -30,29 +29,16 @@ export default function UserHeader() {
                 <MobileHamburgerBtn />
 
                 <div className="hidden sm:block">
-                    {currentLeftConfig.type === "search" ? (
-                        <div className="relative w-72">
-                            <Search className="absolute left-3 top-2.5 w-4 h-4 text-black" />
-                            <input
-                                type="text"
-                                placeholder={
-                                    currentLeftConfig.searchPlaceholder
-                                }
-                                className="w-full bg-cancelled/20 text-sm pl-9 pr-4 py-2 rounded-lg text-black border border-cancelled focus:outline-none focus:ring-1 focus:ring-primary"
-                            />
-                        </div>
-                    ) : (
-                        <div className="space-y-0.5">
-                            <h1 className="text-xl font-bold text-primary tracking-tight">
-                                {currentLeftConfig.title}
-                            </h1>
-                            {currentLeftConfig.description && (
-                                <p className="text-xs text-primary">
-                                    {currentLeftConfig.description}
-                                </p>
-                            )}
-                        </div>
-                    )}
+                    <div className="space-y-0.5">
+                        <h1 className="text-xl font-bold text-primary tracking-tight">
+                            {currentLeftConfig.title}
+                        </h1>
+                        {currentLeftConfig.description && (
+                            <p className="text-xs text-primary">
+                                {currentLeftConfig.description}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </div>
 
