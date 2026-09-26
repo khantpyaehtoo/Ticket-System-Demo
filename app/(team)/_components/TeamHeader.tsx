@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import profileImg from "@/public/defaultProfile.jpg";
 import { usePathname } from "next/navigation";
-import { useNotificationStore } from "@/store/useNotificationsStore";
+// import { useNotificationStore } from "@/store/useNotificationsStore";
 import { cn } from "@/lib/utils";
 
 interface navProps {
@@ -18,7 +18,7 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
     const avatarUrl = profileImg.src;
     const pathname = usePathname();
 
-    const unreadCount = useNotificationStore((state) => state.unreadCount);
+    // const unreadCount = useNotificationStore((state) => state.unreadCount);
 
     return (
         <header className="flex items-center justify-between p-6 bg-background text-white shadow-md">
