@@ -1,14 +1,13 @@
-import DashboardShell from "@/components/shared/DashboardShell";
-import TeamHeader from "@/components/team/teamHeader";
+import TeamHeader from "@/app/(team)/_components/TeamHeader";
 import { NavItem } from "@/types/dashboard";
-import { BellRing, LayoutGrid, Package, Settings, Ticket } from "lucide-react";
+import { BellRing, LayoutGrid, Settings, Ticket } from "lucide-react";
 
 const TeamNavItems: NavItem[] = [
-    { label: "Dashboard", href: "/team", icon: <LayoutGrid /> },
-    { label: "Tickets", href: "/tickets", icon: <Ticket /> },
-    { label: "Service", href: "/products", icon: <Package /> },
-    { label: "Notification", href: "/notifications", icon: <BellRing /> },
-    { label: "Setting", href: "/settings", icon: <Settings /> },
+    { label: "My Works", href: "/team-works", icon: <LayoutGrid /> },
+    { label: "My Tickets", href: "/team-tickets", icon: <Ticket /> },
+    // { label: "Service", href: "/products", icon: <Package /> },
+    { label: "Notification", href: "/team-notifications", icon: <BellRing /> },
+    { label: "Setting", href: "/team-settings", icon: <Settings /> },
 ];
 
 export default function CustomerLayout({
@@ -17,12 +16,9 @@ export default function CustomerLayout({
     children: React.ReactNode;
 }) {
     return (
-        <DashboardShell
-            navItems={TeamNavItems}
-            homeHref="/dashboard"
-            header={<TeamHeader />} // Pass User Header Component
-        >
+        <div className="bg-background h-full">
+            <TeamHeader navItems={TeamNavItems} homeHref="/team-works" />
             {children}
-        </DashboardShell>
+        </div>
     );
 }
