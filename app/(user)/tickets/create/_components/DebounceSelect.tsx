@@ -74,8 +74,8 @@ export default function DebounceSelect<ValueType = unknown>({
         } else {
             setSearchText(""); // Clear DropDown when search close
         }
-        if (props.onDropdownVisibleChange) {
-            props.onDropdownVisibleChange(open);
+        if (props.onOpenChange) {
+            props.onOpenChange(open);
         }
     };
 
@@ -85,7 +85,7 @@ export default function DebounceSelect<ValueType = unknown>({
             showSearch
             filterOption={false}
             onSearch={debouncedSearch}
-            onDropdownVisibleChange={handleDropdownVisibleChange}
+            onOpenChange={handleDropdownVisibleChange}
             placeholder="Select staff"
             allowClear
             notFoundContent={

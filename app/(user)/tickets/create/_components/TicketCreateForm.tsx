@@ -3,13 +3,33 @@
 import React, { useState } from "react";
 import "quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import { Form, Select, Input, Button, Upload } from "antd";
+import {
+    Form,
+    Select,
+    Input,
+    Button,
+    Upload,
+    UploadProps,
+    GetProp,
+    UploadFile,
+} from "antd";
 import { PlusCircle, UploadIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DebounceSelect from "./DebounceSelect";
 import { useAppModal } from "@/hooks/useAppModal";
 
 const { Dragger } = Upload;
+
+type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+
+// Helper function to convert file to Base64 for preview
+const getBase64 = (file: FileType): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (error) => reject(error);
+    });
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
     ssr: false,
@@ -41,9 +61,27 @@ export default function TicketCreateForm() {
 
     const [isDirty, setIsDirty] = useState(false);
 
+    // Image Preview States
+    const [previewOpen, setPreviewOpen] = useState(false);
+    const [previewImage, setPreviewImage] = useState("");
+    const [previewTitle, setPreviewTitle] = useState("");
+
     const fetchIssueTypes = async (search: string) => {
         return MOCK_ISSUE_TYPES.filter((item) =>
             item.label.toLowerCase().includes(search.toLowerCase()),
+        );
+    };
+
+    // Handle Image Preview Trigger
+    const handlePreview = async (file: UploadFile) => {
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj as FileType);
+        }
+
+        setPreviewImage(file.url || (file.preview as string));
+        setPreviewOpen(true);
+        setPreviewTitle(
+            file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1),
         );
     };
 
@@ -90,9 +128,9 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    // rules={[
-                    //     { required: true, message: "Please select a product" },
-                    // ]}
+                    rules={[
+                        { required: true, message: "Please select a product" },
+                    ]}
                 >
                     <Select
                         placeholder="Choose a Product"
@@ -122,14 +160,12 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={
-                        [
-                            // {
-                            //     required: true,
-                            //     message: "Please select an issue type",
-                            // },
-                        ]
-                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please select an issue type",
+                        },
+                    ]}
                 >
                     <DebounceSelect
                         style={{ width: "100%" }}
@@ -153,14 +189,12 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={
-                        [
-                            // {
-                            //     required: true,
-                            //     message: "Please enter issue summary",
-                            // },
-                        ]
-                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter issue summary",
+                        },
+                    ]}
                 >
                     <Input
                         placeholder="e.g. Unable to log in to my account"
@@ -199,10 +233,19 @@ export default function TicketCreateForm() {
                 </Form.Item>
 
                 {/* File Upload Dragger */}
-                <Form.Item name="attachments" valuePropName="fileList">
+                <Form.Item
+                    name="attachments"
+                    valuePropName="fileList"
+                    getValueFromEvent={(e) => {
+                        if (Array.isArray(e)) return e;
+                        return e?.fileList;
+                    }}
+                >
                     <Dragger
                         name="files"
                         multiple={true}
+                        listType="picture" // Shows thumbnail list with preview
+                        onPreview={handlePreview} // Enables photo preview click
                         beforeUpload={() => false}
                         className="p-2 sm:p-4"
                     >
@@ -226,7 +269,7 @@ export default function TicketCreateForm() {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        // disabled={!isDirty}
+                        disabled={!isDirty}
                         size="large"
                         className="w-full sm:w-auto bg-primary flex items-center justify-center gap-2 px-6"
                     >
