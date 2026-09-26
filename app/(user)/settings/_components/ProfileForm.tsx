@@ -189,7 +189,7 @@ export default function ProfileForm() {
                     <Button
                         htmlType="submit"
                         disabled={!isDirty}
-                        className="px-3! py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! disabled:bg-gray-300! disabled:text-gray-500! disabled:cursor-not-allowed rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-1 cursor-pointer"
+                        className="px-3! py-5! h-11 md:h-12 border-none! bg-primary! text-background! hover:bg-secondary! disabled:bg-gray-200! disabled:text-gray-500! disabled:cursor-not-allowed rounded-lg! font-medium text-sm transition-all group flex items-center justify-center gap-1 cursor-pointer"
                     >
                         <Save size="20px" /> <span>Save Changes</span>
                     </Button>
