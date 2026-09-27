@@ -1,15 +1,47 @@
 "use client";
 
-import { Button, Checkbox, Form, Input } from "antd";
+import { loginAction } from "@/actions/authAction";
+import { loginSchema } from "@/lib/validations/auth";
+import { createZodRule } from "@/lib/validations/createZodRule";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { ArrowRight, Info } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { z } from "zod";
 
 interface LoginFormProps {
     onForgotPassword: () => void;
 }
 
+type LoginInput = z.infer<typeof loginSchema>;
+
 export default function LoginForm({ onForgotPassword }: LoginFormProps) {
-    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+
+    const handleFinish = async (values: LoginInput) => {
+        setLoading(true);
+
+        try {
+            const formData = new FormData();
+            formData.append("email", values.email);
+            formData.append("password", values.password);
+
+            if (values.remember) {
+                formData.append("rememberMe", "on");
+            }
+
+            await loginAction(formData);
+        } catch (error: unknown) {
+            const isRedirectError =
+                error instanceof Error && error.message === "NEXT_REDIRECT";
+
+            if (!isRedirectError) {
+                message.error("Login failed. Please check your credentials.");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="w-full max-w-md mx-auto p-6 md:p-10 flex flex-col justify-center">
             {/* Form Header */}
@@ -28,7 +60,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                 layout="vertical"
                 requiredMark={false}
                 autoComplete="off"
-                onFinish={() => router.push("/dashboard")}
+                onFinish={handleFinish}
             >
                 {/* Email Field */}
                 <Form.Item
@@ -38,9 +70,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                             Email Address
                         </span>
                     }
-                    rules={[
-                        { required: true, message: "Please enter your email!" },
-                    ]}
+                    rules={[createZodRule(loginSchema, "email")]}
                 >
                     <Input
                         type="email"
@@ -67,12 +97,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                             </button>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter your password!",
-                        },
-                    ]}
+                    rules={[createZodRule(loginSchema, "password")]}
                 >
                     <Input.Password
                         placeholder="Enter your password"
@@ -96,6 +121,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                     <Button
                         block
                         htmlType="submit"
+                        loading={loading}
                         className="loginFormBtn! group flex items-center justify-center gap-2"
                     >
                         <span>Sign In</span>
