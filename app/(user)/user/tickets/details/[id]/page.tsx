@@ -9,7 +9,7 @@ export default function Page() {
             {/* Breadcrumb Link */}
             <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-800">
                 <Link
-                    href="/tickets"
+                    href="/user/tickets"
                     className="hover:text-gray-500 transition-colors font-medium"
                 >
                     Back

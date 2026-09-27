@@ -3,7 +3,7 @@
 import {
     dummyTicketData,
     TicketType,
-} from "@/app/(user)/tickets/_components/dummydata";
+} from "@/app/(user)/user/tickets/_components/dummydata";
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/DashboardCard";

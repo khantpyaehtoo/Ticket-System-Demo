@@ -1,5 +1,6 @@
 "use client";
 
+import HoursCardGrid from "@/app/(user)/_components/HoursCardGrid";
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/DashboardCard";
@@ -12,7 +13,6 @@ import {
     PlusCircle,
 } from "lucide-react";
 import Link from "next/link";
-import HoursCardGrid from "../../_components/HoursCardGrid";
 
 interface TicketCard {
     title: string;
@@ -81,7 +81,7 @@ export default function DashboardCardHeader() {
         <div>
             <div className="block sm:block md:block lg:block xl:block 2xl:sticky 2xl:top-10 bg-background z-10">
                 <div className="w-full flex justify-end items-center">
-                    <Link href="/tickets/create" className="inline-block">
+                    <Link href="/user/tickets/create" className="inline-block">
                         <Button type="primary" className="createTicketBtn">
                             <PlusCircle size={20} /> Create Ticket
                         </Button>

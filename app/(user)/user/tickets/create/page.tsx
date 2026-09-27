@@ -1,30 +1,26 @@
-import React from "react";
 import Link from "next/link";
-import ProductSpecsCard from "./_components/ProductSpecsCard";
 import { ChevronRight } from "lucide-react";
+import TicketCreateForm from "./_components/TicketCreateForm";
 
-export default function page() {
+export default function CreateTicketPage() {
     return (
         <div className="w-full max-w-8xl mx-auto px-0 sm:px-6 py-4 sm:py-8 space-y-4 sm:space-y-6">
             {/* Breadcrumb Navigation */}
             <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-800">
                 <Link
-                    href="/products"
+                    href="/user/tickets"
                     className="hover:text-gray-500 transition-colors font-medium"
                 >
-                    Back{" "}
+                    Back
                 </Link>
                 <span className="text-gray-800 font-bold">
                     <ChevronRight />
                 </span>
-                <span className="text-blue-800 font-medium">
-                    {" "}
-                    View Product Ticket
-                </span>
+                <span className="text-blue-800 font-medium">Create Ticket</span>
             </nav>
 
-            {/* Product Specifications & Dashboard Cards */}
-            <ProductSpecsCard />
+            {/* Ticket Form */}
+            <TicketCreateForm />
         </div>
     );
 }

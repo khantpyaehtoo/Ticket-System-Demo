@@ -179,7 +179,7 @@ export default function RecentActivity() {
                     </p>
                 </div>
                 <Link
-                    href="/tickets"
+                    href="/user/tickets"
                     className="flex items-center gap-1.5 text-xs sm:text-sm text-primary hover:underline shrink-0 self-start sm:self-auto font-medium"
                 >
                     View All <ArrowRight size={16} />

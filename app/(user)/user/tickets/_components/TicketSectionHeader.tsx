@@ -1,10 +1,10 @@
 "use client";
 
+import HoursCardGrid from "@/app/(user)/_components/HoursCardGrid";
 import { Button } from "antd";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import HoursCardGrid from "../../_components/HoursCardGrid";
 
 export default function TicketSectionHeader() {
     const ticketCards = [
@@ -30,7 +30,7 @@ export default function TicketSectionHeader() {
         <div className="w-full space-y-6 ">
             {/* Create Ticket Button */}
             <div className="w-full flex justify-end items-center">
-                <Link href="/tickets/create" className="inline-block">
+                <Link href="/user/tickets/create" className="inline-block">
                     <Button type="primary" className="createTicketBtn">
                         <PlusCircle size={20} /> Create Ticket
                     </Button>
