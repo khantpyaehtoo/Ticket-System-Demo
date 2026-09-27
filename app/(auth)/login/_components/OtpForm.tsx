@@ -1,12 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, MailOpen, RotateCw } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { otpSchema } from "@/lib/validations/auth";
+import { z } from "zod";
+import { createZodRule } from "@/lib/validations/createZodRule";
+
+type OtpInput = z.infer<typeof otpSchema>;
 
 interface OtpFormProps {
-    email?: string | { email: string };
+    email?: string;
     onBackToLogin?: () => void;
     onSuccessSubmit?: (otp: string) => void;
     onResendOtp?: () => void;
@@ -18,18 +23,13 @@ export default function OtpForm({
     onSuccessSubmit,
     onResendOtp,
 }: OtpFormProps) {
-    const [form] = Form.useForm();
     const [timer, setTimer] = useState<number>(60);
     const [canResend, setCanResend] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const searchParams = useSearchParams();
-
     const queryEmail = searchParams.get("email");
-
-    const rawEmail = queryEmail || propEmail;
-
-    const displayEmail =
-        typeof rawEmail === "object" ? rawEmail.email : rawEmail;
+    const displayEmail = queryEmail || propEmail;
 
     // Resend Countdown Timer Logic
     useEffect(() => {
@@ -44,16 +44,39 @@ export default function OtpForm({
         return () => clearInterval(interval);
     }, [timer]);
 
-    const handleResend = () => {
+    const handleResend = async () => {
         if (!canResend) return;
-        setTimer(60);
-        setCanResend(false);
-        if (onResendOtp) onResendOtp();
+
+        try {
+            setTimer(60);
+            setCanResend(false);
+            if (onResendOtp) onResendOtp();
+            message.success("A new OTP code has been sent!");
+        } catch (error: unknown) {
+            const err = error as Error;
+            message.error(err?.message || "Failed to resend OTP.");
+        }
     };
 
-    const handleSubmit = (values: { otp: string }) => {
-        if (onSuccessSubmit) {
-            onSuccessSubmit(values.otp);
+    const handleSubmit = async (values: OtpInput) => {
+        setLoading(true);
+
+        try {
+            // TODO: OTP
+            // await verifyOtpAction({ email: displayEmail, otp: values.otp });
+
+            message.success("OTP verified successfully!");
+
+            if (onSuccessSubmit) {
+                onSuccessSubmit(values.otp);
+            }
+        } catch (error: unknown) {
+            const err = error as Error;
+            message.error(
+                err?.message || "Invalid OTP code. Please try again.",
+            );
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -79,22 +102,15 @@ export default function OtpForm({
             </div>
 
             <Form
-                form={form}
                 name="otp"
                 layout="vertical"
                 requiredMark={false}
                 onFinish={handleSubmit}
             >
-                {/* AntD OTP Input Component */}
+                {/* AntD OTP Input Component with Zod Rule */}
                 <Form.Item
                     name="otp"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter the OTP code!",
-                        },
-                        { len: 6, message: "OTP must be 6 digits!" },
-                    ]}
+                    rules={[createZodRule(otpSchema, "otp")]}
                     className="flex justify-center mb-4"
                 >
                     <Input.OTP
@@ -127,12 +143,17 @@ export default function OtpForm({
 
                 {/* Submit Button */}
                 <Form.Item className="mt-6 mb-2">
-                    <Button block htmlType="submit" className="loginFormBtn!">
+                    <Button
+                        block
+                        htmlType="submit"
+                        loading={loading}
+                        className="loginFormBtn!"
+                    >
                         Verify & Continue
                     </Button>
                 </Form.Item>
 
-                {/* Back to Login */}
+                {/* Back Button */}
                 <div className="text-center mt-4">
                     <button
                         type="button"

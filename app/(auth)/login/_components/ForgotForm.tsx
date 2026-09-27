@@ -1,31 +1,63 @@
 "use client";
 
-import { Button, Form, Input } from "antd";
+import { useState } from "react";
+import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, LockKeyholeIcon } from "lucide-react";
+import { forgotPasswordSchema } from "@/lib/validations/auth";
+import { z } from "zod";
+import { createZodRule } from "@/lib/validations/createZodRule";
+
+type ForgotInput = z.infer<typeof forgotPasswordSchema>;
 
 export interface ForgotFormProps {
     onBackToLogin: () => void;
-    onSuccessSubmit: (email: string) => void; // OTP
+    onSuccessSubmit: (email: string) => void;
 }
 
 export default function ForgotForm({
     onBackToLogin,
     onSuccessSubmit,
 }: ForgotFormProps) {
+    const [loading, setLoading] = useState(false);
+
+    const handleFinish = async (values: ForgotInput) => {
+        setLoading(true);
+
+        try {
+            // TODO: Server Action
+            // await sendOtpAction(values.email);
+
+            message.success(
+                "OTP verification code has been sent to your email!",
+            );
+
+            // Email
+            onSuccessSubmit(values.email);
+        } catch (error: unknown) {
+            const err = error as Error;
+            message.error(
+                err?.message || "Failed to send OTP. Please try again.",
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
             <div className="flex justify-center items-center mb-6">
-                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center">
-                    <LockKeyholeIcon />
+                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center text-white">
+                    <LockKeyholeIcon className="w-8 h-8" />
                 </p>
             </div>
-            <div className="space-y-2 mb-6">
+
+            <div className="space-y-2 mb-6 text-center">
                 <h1 className="text-xl md:text-2xl font-semibold text-black">
                     Reset your password
                 </h1>
                 <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
                     Enter your email address and we&apos;ll send you a secure
-                    verification link to reset your password.
+                    verification code to reset your password.
                 </p>
             </div>
 
@@ -33,7 +65,7 @@ export default function ForgotForm({
                 name="forgot"
                 layout="vertical"
                 requiredMark={false}
-                onFinish={onSuccessSubmit}
+                onFinish={handleFinish}
             >
                 <Form.Item
                     name="email"
@@ -42,9 +74,7 @@ export default function ForgotForm({
                             Email Address
                         </span>
                     }
-                    rules={[
-                        { required: true, message: "Please enter your email!" },
-                    ]}
+                    rules={[createZodRule(forgotPasswordSchema, "email")]}
                 >
                     <Input
                         type="email"
@@ -54,7 +84,12 @@ export default function ForgotForm({
                 </Form.Item>
 
                 <Form.Item className="mt-6 mb-2">
-                    <Button block htmlType="submit" className="loginFormBtn!">
+                    <Button
+                        block
+                        htmlType="submit"
+                        loading={loading}
+                        className="loginFormBtn!"
+                    >
                         Send OTP Code
                     </Button>
                 </Form.Item>

@@ -1,22 +1,44 @@
 "use client";
 
-import { Button, Form, Input } from "antd";
+import { useState } from "react";
+import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, Key, Lock } from "lucide-react";
+import { z } from "zod";
+import { newPasswordSchema } from "@/lib/validations/auth";
+import { createZodRule } from "@/lib/validations/createZodRule";
+
+type ResetPasswordInput = z.infer<typeof newPasswordSchema>;
 
 interface ResetPasswordFormProps {
     onBackToLogin?: () => void;
-    onSuccessSubmit?: (values: { password: string }) => void;
+    onSuccessSubmit?: (values: ResetPasswordInput) => void;
 }
 
 export default function ResetPasswordForm({
     onBackToLogin,
     onSuccessSubmit,
 }: ResetPasswordFormProps) {
-    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (values: { password: string }) => {
-        if (onSuccessSubmit) {
-            onSuccessSubmit(values);
+    const handleSubmit = async (values: ResetPasswordInput) => {
+        setLoading(true);
+
+        try {
+            // TODO: Server Action
+            // await resetPasswordAction(values);
+
+            message.success("Password reset successfully!");
+
+            if (onSuccessSubmit) {
+                onSuccessSubmit(values);
+            }
+        } catch (error: unknown) {
+            const err = error as Error;
+            message.error(
+                err?.message || "Failed to reset password. Please try again.",
+            );
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -24,8 +46,8 @@ export default function ResetPasswordForm({
         <div className="w-full max-w-md mx-auto p-6 md:p-8 bg-background border border-zinc-200/50 rounded-2xl shadow-2xl backdrop-blur-md">
             {/* Header Section */}
             <div className="flex justify-center items-center mb-6">
-                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center">
-                    <Key />
+                <p className="h-15 w-15 p-1 rounded-full bg-primary flex items-center justify-center text-white">
+                    <Key className="w-7 h-7" />
                 </p>
             </div>
             <div className="space-y-2 mb-6 text-center md:text-left">
@@ -39,7 +61,6 @@ export default function ResetPasswordForm({
             </div>
 
             <Form
-                form={form}
                 name="reset_password"
                 layout="vertical"
                 requiredMark={false}
@@ -53,16 +74,7 @@ export default function ResetPasswordForm({
                             New Password
                         </span>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter your new password!",
-                        },
-                        {
-                            min: 8,
-                            message: "Password must be at least 8 characters!",
-                        },
-                    ]}
+                    rules={[createZodRule(newPasswordSchema, "password")]}
                     hasFeedback
                 >
                     <Input.Password
@@ -83,25 +95,7 @@ export default function ResetPasswordForm({
                     dependencies={["password"]}
                     hasFeedback
                     rules={[
-                        {
-                            required: true,
-                            message: "Please confirm your password!",
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (
-                                    !value ||
-                                    getFieldValue("password") === value
-                                ) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(
-                                    new Error(
-                                        "The passwords that you entered do not match!",
-                                    ),
-                                );
-                            },
-                        }),
+                        createZodRule(newPasswordSchema, "confirmPassword"),
                     ]}
                 >
                     <Input.Password
@@ -113,7 +107,12 @@ export default function ResetPasswordForm({
 
                 {/* Submit Button */}
                 <Form.Item className="mt-6 mb-2">
-                    <Button block htmlType="submit" className="loginFormBtn!">
+                    <Button
+                        block
+                        htmlType="submit"
+                        loading={loading}
+                        className="loginFormBtn!"
+                    >
                         Reset Password
                     </Button>
                 </Form.Item>
