@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import { NavItem } from "@/types/dashboard";
-import SignOutBtn from "./SignOutBtn";
 import MobileSideBar from "./MobileSideBar";
+import SignOutBtn from "../ui/SignOutBtn";
 
 export interface SidebarProps {
     navItems: NavItem[];

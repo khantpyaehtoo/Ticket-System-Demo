@@ -9,33 +9,33 @@ export type HeaderLeftConfig = {
 
 // Static route configurations
 export const staticHeaderLeftMap: Record<string, HeaderLeftConfig> = {
-    "/dashboard": {
+    "/user/dashboard": {
         type: "title",
         title: "Welcome Back!",
         description: "Here's an overview of your tickets and service requests",
     },
-    "/tickets": {
+    "/user/tickets": {
         type: "title",
         title: "My Tickets",
         description: "View and manage all your support requests",
     },
-    "/tickets/create": {
+    "/user/tickets/create": {
         type: "title",
         title: "My Tickets",
         description:
             "Describe your issue and provide any details that may help our support team understand and resolve it.",
     },
-    "/products": {
+    "/user/products": {
         type: "title",
         title: "My Products",
         description: "Your active tools and subscription services",
     },
-    "/notifications": {
+    "/user/notifications": {
         type: "title",
         title: "Notifications",
         description: "Recent alerts and updates",
     },
-    "/settings": {
+    "/user/settings": {
         type: "title",
         title: "Account Settings",
         description: "Manage your preferences and profile details",
@@ -53,7 +53,7 @@ export function getHeaderConfig(
     }
 
     // Dynamic Route: /tickets/details/[id]
-    if (pathname.startsWith("/tickets/details/")) {
+    if (pathname.startsWith("/user/tickets/details/")) {
         const ticketId = params?.id || pathname.split("/").pop();
         return {
             type: "title",
@@ -69,7 +69,7 @@ export function getHeaderConfig(
     }
 
     // Dynamic Route: /products/viewProduct/[id]
-    if (pathname.startsWith("/products/viewProduct/")) {
+    if (pathname.startsWith("/user/products/viewProduct/")) {
         const productId = params?.id || pathname.split("/").pop();
         return {
             type: "title",
