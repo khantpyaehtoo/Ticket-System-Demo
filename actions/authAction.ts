@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { loginSchema } from "@/lib/validations/auth";
 
 export async function signOut() {
     const cookieStore = await cookies();
@@ -12,21 +13,36 @@ export async function signOut() {
 
 export async function loginAction(formData: FormData) {
     let targetPath = "";
-    const rememberMe = formData.get("rememberMe") === "on";
+
+    const rawData = Object.fromEntries(formData);
+
+    const validation = loginSchema.safeParse({
+        email: rawData.email,
+        password: rawData.password,
+        remember: rawData.rememberMe === "on",
+    });
+
+    if (!validation.success) {
+        throw new Error("Invalid form data submitted.");
+    }
+
+    const { email, password, remember } = validation.data;
 
     // (30 days * 24 hours * 60 mins * 60 secs)
     const THIRTY_DAYS = 30 * 24 * 60 * 60;
+    const cookieMaxAge = remember ? THIRTY_DAYS : undefined;
 
-    // 1 day
-    const cookieMaxAge = rememberMe ? THIRTY_DAYS : undefined;
-
-    const res = await fetch("", {
+    const res = await fetch("YOUR_BACKEND_API_URL_HERE", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify({ email, password }),
     });
+
+    if (!res.ok) {
+        throw new Error("Invalid credentials");
+    }
 
     const data = await res.json();
 

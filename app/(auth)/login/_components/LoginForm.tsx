@@ -1,23 +1,24 @@
 "use client";
 
 import { loginAction } from "@/actions/authAction";
-import { loginSchema } from "@/lib/validations/auth";
-import { createZodRule } from "@/lib/validations/createZodRule";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { ArrowRight, Info } from "lucide-react";
 import { useState } from "react";
-import { z } from "zod";
+
+interface LoginFormValues {
+    email: string;
+    password: string;
+    remember?: boolean;
+}
 
 interface LoginFormProps {
     onForgotPassword: () => void;
 }
 
-type LoginInput = z.infer<typeof loginSchema>;
-
 export default function LoginForm({ onForgotPassword }: LoginFormProps) {
     const [loading, setLoading] = useState(false);
 
-    const handleFinish = async (values: LoginInput) => {
+    const handleFinish = async (values: LoginFormValues) => {
         setLoading(true);
 
         try {
@@ -31,10 +32,9 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
 
             await loginAction(formData);
         } catch (error: unknown) {
-            const isRedirectError =
+            const isRedirect =
                 error instanceof Error && error.message === "NEXT_REDIRECT";
-
-            if (!isRedirectError) {
+            if (!isRedirect) {
                 message.error("Login failed. Please check your credentials.");
             }
         } finally {
@@ -70,7 +70,13 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                             Email Address
                         </span>
                     }
-                    rules={[createZodRule(loginSchema, "email")]}
+                    rules={[
+                        { required: true, message: "Please enter your email!" },
+                        {
+                            type: "email",
+                            message: "Please enter a valid email address!",
+                        },
+                    ]}
                 >
                     <Input
                         type="email"
@@ -97,7 +103,17 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                             </button>
                         </div>
                     }
-                    rules={[createZodRule(loginSchema, "password")]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter your password!",
+                        },
+                        {
+                            required: true,
+                            min: 8,
+                            message: "Password must be at least 8 characters!",
+                        },
+                    ]}
                 >
                     <Input.Password
                         placeholder="Enter your password"

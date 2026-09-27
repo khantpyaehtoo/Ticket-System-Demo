@@ -3,11 +3,10 @@
 import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, LockKeyholeIcon } from "lucide-react";
-import { forgotPasswordSchema } from "@/lib/validations/auth";
-import { z } from "zod";
-import { createZodRule } from "@/lib/validations/createZodRule";
 
-type ForgotInput = z.infer<typeof forgotPasswordSchema>;
+export interface ForgotInput {
+    email: string;
+}
 
 export interface ForgotFormProps {
     onBackToLogin: () => void;
@@ -31,7 +30,6 @@ export default function ForgotForm({
                 "OTP verification code has been sent to your email!",
             );
 
-            // Email
             onSuccessSubmit(values.email);
         } catch (error: unknown) {
             const err = error as Error;
@@ -74,7 +72,16 @@ export default function ForgotForm({
                             Email Address
                         </span>
                     }
-                    rules={[createZodRule(forgotPasswordSchema, "email")]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter your email address!",
+                        },
+                        {
+                            type: "email",
+                            message: "Please enter a valid email address!",
+                        },
+                    ]}
                 >
                     <Input
                         type="email"

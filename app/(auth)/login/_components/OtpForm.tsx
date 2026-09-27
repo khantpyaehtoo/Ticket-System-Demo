@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, MailOpen, RotateCw } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { otpSchema } from "@/lib/validations/auth";
-import { z } from "zod";
-import { createZodRule } from "@/lib/validations/createZodRule";
 
-type OtpInput = z.infer<typeof otpSchema>;
+interface OtpFormValues {
+    otp: string;
+}
 
 interface OtpFormProps {
     email?: string;
@@ -58,11 +57,11 @@ export default function OtpForm({
         }
     };
 
-    const handleSubmit = async (values: OtpInput) => {
+    const handleSubmit = async (values: OtpFormValues) => {
         setLoading(true);
 
         try {
-            // TODO: OTP
+            // TODO: Server Action
             // await verifyOtpAction({ email: displayEmail, otp: values.otp });
 
             message.success("OTP verified successfully!");
@@ -107,10 +106,18 @@ export default function OtpForm({
                 requiredMark={false}
                 onFinish={handleSubmit}
             >
-                {/* AntD OTP Input Component with Zod Rule */}
                 <Form.Item
                     name="otp"
-                    rules={[createZodRule(otpSchema, "otp")]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter the OTP code!",
+                        },
+                        {
+                            len: 6,
+                            message: "OTP must be exactly 6 digits!",
+                        },
+                    ]}
                     className="flex justify-center mb-4"
                 >
                     <Input.OTP

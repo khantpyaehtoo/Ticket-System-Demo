@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, Key, Lock } from "lucide-react";
-import { z } from "zod";
-import { newPasswordSchema } from "@/lib/validations/auth";
-import { createZodRule } from "@/lib/validations/createZodRule";
 
-type ResetPasswordInput = z.infer<typeof newPasswordSchema>;
+export interface ResetPasswordInput {
+    password: string;
+    confirmPassword: string;
+}
 
 interface ResetPasswordFormProps {
     onBackToLogin?: () => void;
@@ -25,8 +25,6 @@ export default function ResetPasswordForm({
 
         try {
             // TODO: Server Action
-            // await resetPasswordAction(values);
-
             message.success("Password reset successfully!");
 
             if (onSuccessSubmit) {
@@ -74,7 +72,16 @@ export default function ResetPasswordForm({
                             New Password
                         </span>
                     }
-                    rules={[createZodRule(newPasswordSchema, "password")]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter your new password!",
+                        },
+                        {
+                            min: 8,
+                            message: "Password must be at least 8 characters!",
+                        },
+                    ]}
                     hasFeedback
                 >
                     <Input.Password
@@ -95,7 +102,25 @@ export default function ResetPasswordForm({
                     dependencies={["password"]}
                     hasFeedback
                     rules={[
-                        createZodRule(newPasswordSchema, "confirmPassword"),
+                        {
+                            required: true,
+                            message: "Please confirm your password!",
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (
+                                    !value ||
+                                    getFieldValue("password") === value
+                                ) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                    new Error(
+                                        "The passwords that you entered do not match!",
+                                    ),
+                                );
+                            },
+                        }),
                     ]}
                 >
                     <Input.Password
