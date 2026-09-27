@@ -3,7 +3,7 @@
 // import { BellRing, LayoutGrid, Settings, Ticket } from "lucide-react";
 
 // const TeamNavItems: NavItem[] = [
-//     { label: "My Works", href: "/team-works", icon: <LayoutGrid /> },
+//     { label: "My Works", href: "/main", icon: <LayoutGrid /> },
 //     { label: "My Tickets", href: "/team-tickets", icon: <Ticket /> },
 //     // { label: "Service", href: "/products", icon: <Package /> },
 //     { label: "Notification", href: "/team-notifications", icon: <BellRing /> },
