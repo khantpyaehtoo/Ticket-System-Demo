@@ -46,13 +46,13 @@ export default function TicketDetails({ ticket }: TicketDetailsProps) {
                             <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-secondary">
                                 {ticket?.title || "Technical Issues"}
                             </h1>
-                            <span className="uppercase text-xs font-semibold tracking-wider bg-primary/10 text-primary px-2.5 py-1 rounded-md">
-                                {ticket?.id || "DB-TK1"}
-                            </span>
                         </div>
 
                         {/* DYNAMIC STATUS BADGE */}
-                        <div className="self-start sm:self-auto">
+                        <div className="flex justify-between items-center flex-1">
+                            <span className="uppercase text-xs font-semibold tracking-wider bg-primary/10 text-primary px-2.5 py-1 rounded-md">
+                                {ticket?.id || "DB-TK1"}
+                            </span>
                             <span
                                 style={{
                                     backgroundColor: `color-mix(in srgb, ${statusColor} 15%, transparent)`,
