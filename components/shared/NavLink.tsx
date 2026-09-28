@@ -1,5 +1,6 @@
 "use client";
 
+import { dummyTicketsList } from "@/app/(user)/user/tickets/_components/dummydata";
 import { cn } from "@/lib/utils";
 import { useNotificationStore } from "@/store/useNotificationsStore";
 import Link from "next/link";
@@ -17,11 +18,18 @@ export default function NavLink({ href, label, icon, hasBadge }: NavLinkProps) {
     const pathname = usePathname();
 
     const unreadCount = useNotificationStore((state) => state.unreadCount);
+    const unreadTicketIds = useNotificationStore(
+        (state) => state.unreadTicketIds,
+    );
+    const hasDummyUnread = dummyTicketsList.some(
+        (ticket) =>
+            ticket.hasUnreadNoti && !unreadTicketIds.includes(ticket.ticketId),
+    );
 
     const isActive =
         pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
 
-    const showBadge = hasBadge && unreadCount > 0;
+    const showBadge = hasBadge && (unreadCount > 0 || hasDummyUnread);
 
     return (
         <Link
