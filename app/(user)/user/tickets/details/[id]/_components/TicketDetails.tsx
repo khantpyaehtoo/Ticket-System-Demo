@@ -1,31 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import profileImg from "@/public/defaultProfile.jpg";
 import { useUserStore } from "@/store/useUserStore";
 import { Avatar } from "antd";
 import Image from "next/image";
 import TicketProperties from "./TicketProperties";
 import { Clock } from "lucide-react";
-import { getStatusColor, TicketStatus } from "@/lib/config/getStatusColors";
+import { getStatusColor } from "@/lib/config/getStatusColors";
+import { TicketDetailsType } from "@/types/ticket";
+import { useNotificationStore } from "@/store/useNotificationsStore";
 
 interface TicketDetailsProps {
-    ticket?: {
-        id: string;
-        title: string;
-        status: TicketStatus;
-        senderName: string;
-        senderEmail: string;
-        recipientEmail: string;
-        createdAt: string;
-        description: string;
-        attachments?: string[];
-    };
+    ticket: TicketDetailsType;
 }
 
 export default function TicketDetails({ ticket }: TicketDetailsProps) {
     const imageSrc = useUserStore((state) => state.imageSrc);
     const avatarUrl = imageSrc || profileImg.src;
+
+    const markTicketAsRead = useNotificationStore(
+        (state) => state.markTicketAsRead,
+    );
+
+    useEffect(() => {
+        const targetId = ticket.ticketId || ticket.id;
+        if (targetId) {
+            markTicketAsRead(targetId);
+        }
+    }, [ticket, markTicketAsRead]);
 
     // Fallback/Default values
     const currentStatus = ticket?.status || "Submitted";

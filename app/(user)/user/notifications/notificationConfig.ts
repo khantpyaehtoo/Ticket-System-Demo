@@ -21,6 +21,7 @@ export interface NotificationItem {
     type: NotificationType;
     time: string;
     isNew: boolean;
+    ticketId?: string;
     linkText?: string;
     linkHref?: string;
 }

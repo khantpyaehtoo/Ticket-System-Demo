@@ -4,6 +4,7 @@ import RecentActivity from "./_components/RecentActivity";
 import RecentTickets from "./_components/RecentTickets";
 
 export default function page() {
+    // throw new Error("401 - Unauthorized Access");
     return (
         <div>
             <DashboardCardHeader />

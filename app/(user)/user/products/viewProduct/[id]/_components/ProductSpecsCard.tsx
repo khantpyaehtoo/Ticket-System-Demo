@@ -1,14 +1,12 @@
 "use client";
 
-import {
-    dummyTicketData,
-    TicketType,
-} from "@/app/(user)/user/tickets/_components/dummydata";
+import { dummyTicketsList } from "@/app/(user)/user/tickets/_components/dummydata";
 import DashboardCard, {
     DashboardCardProps,
 } from "@/components/ui/DashboardCard";
 import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { getStatusColor } from "@/lib/config/getStatusColors";
+import { TicketDetailsType } from "@/types/ticket";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import {
@@ -64,7 +62,7 @@ export default function ProductSpecsCard() {
         },
     ];
 
-    const tableColumns: ColumnsType<TicketType> = [
+    const tableColumns: ColumnsType<TicketDetailsType> = [
         {
             title: "No.",
             key: "key",
@@ -229,7 +227,7 @@ export default function ProductSpecsCard() {
                     <Table
                         rowKey="key"
                         columns={tableColumns}
-                        dataSource={dummyTicketData}
+                        dataSource={dummyTicketsList}
                         pagination={{ pageSize: 5, responsive: true }}
                     />
                 </div>

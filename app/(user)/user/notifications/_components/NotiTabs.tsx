@@ -25,27 +25,29 @@ const INITIAL_NOTIFICATIONS: (NotificationItem & {
     },
     {
         id: "2",
-        title: "Ticket #TK-8492 has been resolved",
+        title: "Ticket #DB-TK1 has been resolved",
         description:
             "Our support team has fixed the issue regarding your custom domain configuration.",
         type: "success",
         time: "2 hours ago",
         isNew: true,
         category: "tickets",
+        ticketId: "DB-TK1",
         linkText: "View ticket details",
-        linkHref: "/tickets/details/TK-8492",
+        linkHref: "/user/tickets/details/DB-TK1",
     },
     {
         id: "3",
-        title: "New update on Ticket #TK-9102",
+        title: "New update on Ticket #DB-TK2",
         description:
             "An agent has requested additional information regarding your database migration logs.",
         type: "info",
         time: "1 day ago",
-        isNew: false,
+        isNew: true,
         category: "tickets",
+        ticketId: "DB-TK2",
         linkText: "View ticket details",
-        linkHref: "/tickets/details/TK-9102",
+        linkHref: "/user/tickets/details/DB-TK2",
     },
     {
         id: "4",
@@ -97,24 +99,22 @@ export default function AccountTabs() {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
 
-    const { setUnreadCount, clearUnread } = useNotificationStore();
+    const { setUnreadNotifications, clearUnread } = useNotificationStore();
 
     const notificationsRef = useRef(notifications);
+
     useEffect(() => {
         notificationsRef.current = notifications;
     }, [notifications]);
 
     useEffect(() => {
-        const unreadCount = notifications.filter((n) => n.isNew).length;
-        setUnreadCount(unreadCount);
-    }, [notifications, setUnreadCount]);
+        setUnreadNotifications(notifications);
+    }, [notifications, setUnreadNotifications]);
 
     useEffect(() => {
         return () => {
-            // Check if there are any unread notifications before leaving
             const hasUnread = notificationsRef.current.some((n) => n.isNew);
             if (hasUnread) {
-                // await axios.post("/api/notifications/mark-all-read");
                 clearUnread();
             }
         };

@@ -5,23 +5,26 @@ import { Button, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import {
-    dummyTicketData,
-    TicketType,
-} from "../../tickets/_components/dummydata";
+
 import { getStatusColor } from "@/lib/config/getStatusColors";
 import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { dummyTicketsList } from "../../tickets/_components/dummydata";
+import { TicketDetailsType } from "@/types/ticket";
 // import { usersQueryOptions } from "../page";
 
 export default function RecentTickets() {
     const router = useRouter();
-    const tableColumns: ColumnsType<TicketType> = [
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 5;
+
+    const tableColumns: ColumnsType<TicketDetailsType> = [
         {
             title: "No.",
-            key: "id",
+            key: "no",
             width: 60,
-            render: (_, __, id) => id + 1,
+            render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
         },
         {
             title: "Ticket Id",
@@ -125,17 +128,22 @@ export default function RecentTickets() {
 
             {/* Table with Horizontal Scroll Support */}
             <div className="w-full overflow-x-auto">
-                <Table<TicketType>
+                <Table<TicketDetailsType>
                     columns={tableColumns}
-                    dataSource={dummyTicketData}
+                    dataSource={dummyTicketsList}
                     // loading={isLoading}
-                    key="id"
+                    rowKey={(record) => record.ticketId || record.id}
                     scroll={{ x: 600 }}
-                    pagination={{ pageSize: 5, responsive: true }}
+                    pagination={{
+                        current: currentPage,
+                        pageSize: pageSize,
+                        responsive: true,
+                        onChange: (page) => setCurrentPage(page),
+                    }}
                     onRow={(record) => ({
                         onClick: () => {
                             const targetId = record.ticketId || record.id;
-                            router.push(`/tickets/details/${targetId}`);
+                            router.push(`/user/tickets/details/${targetId}`);
                         },
                         className:
                             "cursor-pointer hover:bg-gray-50 transition-colors",

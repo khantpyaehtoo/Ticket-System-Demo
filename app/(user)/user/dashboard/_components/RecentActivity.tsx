@@ -195,7 +195,9 @@ export default function RecentActivity() {
                     <div
                         key={key}
                         className="flex items-center gap-3 sm:gap-4 border-b border-dashed border-b-[#d5d5d5] py-3 sm:py-4 group w-full px-2 sm:px-3 hover:bg-gray-50/50 rounded-lg cursor-pointer transition-all"
-                        onClick={() => router.push(`/tickets/details/${i.id}`)}
+                        onClick={() =>
+                            router.push(`/user/tickets/details/${i.id}`)
+                        }
                     >
                         {/* Timeline Dot Indicator */}
                         <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full ring-2 ring-[#d5d5d5] ring-offset-2 flex items-center justify-center border border-background shrink-0">

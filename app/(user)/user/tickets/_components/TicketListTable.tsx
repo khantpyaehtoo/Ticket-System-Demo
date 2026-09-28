@@ -1,32 +1,55 @@
 "use client";
 
-// import { useQuery } from "@tanstack/react-query";
 import { Input, Select, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Search } from "lucide-react";
-import { dummyTicketData, TicketType } from "./dummydata";
+import { dummyTicketsList } from "./dummydata";
 import { getStatusColor } from "@/lib/config/getStatusColors";
 import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { useRouter } from "next/navigation";
-// import { usersQueryOptions } from "../page";
+import { useState } from "react";
+import { TicketDetailsType } from "@/types/ticket";
+import { useNotificationStore } from "@/store/useNotificationsStore";
 
 export default function TicketListClient() {
-    // const { data: users, isLoading } = useQuery(usersQueryOptions);
     const router = useRouter();
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 7;
 
-    const tableColumns: ColumnsType<TicketType> = [
+    const { unreadTicketIds, markTicketAsRead } = useNotificationStore();
+
+    const tableColumns: ColumnsType<TicketDetailsType> = [
         {
             title: "No.",
-            key: "id",
+            key: "no",
             width: 60,
-            render: (_, __, id) => id + 1,
+            render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
         },
         {
             title: "Ticket Id",
             dataIndex: "ticketId",
             key: "ticketId",
-            width: 120,
-            render: (val, record) => val || record.id || "-",
+            width: 140,
+            render: (val, record) => {
+                const targetId = val || record.id || "-";
+
+                const hasUnreadNoti =
+                    unreadTicketIds.includes(targetId) || record.hasUnreadNoti;
+
+                return (
+                    <div className="flex items-center gap-2">
+                        <span className="font-medium text-gray-900">
+                            {targetId}
+                        </span>
+                        {hasUnreadNoti && (
+                            <span className="relative flex h-2 w-2 shrink-0">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                            </span>
+                        )}
+                    </div>
+                );
+            },
         },
         {
             title: "Status",
@@ -38,10 +61,7 @@ export default function TicketListClient() {
                 return (
                     <span
                         className="px-2.5 py-1 rounded-full text-sm font-medium inline-block"
-                        style={{
-                            color: color,
-                            // backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, // Soft background pill effect
-                        }}
+                        style={{ color: color }}
                     >
                         {status}
                     </span>
@@ -140,20 +160,25 @@ export default function TicketListClient() {
 
             {/* Table Container with Horizontal Scroll Support */}
             <div className="w-full overflow-x-auto">
-                <Table<TicketType>
+                <Table<TicketDetailsType>
                     columns={tableColumns}
-                    // dataSource={users}
-                    // loading={isLoading}
-                    rowKey="id"
                     scroll={{ x: 800 }}
-                    dataSource={dummyTicketData}
+                    dataSource={dummyTicketsList}
+                    rowKey={(record) => record.ticketId || record.id}
                     pagination={{
+                        current: currentPage,
+                        pageSize: pageSize,
                         responsive: true,
-                        pageSize: 10,
+                        onChange: (page) => setCurrentPage(page),
                     }}
                     onRow={(record) => ({
                         onClick: () => {
                             const targetId = record.ticketId || record.id;
+
+                            if (targetId) {
+                                markTicketAsRead(targetId);
+                            }
+
                             router.push(`/user/tickets/details/${targetId}`);
                         },
                         className:
