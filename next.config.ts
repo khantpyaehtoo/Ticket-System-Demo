@@ -43,6 +43,18 @@ const nextConfig: NextConfig = {
         ],
     },
 
+    // Proxy / Rewrites Config
+    /*
+    async rewrites() {
+        return [
+            {
+                source: "/api/:path*",
+                destination: "http://localhost:8000/api/:path*", 
+            },
+        ];
+    },
+    */
+
     // SVG Loader Config
     webpack(config) {
         config.module.rules.push({
