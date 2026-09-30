@@ -128,9 +128,9 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        { required: true, message: "Please select a product" },
-                    ]}
+                    // rules={[
+                    //     { required: true, message: "Please select a product" },
+                    // ]}
                 >
                     <Select
                         placeholder="Choose a Product"
@@ -160,12 +160,12 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please select an issue type",
-                        },
-                    ]}
+                    // rules={[
+                    //     {
+                    //         required: true,
+                    //         message: "Please select an issue type",
+                    //     },
+                    // ]}
                 >
                     <DebounceSelect
                         style={{ width: "100%" }}
@@ -189,12 +189,12 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter issue summary",
-                        },
-                    ]}
+                    // rules={[
+                    //     {
+                    //         required: true,
+                    //         message: "Please enter issue summary",
+                    //     },
+                    // ]}
                 >
                     <Input
                         placeholder="e.g. Unable to log in to my account"
@@ -216,12 +216,12 @@ export default function TicketCreateForm() {
                             </p>
                         </div>
                     }
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please provide a description",
-                        },
-                    ]}
+                    // rules={[
+                    //     {
+                    //         required: true,
+                    //         message: "Please provide a description",
+                    //     },
+                    // ]}
                 >
                     <ReactQuill
                         theme="snow"
@@ -269,7 +269,7 @@ export default function TicketCreateForm() {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        disabled={!isDirty}
+                        // disabled={!isDirty}
                         size="large"
                         className="w-full sm:w-auto bg-primary flex items-center justify-center gap-2 px-6"
                     >

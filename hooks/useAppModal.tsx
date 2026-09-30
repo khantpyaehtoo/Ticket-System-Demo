@@ -111,24 +111,24 @@ export function useAppModal() {
                 icon: null,
                 title: null,
                 content: (
-                    <div className="text-center py-2 space-y-4">
-                        <div className="flex flex-col items-center justify-center mx-auto w-[80%] bg-secondary rounded-2xl px-3 py-4">
+                    <div className="text-center py-2 space-y-4 ">
+                        <div className="flex flex-col items-center justify-center mx-auto w-[80%] bg-linear-to-r from-secondary to-[#7a9ce3] rounded-2xl px-3 py-4">
                             <div className="flex items-center justify-center space-x-3">
-                                <h3 className="text-xl font-bold text-gray-900 leading-snug">
+                                <h3 className="text-xl font-bold text-white leading-snug">
                                     {title || "Ticket Submitted"}
                                 </h3>
 
                                 <div
                                     className={`p-1 rounded-full flex items-center justify-center ${
                                         isSuccess
-                                            ? "bg-[#2563eb] text-secondary"
+                                            ? "bg-[#1559eb] text-[#7a9ce3]"
                                             : "bg-red-100 text-red-600"
                                     }`}
                                 >
                                     <Icon size={20} />
                                 </div>
                             </div>
-                            <h3 className="text-sm font-normal text-black leading-snug mt-3">
+                            <h3 className="text-sm font-normal text-white leading-snug mt-3">
                                 Your ticket has been submitted successfully!
                             </h3>
                         </div>
@@ -191,7 +191,8 @@ export function useAppModal() {
                 ),
                 centered: true,
                 maskClosable: false,
-                width: 440,
+                width: 800,
+                style: { maxWidth: "90vw" },
             });
         }
     };

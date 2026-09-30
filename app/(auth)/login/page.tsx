@@ -36,8 +36,9 @@ export default function LoginPage() {
                     <AuthIntroSection />
                 </div>
             ) : (
+                // bg-linear-to-r from-primary from-50% to-[#7b8192]
                 /* Forgot / OTP / Reset Views Container */
-                <div className="relative w-full h-full bg-linear-to-b from-primary to-secondary flex items-center justify-center p-4">
+                <div className="relative w-full h-full bg-linear-to-r from-primary from-50% to-[#7b8192] flex items-center justify-center p-4">
                     <div className="absolute top-0 left-4 py-8 px-10">
                         <Image
                             src="/logo&text.svg"

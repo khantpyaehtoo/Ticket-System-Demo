@@ -7,9 +7,10 @@ const STEPPER_ITEMS = [
     "Verified Patch Resolved",
 ];
 
+// bg-linear-to-r from-primary from-50% to-[#7b8192]
 export default function AuthIntroSection() {
     return (
-        <div className="intro-section absolute inset-0 h-full py-8 px-6 md:px-14 flex flex-col z-10 bg-linear-to-b from-primary to-secondary md:w-1/2 w-full">
+        <div className="intro-section absolute inset-0 h-full py-8 px-6 md:px-14 flex flex-col z-10 bg-primary md:w-1/2 w-full">
             <div className="intro-header">
                 <Image
                     src="/logo&text.svg"
