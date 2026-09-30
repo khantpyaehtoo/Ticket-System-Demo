@@ -1,5 +1,7 @@
 import { CircleCheck, Hourglass, RotateCcw, Ticket } from "lucide-react";
 import React from "react";
+import TicketTable from "./_components/TicketTable";
+import StartTimeCard from "./_components/StartTimeCard";
 
 // 1. Define an interface for your card data
 interface WorkCard {
@@ -44,7 +46,7 @@ export default function Page() {
     ];
 
     return (
-        <section className="text-black p-6 md:p-10 max-w-[1600px] mx-auto">
+        <section className="text-black max-w-[1600px] mx-auto space-y-10">
             {/* Header Section */}
             <div className="flex justify-center items-center pb-8 md:pb-12">
                 <div className="text-center space-y-3 md:space-y-4 max-w-2xl">
@@ -58,11 +60,6 @@ export default function Page() {
                 </div>
             </div>
 
-            {/* Header Card Section: 
-                - 1 col on mobile
-                - 2 cols on tablets / 13" laptops
-                - 4 cols on large & wide screens (xl/2xl) 
-            */}
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {overviewCards.map((card, index) => (
                     <div
@@ -102,6 +99,12 @@ export default function Page() {
                     </div>
                 ))}
             </section>
+
+            {/* Start Time Card */}
+            <StartTimeCard />
+
+            {/* Table */}
+            <TicketTable />
         </section>
     );
 }

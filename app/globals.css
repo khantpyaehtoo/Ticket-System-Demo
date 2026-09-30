@@ -61,6 +61,10 @@ body {
   @apply h-11 md:h-12 border-none bg-primary text-background hover:bg-secondary rounded-xl font-medium text-sm transition-all cursor-pointer
 }
 
+@utility detailBtn {
+  @apply h-11 md:h-12 bg-background text-primary hover:bg-primary hover:text-background border-2 border-primary rounded-xl font-medium text-sm transition-all cursor-pointer
+}
+
 @utility createTicketBtn {
   @apply flex items-center gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base
 }
