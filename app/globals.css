@@ -32,6 +32,12 @@
   --font-sans: var(--font-roboto);
   --font-jetbrains: var(--font-jetbrains-mono);
 
+  /* Priority Color */
+  --color-critical: var(--critical);
+  --color-high: var(--high);
+  --color-medium: var(--medium);
+  --color-low: var(--low);
+
   /* Status Colors */
   --color-submitted: var(--submitted);
   --color-reviewing: var(--reviewing);

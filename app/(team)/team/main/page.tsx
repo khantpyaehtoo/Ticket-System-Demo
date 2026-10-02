@@ -2,6 +2,7 @@ import React from "react";
 import TicketTable from "./_components/TicketTable";
 import TimerSection from "./_components/TimerSection";
 import HeaderOverviewCards from "./_components/HeaderOverviewCards";
+import PieSemiDonut from "./_components/PieSemiDonut";
 
 export default function Page() {
     return (
@@ -26,7 +27,10 @@ export default function Page() {
             <TimerSection />
 
             {/* Table */}
-            <TicketTable />
+            <div className="flex space-x-7">
+                <TicketTable />
+                <PieSemiDonut />
+            </div>
         </section>
     );
 }

@@ -4,7 +4,7 @@ import { CircleCheck, Hourglass, RotateCcw, Ticket } from "lucide-react";
 interface WorkCard {
     title: string;
     count: number;
-    criticalCount?: number;
+    labelCount?: React.ReactNode;
     totalText: string;
     icon: React.ReactNode;
 }
@@ -14,28 +14,49 @@ export default function HeaderOverviewCards() {
         {
             title: "Assigned Tickets",
             count: 10,
-            criticalCount: 3,
+            labelCount: (
+                <>
+                    <div className="w-2.5 h-2.5 bg-critical rounded-full shrink-0" />
+                    <p className="text-critical text-xs md:text-sm font-medium whitespace-nowrap">
+                        Critical Tasks - 3
+                    </p>
+                </>
+            ),
             totalText: "Total Assigned Tickets - 10",
             icon: <Ticket className="w-5 h-5" />,
         },
         {
             title: "In Progress",
             count: 10,
-            criticalCount: 3,
+            labelCount: (
+                <>
+                    <div className="w-2.5 h-2.5 bg-high rounded-full shrink-0" />
+                    <p className="text-high text-xs md:text-sm font-medium whitespace-nowrap">
+                        Due Soon - 3
+                    </p>
+                </>
+            ),
             totalText: "Total Assigned Tickets - 10",
             icon: <Hourglass className="w-5 h-5" />,
         },
         {
             title: "Resolved",
             count: 2,
-            // criticalCount: 3,
+            // labelCount: "Critical Tasks - 3",
             totalText: "Total Resolved Tickets - 10",
             icon: <CircleCheck className="w-5 h-5" />,
         },
         {
             title: "Reopened",
             count: 4,
-            criticalCount: 4,
+            labelCount: (
+                <>
+                    <div className="w-2.5 h-2.5 bg-high rounded-full shrink-0" />
+                    <p className="text-high text-xs md:text-sm font-medium whitespace-nowrap">
+                        Needs Review - 4
+                    </p>
+                </>
+            ),
             totalText: "Total Reopened Tickets - 10",
             icon: <RotateCcw className="w-5 h-5" />,
         },
@@ -63,12 +84,9 @@ export default function HeaderOverviewCards() {
                             {card.count}
                         </p>
 
-                        {card.criticalCount && (
+                        {card.labelCount && (
                             <div className="border border-gray-200 py-1.5 px-3 flex items-center space-x-2 rounded-xl bg-gray-50">
-                                <div className="w-2.5 h-2.5 bg-red-500 rounded-full shrink-0" />
-                                <p className="text-xs md:text-sm text-red-600 font-medium whitespace-nowrap">
-                                    Critical - {card.criticalCount}
-                                </p>
+                                {card.labelCount}
                             </div>
                         )}
                     </div>
