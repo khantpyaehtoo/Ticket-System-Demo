@@ -1,6 +1,4 @@
 import React from "react";
-import CurrentTicketTimer from "./CurrentTicketTimer";
-import UpComingTicketTImer from "./UpComingTicketTImer";
 import RecentActivity from "@/app/(user)/user/dashboard/_components/RecentActivity";
 import TimerCard from "./TimerCard";
 
@@ -31,7 +29,7 @@ const timerCardValue = [
 
 export default function TimerSection() {
     return (
-        <div className="flex space-x-10 max-w-full">
+        <div className="flex space-x-7 max-w-full">
             <div className="space-y-10 w-1/2">
                 {timerCardValue.map((value, id) => (
                     <div
@@ -53,7 +51,7 @@ export default function TimerSection() {
                 ))}
             </div>
 
-            <div className="flex-1">
+            <div className="w-1/2">
                 <RecentActivity ActivityListWrapperClass="h-130" />
             </div>
         </div>

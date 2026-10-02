@@ -104,12 +104,14 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                     </div>
 
                     {/* Desktop Admin Badge */}
-                    <div className="hidden md:flex items-center gap-4 whitespace-nowrap border-l border-zinc-200 pl-6">
-                        <div className="font-jetbrains text-xs text-right leading-tight space-y-1">
-                            <p className="font-medium text-primary">
+                    <div className="hidden md:flex items-center gap-4 whitespace-nowrap pl-6">
+                        <div className=" text-right leading-tight space-y-1">
+                            <p className="text-md font-medium text-primary">
                                 Micheal Jackson
                             </p>
-                            <p className="text-primary">Frontend Developer</p>
+                            <p className="text-xs text-primary">
+                                Frontend Developer
+                            </p>
                         </div>
                     </div>
 

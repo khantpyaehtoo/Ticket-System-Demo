@@ -104,7 +104,7 @@ export default function RecentTickets() {
             {/* Header */}
             <div className="pb-4 border-b border-primary/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                 <div className="space-y-0.5">
-                    <h1 className="text-base sm:text-lg font-bold text-secondary tracking-tight">
+                    <h1 className="text-base sm:text-lg font-medium text-primary tracking-tight">
                         Recent Tickets
                     </h1>
                     <p className="font-light text-xs sm:text-sm text-gray-500">

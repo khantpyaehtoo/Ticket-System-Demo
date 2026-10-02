@@ -6,11 +6,11 @@ import { TicketStatus } from "@/lib/config/getStatusColors";
 
 interface timerCardProps {
     title: string;
-    ticketStatus: TicketStatus;
+    ticketStatus: TicketStatus | string;
     ticketId: string;
     ticketIssueType: string;
     productName: string;
-    timerStatus: string;
+    timerStatus: string | undefined;
     timer: string;
     issueSummary: string;
     note: string;
