@@ -1,14 +1,42 @@
 import React from "react";
 import { Button } from "antd";
 import { Play } from "lucide-react";
+import { getPriorityColor } from "@/lib/config/getPriorityConfig";
+import { TicketStatus } from "@/lib/config/getStatusColors";
 
-export default function UpComingTicketTImer({ statusColor, currentStatus }) {
+interface timerCardProps {
+    title: string;
+    ticketStatus: TicketStatus;
+    ticketId: string;
+    ticketIssueType: string;
+    productName: string;
+    timerStatus: string;
+    timer: string;
+    issueSummary: string;
+    note: string;
+}
+
+export default function TimerCard({
+    title,
+    ticketStatus,
+    ticketId,
+    ticketIssueType,
+    productName,
+    timerStatus,
+    timer,
+    issueSummary,
+    note,
+}: timerCardProps) {
+    const statusColor = getPriorityColor(ticketStatus);
+
     return (
-        <div className="w-full teamHeaderCard p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
+        <>
             {/* Starter Card Header Section */}
             <div className="flex justify-between items-center border-b border-b-gray-200 pb-3">
                 <div className="flex items-center space-x-7">
-                    <small className="uppercase">up-coming ticket</small>
+                    <small className="uppercase">
+                        {title || "- - - - - -"}
+                    </small>
                     <span
                         style={{
                             backgroundColor: `color-mix(in srgb, ${statusColor} 30%, transparent)`,
@@ -17,12 +45,15 @@ export default function UpComingTicketTImer({ statusColor, currentStatus }) {
                         }}
                         className="text-xs sm:text-sm font-medium px-3 py-1 rounded-full border-none transition-all inline-block"
                     >
-                        {currentStatus}
+                        {ticketStatus}
                     </span>
                 </div>
 
                 <p className="text-sm font-medium">
-                    Ticket ID : <span className="font-jetbrains">DB - TK1</span>
+                    Ticket ID :{" "}
+                    <span className="font-jetbrains">
+                        {ticketId || "- - - - - -"}
+                    </span>
                 </p>
             </div>
 
@@ -31,14 +62,15 @@ export default function UpComingTicketTImer({ statusColor, currentStatus }) {
                 {/* Product Name + Timer */}
                 <div className="flex items-center justify-between">
                     <div className="space-y-2 font-medium">
-                        <p>Issue Type : Technical Issues</p>
-                        <p>Product Name : Mari's Nail Salon</p>
+                        <p>Issue Type : {ticketIssueType || "- - - - - -"}</p>
+                        <p>Product Name : {productName || "- - - - - -"}</p>
                     </div>
                     <div className="font-medium text-center">
                         <div className="flex space-x-2 items-center">
                             <div className="flex items-center space-x-2 font-jetbrains">
+                                <span>{timerStatus || ""}</span>
                                 <div className="w-2 h-2 bg-black rounded-full" />
-                                <p>01:42:18</p>
+                                <p>{timer || "- - - - - -"}</p>
                             </div>
                         </div>
                     </div>
@@ -47,8 +79,8 @@ export default function UpComingTicketTImer({ statusColor, currentStatus }) {
                 {/* Issue Summary */}
                 <div className="bg-[#f8f4fa] px-6 py-3 rounded-2xl">
                     <div className="space-y-2">
-                        <p>Issue Type : Technical Issues</p>
-                        <p>Product Name : Mari's Nail Salon</p>
+                        <p>Issue Summary : {issueSummary || "- - - - - -"}</p>
+                        <p>Note : {note || "- - - - - -"}</p>
                     </div>
                 </div>
 
@@ -65,12 +97,12 @@ export default function UpComingTicketTImer({ statusColor, currentStatus }) {
                         block
                         type="text"
                         htmlType="submit"
-                        className="group flex items-center justify-center gap-2 underline hover:"
+                        className="group flex items-center justify-center gap-2 underline"
                     >
                         View Ticket Details
                     </Button>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
