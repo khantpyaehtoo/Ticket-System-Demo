@@ -59,7 +59,7 @@ export default function ChatSession({
     };
 
     return (
-        <div className="relative w-full bg-background border border-primary/10 rounded-xl shadow-sm overflow-hidden text-primary">
+        <div className="relative teamHeaderCard shadow-sm overflow-hidden text-primary">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-primary/10 gap-2">
                 <div>

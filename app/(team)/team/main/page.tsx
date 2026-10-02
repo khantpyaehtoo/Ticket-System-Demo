@@ -1,7 +1,7 @@
 import { CircleCheck, Hourglass, RotateCcw, Ticket } from "lucide-react";
 import React from "react";
 import TicketTable from "./_components/TicketTable";
-import StartTimeCard from "./_components/StartTimeCard";
+import TimerSection from "./_components/TimerSection";
 
 // 1. Define an interface for your card data
 interface WorkCard {
@@ -101,7 +101,7 @@ export default function Page() {
             </section>
 
             {/* Start Time Card */}
-            <StartTimeCard />
+            <TimerSection />
 
             {/* Table */}
             <TicketTable />

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ArrowRight } from "lucide-react";
@@ -7,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 
-export default function RecentActivity() {
+export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
 
@@ -167,7 +168,7 @@ export default function RecentActivity() {
     ];
 
     return (
-        <div className="w-full bg-background border border-primary/10 rounded-xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
+        <div className="teamHeaderCard p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black h-full">
             {/* Header */}
             <div className="pb-4 border-b border-primary/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                 <div className="space-y-0.5">
@@ -189,7 +190,9 @@ export default function RecentActivity() {
             {/* Activity List */}
             <div
                 ref={containerRef}
-                className="space-y-2 sm:space-y-3 text-xs sm:text-sm overflow-y-auto h-120"
+                className={cn(
+                    `space-y-2 sm:space-y-3 text-xs sm:text-sm overflow-y-auto ${ActivityListWrapperClass}`,
+                )}
             >
                 {activity.map((i, key) => (
                     <div

@@ -3,9 +3,8 @@
 import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { getStatusColor } from "@/lib/config/getStatusColors";
 import { TicketDetailsType } from "@/types/ticket";
-import { Input, Select, Table } from "antd";
+import { Select, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -118,7 +117,7 @@ export default function TicketTable() {
     ];
 
     return (
-        <div className="w-full bg-background border border-primary/10 rounded-xl p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
+        <div className="teamHeaderCard p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6 text-black">
             {/* Header Controls Container */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-6 md:mb-10">
                 {/* Title & Subtitle */}
