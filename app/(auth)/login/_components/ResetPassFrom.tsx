@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, Key, Lock } from "lucide-react";
 
@@ -12,21 +11,16 @@ export interface ResetPasswordInput {
 interface ResetPasswordFormProps {
     onBackToLogin?: () => void;
     onSuccessSubmit?: (values: ResetPasswordInput) => void;
+    loading: boolean;
 }
 
 export default function ResetPasswordForm({
     onBackToLogin,
     onSuccessSubmit,
+    loading,
 }: ResetPasswordFormProps) {
-    const [loading, setLoading] = useState(false);
-
     const handleSubmit = async (values: ResetPasswordInput) => {
-        setLoading(true);
-
         try {
-            // TODO: Server Action
-            message.success("Password reset successfully!");
-
             if (onSuccessSubmit) {
                 onSuccessSubmit(values);
             }
@@ -35,8 +29,6 @@ export default function ResetPasswordForm({
             message.error(
                 err?.message || "Failed to reset password. Please try again.",
             );
-        } finally {
-            setLoading(false);
         }
     };
 

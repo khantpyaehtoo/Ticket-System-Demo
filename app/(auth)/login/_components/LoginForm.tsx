@@ -1,9 +1,9 @@
 "use client";
 
-import { loginAction } from "@/actions/authAction";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { ArrowRight, Info } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useLoginAccountMutation } from "../_hooks/useAuthQuries";
 
 interface LoginFormValues {
     email: string;
@@ -16,30 +16,39 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({ onForgotPassword }: LoginFormProps) {
-    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
-    const handleFinish = async (values: LoginFormValues) => {
-        setLoading(true);
+    const { mutate: login, isPending: isLoggingIn } = useLoginAccountMutation();
 
-        try {
-            const formData = new FormData();
-            formData.append("email", values.email);
-            formData.append("password", values.password);
+    const handleFinish = (values: LoginFormValues) => {
+        login(
+            {
+                email: values.email,
+                password: values.password,
+                remember: values.remember ?? false,
+            },
+            {
+                onSuccess: (data) => {
+                    message.success("Logged in successfully!");
+                    console.log("Login Response Data:", data);
 
-            if (values.remember) {
-                formData.append("rememberMe", "on");
-            }
+                    if (data?.accessToken) {
+                        localStorage.setItem("token", data.accessToken);
+                    }
 
-            await loginAction(formData);
-        } catch (error: unknown) {
-            const isRedirect =
-                error instanceof Error && error.message === "NEXT_REDIRECT";
-            if (!isRedirect) {
-                message.error("Login failed. Please check your credentials.");
-            }
-        } finally {
-            setLoading(false);
-        }
+                    const targetPath = data?.targetPath || "/user/dashboard";
+
+                    router.push(targetPath);
+                    router.refresh();
+                },
+                onError: (err) => {
+                    message.error(
+                        err?.message ||
+                            "Login failed. Please check your credentials.",
+                    );
+                },
+            },
+        );
     };
 
     return (
@@ -137,7 +146,7 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                     <Button
                         block
                         htmlType="submit"
-                        loading={loading}
+                        loading={isLoggingIn}
                         className="loginFormBtn! group flex items-center justify-center gap-2"
                     >
                         <span>Sign In</span>

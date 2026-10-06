@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { ArrowLeft, LockKeyholeIcon } from "lucide-react";
 
@@ -11,33 +10,22 @@ export interface ForgotInput {
 export interface ForgotFormProps {
     onBackToLogin: () => void;
     onSuccessSubmit: (email: string) => void;
+    loading: boolean;
 }
 
 export default function ForgotForm({
     onBackToLogin,
     onSuccessSubmit,
+    loading,
 }: ForgotFormProps) {
-    const [loading, setLoading] = useState(false);
-
     const handleFinish = async (values: ForgotInput) => {
-        setLoading(true);
-
         try {
-            // TODO: Server Action
-            // await sendOtpAction(values.email);
-
-            message.success(
-                "OTP verification code has been sent to your email!",
-            );
-
             onSuccessSubmit(values.email);
         } catch (error: unknown) {
             const err = error as Error;
             message.error(
                 err?.message || "Failed to send OTP. Please try again.",
             );
-        } finally {
-            setLoading(false);
         }
     };
 

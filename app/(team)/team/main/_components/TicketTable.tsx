@@ -5,6 +5,7 @@ import { getStatusColor } from "@/lib/config/getStatusColors";
 import { TicketDetailsType } from "@/types/ticket";
 import { Select, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -40,6 +41,12 @@ export default function TicketTable() {
             },
         },
         {
+            title: "Product",
+            dataIndex: "product",
+            key: "product",
+            width: 150,
+        },
+        {
             title: "Status",
             dataIndex: "status",
             key: "status",
@@ -68,12 +75,6 @@ export default function TicketTable() {
             ),
         },
         {
-            title: "Assigned Team",
-            dataIndex: "assign",
-            key: "assign",
-            width: 150,
-        },
-        {
             title: "Priority",
             dataIndex: "priority",
             key: "priority",
@@ -95,10 +96,13 @@ export default function TicketTable() {
             },
         },
         {
-            title: "Duration",
-            dataIndex: "duration",
-            key: "duration",
+            title: "Action",
             width: 120,
+            render: () => (
+                <Link href="view">
+                    <span className="underline text-primary">View</span>
+                </Link>
+            ),
         },
     ];
 

@@ -14,6 +14,8 @@ interface OtpFormProps {
     onBackToLogin?: () => void;
     onSuccessSubmit?: (otp: string) => void;
     onResendOtp?: () => void;
+    onSubmitOtp?: (otp: string) => Promise<void> | void;
+    loading: boolean;
 }
 
 export default function OtpForm({
@@ -21,10 +23,11 @@ export default function OtpForm({
     onBackToLogin,
     onSuccessSubmit,
     onResendOtp,
+    onSubmitOtp,
+    loading,
 }: OtpFormProps) {
     const [timer, setTimer] = useState<number>(60);
     const [canResend, setCanResend] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
 
     const searchParams = useSearchParams();
     const queryEmail = searchParams.get("email");
@@ -58,11 +61,10 @@ export default function OtpForm({
     };
 
     const handleSubmit = async (values: OtpFormValues) => {
-        setLoading(true);
-
         try {
-            // TODO: Server Action
-            // await verifyOtpAction({ email: displayEmail, otp: values.otp });
+            if (onSubmitOtp) {
+                await onSubmitOtp(values.otp);
+            }
 
             message.success("OTP verified successfully!");
 
@@ -74,8 +76,6 @@ export default function OtpForm({
             message.error(
                 err?.message || "Invalid OTP code. Please try again.",
             );
-        } finally {
-            setLoading(false);
         }
     };
 

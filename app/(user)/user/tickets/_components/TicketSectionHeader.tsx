@@ -51,7 +51,7 @@ export default function TicketSectionHeader() {
                 </div>
 
                 {/* Right Section: SLA Plan Card */}
-                <div className="border-l-2 border-[#d97706] rounded-2xl p-4 sm:p-5 w-full lg:w-80 space-y-4 shrink-0">
+                <div className="border-l-2 border-[#d97706] rounded-2xl p-4 sm:p-5 w-full xl:w-80 space-y-4 shrink-0">
                     <div className="flex justify-between items-center font-light text-sm sm:text-base">
                         <p>Standard SLA Plan</p>
                         <span className="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-light">

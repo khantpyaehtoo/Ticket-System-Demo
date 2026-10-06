@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Input, Form, Button } from "antd";
+import { Input, Form, Button, message } from "antd";
 import { Save } from "lucide-react";
 import { usePasswordStrength } from "../_hooks/usePasswordStrength";
 import PasswordStrengthIndicator from "./PasswordStep";
 import gsap from "gsap";
 import { useAppModal } from "@/hooks/useAppModal";
 import ResetPasswordModals from "./ResetPasswordModal";
+import { useChangePasswordMutation } from "../_hooks/useChangePasswordMutation";
 
 interface SecurityFormProps {
     onForgotPasswordClick?: () => void;
@@ -55,12 +56,30 @@ export default function SecurityForm({
         }
     }, [hasPassword]);
 
-    const handleUpdatePassword = () => {
-        showModal({
-            variant: "notification",
-            title: "Password Updated Successfully!",
-            type: "success",
-        });
+    const { mutate: changePassword, isPending: isChanging } =
+        useChangePasswordMutation();
+
+    const handleUpdatePassword = (values: {
+        oldPassword: string;
+        newPassword: string;
+    }) => {
+        changePassword(
+            {
+                oldPassword: values.oldPassword,
+                newPassword: values.newPassword,
+            },
+            {
+                onSuccess: () => {
+                    message.success("Password Updated Successfully!");
+                },
+                onError: (error) => {
+                    message.error(
+                        error?.message ||
+                            "Failed to update password. Please try again.",
+                    );
+                },
+            },
+        );
     };
 
     const handleForgotClick = () => {
@@ -92,7 +111,7 @@ export default function SecurityForm({
             >
                 {/* Current Password */}
                 <Form.Item
-                    name="currentPassword"
+                    name="oldPassword"
                     className="[&_.ant-form-item-label]:w-full [&_label]:w-full"
                     label={
                         <div className="flex justify-between items-center w-full">

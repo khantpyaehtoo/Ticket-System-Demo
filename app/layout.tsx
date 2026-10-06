@@ -3,6 +3,7 @@ import { JetBrains_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Providers from "./provider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
@@ -35,7 +36,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 suppressHydrationWarning
             >
                 <AntdRegistry>
-                    <Providers>{children}</Providers>
+                    <Providers>
+                        {children}
+                        <ReactQueryDevtools initialIsOpen={false} />
+                    </Providers>
                 </AntdRegistry>
             </body>
         </html>

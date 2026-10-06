@@ -118,7 +118,7 @@ export default function RecentTickets() {
                 >
                     <Button
                         type="primary"
-                        className="flex items-center gap-2 px-4! sm:px-6! py-3! sm:py-5! text-xs sm:text-sm"
+                        className="flex items-center rounded-xl! gap-2 px-4! sm:px-6! py-3! sm:py-5! text-xs sm:text-sm"
                     >
                         View All Tickets{" "}
                         <ArrowRight size={16} className="sm:w-5 sm:h-5" />

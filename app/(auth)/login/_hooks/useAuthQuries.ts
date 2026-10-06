@@ -42,13 +42,3 @@ export const useResetPasswordMutation = () => {
         },
     });
 };
-
-export const useChangePasswordMutation = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: authService.changePassword,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["auth"] });
-        },
-    });
-};

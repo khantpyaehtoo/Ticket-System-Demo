@@ -72,7 +72,9 @@ export default function ProfileForm() {
         <div className="space-y-4">
             {contextHolder}
             <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">
-                <h1 className="text-2xl text-black">Personal Profile</h1>
+                <h1 className="text-2xl text-black font-bold">
+                    Personal Profile
+                </h1>
                 <p className="text-primary">
                     Manage your public personal and workspace information.
                 </p>

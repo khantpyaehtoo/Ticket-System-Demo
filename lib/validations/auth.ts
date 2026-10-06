@@ -1,14 +1,14 @@
 import { z } from "zod";
 
-// 1. Login Schema
 export const loginSchema = z.object({
     email: z
+        .string()
         .email("Invalid email address format!")
         .min(1, "Please enter your email!"),
     password: z
         .string()
         .min(1, "Please enter your password!")
-        .min(12, "Password must be at least 12 characters!"),
+        .min(8, "Password must be at least 8 characters!"),
     remember: z.boolean().optional(),
 });
 

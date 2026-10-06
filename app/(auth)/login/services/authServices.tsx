@@ -1,38 +1,40 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+async function apiFetch<T>(
+    endpoint: string,
+    options: RequestInit = {},
+): Promise<T> {
+    const res = await fetch(`${BASE_URL}${endpoint}`, {
+        ...options,
+        headers: {
+            "Content-Type": "application/json",
+            ...options.headers,
+        },
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(
+            errorData.message || `Request failed with status ${res.status}`,
+        );
+    }
+
+    return res.json();
+}
+
 export const authService = {
-    loginAccount: async (credentials: {
-        email: string;
-        password: string;
-        remember?: boolean;
-    }) => {
-        const res = await fetch(`${BASE_URL}/api/auth/login`, {
+    requestOtp: async (data: { email: string }) => {
+        return apiFetch("/api/auth/forgot-password", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
-        });
-        if (!res.ok) throw new Error("Login failed");
-        return res.json();
-    },
-
-    requestOtp: async (data: unknown) => {
-        const res = await fetch(`${BASE_URL}/api/auth/forgot-password`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error("Failed to request OTP");
-        return res.json();
     },
 
-    verifyOtp: async (data: unknown) => {
-        const res = await fetch(`${BASE_URL}/api/auth/reset-password`, {
+    verifyOtp: async (data: { email: string; otp: string }) => {
+        return apiFetch("/api/auth/verify-otp", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error("OTP verification failed");
-        return res.json();
     },
 
     resetPassword: async ({
@@ -42,38 +44,9 @@ export const authService = {
         newPassword: string;
         token: string;
     }) => {
-        const res = await fetch(`${BASE_URL}/api/auth/reset-password`, {
+        return apiFetch("/api/auth/reset-password", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ newPassword }),
+            body: JSON.stringify({ token, newPassword }),
         });
-        if (!res.ok) throw new Error("Password reset failed");
-        return res.json();
-    },
-
-    changePassword: async ({
-        updatePasswords,
-        token,
-    }: {
-        updatePasswords: unknown;
-        token: string;
-    }) => {
-        const res = await fetch(
-            `${BASE_URL}api/admin/change-password
-`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(updatePasswords),
-            },
-        );
-        if (!res.ok) throw new Error("Password change failed");
-        return res.json();
     },
 };
