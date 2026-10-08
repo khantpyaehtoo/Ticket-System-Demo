@@ -14,28 +14,28 @@ const cards: cardSpec[] = [
         title: "Total Products",
         content: 2,
         icon: (
-            <Package className="bg-secondary text-white w-10 h-10 p-2 rounded-xl" />
+            <Package className="bg-secondary text-white w-11 h-11 p-2 rounded-lg" />
         ),
     },
     {
         title: "SLA Hour",
         content: 100,
         icon: (
-            <Clock className="bg-secondary text-white w-10 h-10 p-2 rounded-xl" />
+            <Clock className="bg-secondary text-white w-11 h-11 p-2 rounded-lg" />
         ),
     },
     {
         title: "Active Product",
         content: 2,
         icon: (
-            <Package className="bg-secondary text-white w-10 h-10 p-2 rounded-xl" />
+            <Package className="bg-secondary text-white w-11 h-11 p-2 rounded-lg" />
         ),
     },
     {
         title: "Extra Usage",
         content: 0,
         icon: (
-            <Clock className="bg-secondary text-white w-10 h-10 p-2 rounded-xl" />
+            <Clock className="bg-secondary text-white w-11 h-11 p-2 rounded-lg" />
         ),
     },
 ];

@@ -72,7 +72,7 @@ body {
 }
 
 @utility createTicketBtn {
-  @apply flex items-center rounded-xl! gap-2 px-6! sm:px-10! py-4! sm:py-6! text-sm sm:text-base
+  @apply flex items-center rounded-xl! gap-2 px-6! sm:px-10! py-4! sm:py-5! text-sm sm:text-base
 }
 
 @utility slaCardsContainer {

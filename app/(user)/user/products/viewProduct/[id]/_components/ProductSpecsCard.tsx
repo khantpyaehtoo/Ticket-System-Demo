@@ -1,9 +1,7 @@
 "use client";
 
 import { dummyTicketsList } from "@/app/(user)/user/tickets/_components/dummydata";
-import DashboardCard, {
-    DashboardCardProps,
-} from "@/components/ui/DashboardCard";
+
 import { getPriorityColor } from "@/lib/config/getPriorityConfig";
 import { getStatusColor } from "@/lib/config/getStatusColors";
 import { TicketDetailsType } from "@/types/ticket";
@@ -16,8 +14,9 @@ import {
     Package,
     Shield,
 } from "lucide-react";
+import RemainingMinsCards, { CardProps } from "./RemainingMinsCards";
 
-const DashboardCards: DashboardCardProps[] = [
+const DashboardCards: CardProps[] = [
     {
         title: "SLA Hours",
         icon: <AlarmClock />,
@@ -30,6 +29,7 @@ const DashboardCards: DashboardCardProps[] = [
         title: "Extra Hours",
         icon: <AlarmClock />,
         length: "100 / 100",
+        plength: 100,
         type: "Hours",
         inform_1: "Expired in Dec 3",
         inform_2: "20 days remaining",
@@ -160,10 +160,11 @@ export default function ProductSpecsCard() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8 w-full">
                         {DashboardCards.map((card, key) => (
                             <div key={key} className="w-full flex">
-                                <DashboardCard
+                                <RemainingMinsCards
                                     title={card.title}
                                     icon={card.icon}
                                     length={card.length}
+                                    plength={card.plength}
                                     type={card.type}
                                     inform_1={card.inform_1}
                                     inform_2={card.inform_2}
@@ -174,7 +175,7 @@ export default function ProductSpecsCard() {
                 </div>
 
                 {/* Product Information / System Metadata (Sidebar) */}
-                <div className="lg:col-span-1 xl:col-span-4 border border-gray-200 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl w-full shadow-sm flex flex-col justify-between">
+                <div className="lg:col-span-7 xl:col-span-4 border border-gray-200 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl w-full shadow-sm flex flex-col justify-between">
                     <div>
                         <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 pb-3 border-b border-gray-100">
                             System Meta Data

@@ -23,22 +23,21 @@ export default function DashboardCard({
     return (
         <div className="relative w-full max-w-sm h-[200px] flex flex-col justify-between p-6 group">
             <svg
-                className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm"
+                className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm "
                 viewBox="0 0 320 200"
                 preserveAspectRatio="none"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                {/* C x1,y1 x2,y2 x,y */}
                 <path
                     d="
                         M 16 0 
-                        H 216 
-                        C 224 0, 232 8, 232 16  
+                        H 226 
+                        C 234 0, 242 8, 242 16  
                         V 36 
-                        C 232 48, 242 58, 254 58 
-                        H 304 
-                        C 320 58, 320 66, 320 74 
+                        C 242 48, 252 58, 264 58 
+                        H 298 
+                        C 320 62, 320 80, 320 100 
                         V 184 
                         C 320 192, 312 200, 304 200 
                         H 16 
@@ -48,7 +47,7 @@ export default function DashboardCard({
                         Z
                     "
                     fill="#ffffff"
-                    stroke="#e5e7eb"
+                    stroke="#d9d9d9"
                     strokeWidth="1.5"
                 />
             </svg>
