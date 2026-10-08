@@ -50,7 +50,6 @@ const DashboardCards: DashboardCardProps[] = [
     {
         title: "Submitted Tickets",
         icon: <MailCheck />,
-        plength: 5,
         length: 5,
         type: "Tickets",
         inform_1: "Today Submitted",
@@ -59,7 +58,6 @@ const DashboardCards: DashboardCardProps[] = [
     {
         title: "Resolved Tickets",
         icon: <CircleCheck />,
-        plength: 3,
         length: 3,
         type: "Tickets",
         inform_1: "Today Resolved",
@@ -68,7 +66,6 @@ const DashboardCards: DashboardCardProps[] = [
     {
         title: "Active Products",
         icon: <Package />,
-        plength: 2,
         length: "2",
         type: "Products",
         inform_1: "Expired in Dec 3",
@@ -94,7 +91,6 @@ export default function DashboardCardHeader() {
                             <DashboardCard
                                 title={card.title}
                                 icon={card.icon}
-                                plength={card.plength}
                                 length={card.length}
                                 type={card.type}
                                 inform_1={card.inform_1}

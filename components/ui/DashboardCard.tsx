@@ -1,110 +1,90 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Progress } from "antd";
-
 import React, { ReactNode } from "react";
 
 export interface DashboardCardProps {
     title: string;
     icon: ReactNode;
-    plength?: number;
     length: number | string;
     type: string;
     inform_1: string;
     inform_2: string;
 }
 
-export default function dashboardCard({
+export default function DashboardCard({
     title,
     icon,
-    plength,
     length,
     type,
     inform_1,
     inform_2,
 }: DashboardCardProps) {
     return (
-        <div
-            className={cn(
-                !plength ? "bg-primary" : "border-gray-300",
-                "border px-4 sm:px-6 md:px-8 py-4 sm:py-5 rounded-2xl shadow-md w-full h-full flex flex-col justify-between",
-            )}
-        >
-            {/* Header Section */}
-            <div
-                className={cn(
-                    !plength
-                        ? "text-gray-200 border-b-gray-500"
-                        : "border-b-gray-300 text-gray-500",
-                    "flex justify-between items-center pb-3 border-b",
-                )}
+        <div className="relative w-full max-w-sm h-[200px] flex flex-col justify-between p-6 group">
+            <svg
+                className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm"
+                viewBox="0 0 320 200"
+                preserveAspectRatio="none"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
             >
-                <p className="text-xs sm:text-sm ">{title}</p>
+                {/* C x1,y1 x2,y2 x,y */}
+                <path
+                    d="
+                        M 16 0 
+                        H 216 
+                        C 224 0, 232 8, 232 16  
+                        V 36 
+                        C 232 48, 242 58, 254 58 
+                        H 304 
+                        C 320 58, 320 66, 320 74 
+                        V 184 
+                        C 320 192, 312 200, 304 200 
+                        H 16 
+                        C 8 200, 0 192, 0 184 
+                        V 16 
+                        C 0 8, 8 0, 16 0 
+                        Z
+                    "
+                    fill="#ffffff"
+                    stroke="#e5e7eb"
+                    strokeWidth="1.5"
+                />
+            </svg>
 
-                {!plength ? (
-                    <div className="flex items-center space-x-2">
-                        <p className="text-xs shrink-0">
-                            (100 <small>Hours</small>)
-                        </p>
-                        <p className="text-xs! shrink-0">{icon}</p>
-                    </div>
-                ) : (
-                    <p className="text-base sm:text-lg shrink-0">{icon}</p>
-                )}
+            <div className="absolute -top-3 right-1.5 z-10 p-2">
+                <div className="bg-black text-white p-2 rounded-full shadow-md flex items-center justify-center">
+                    {icon}
+                </div>
             </div>
 
-            {/* Middle Section (Progress & Value) */}
-            <div className="my-4 sm:my-6 md:my-8 flex items-center gap-4 sm:gap-6">
-                {plength && (
-                    <>
-                        <div className="shrink-0">
-                            <Progress
-                                type="circle"
-                                percent={type === "Products" ? 0 : plength}
-                                strokeColor={"#15803D"}
-                                size={60}
-                                format={() =>
-                                    type === "Products" ? length : `${plength}`
-                                }
-                            />
-                        </div>
+            {/* 3. Card Content */}
+            <div className="relative z-10 flex flex-col justify-between h-full">
+                {/* Header Section */}
+                <div className="pr-24">
+                    <p className="text-xs sm:text-sm font-medium text-gray-500">
+                        {title}
+                    </p>
+                </div>
 
-                        <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium break-all">
-                            {length}{" "}
-                            <span className="text-xs font-light text-gray-500">
-                                {type}
-                            </span>
-                        </span>
-                    </>
-                )}
+                {/* Middle Section (Value & Type) */}
+                <div className="my-2 flex items-baseline gap-2">
+                    <span className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                        {length}
+                    </span>
+                    <span className="text-xs sm:text-sm font-normal text-gray-500">
+                        {type}
+                    </span>
+                </div>
 
-                {!plength && (
-                    <>
-                        <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium break-all text-white space-y-3">
-                            <p>
-                                {" "}
-                                5 <small>Hrs</small> 30 <small>Mins</small>
-                            </p>
-                            <p className="text-xs font-medium text-reviewing tracking-wider">
-                                Remaining Hours - 94 Hrs 30 Mins
-                            </p>
-                        </span>
-                    </>
-                )}
-            </div>
-
-            {/* Footer Section */}
-            <div
-                className={cn(
-                    !plength
-                        ? "border-t-gray-500 text-gray-300"
-                        : "border-t-gray-300 text-gray-500",
-                    "border-t  pt-3 sm:pt-4  flex justify-between items-center text-xs gap-2",
-                )}
-            >
-                <p className="">{inform_1}</p>
-                <p className="text-right">{inform_2}</p>
+                {/* Footer Section */}
+                <div className="border-t border-gray-100 pt-3 flex justify-between items-center text-xs text-gray-500">
+                    <span className="font-medium text-gray-600">
+                        {inform_1}
+                    </span>
+                    <span className="text-right text-gray-400">{inform_2}</span>
+                </div>
             </div>
         </div>
     );

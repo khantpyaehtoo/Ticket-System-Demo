@@ -29,7 +29,6 @@ const DashboardCards: DashboardCardProps[] = [
     {
         title: "Extra Hours",
         icon: <AlarmClock />,
-        plength: 100,
         length: "100 / 100",
         type: "Hours",
         inform_1: "Expired in Dec 3",
@@ -145,7 +144,7 @@ export default function ProductSpecsCard() {
     return (
         <div className="w-full max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-6 space-y-8 sm:space-y-10">
             {/* Top SLA & Product Metadata Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 text-black items-stretch">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8 text-black items-stretch">
                 {/* SLA Tracking Card */}
                 <div className="lg:col-span-7 xl:col-span-8 border border-gray-200 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl w-full shadow-sm flex flex-col justify-between">
                     <div>
@@ -164,7 +163,6 @@ export default function ProductSpecsCard() {
                                 <DashboardCard
                                     title={card.title}
                                     icon={card.icon}
-                                    plength={card.plength}
                                     length={card.length}
                                     type={card.type}
                                     inform_1={card.inform_1}
@@ -176,7 +174,7 @@ export default function ProductSpecsCard() {
                 </div>
 
                 {/* Product Information / System Metadata (Sidebar) */}
-                <div className="lg:col-span-5 xl:col-span-4 border border-gray-200 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl w-full shadow-sm flex flex-col justify-between">
+                <div className="lg:col-span-1 xl:col-span-4 border border-gray-200 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl w-full shadow-sm flex flex-col justify-between">
                     <div>
                         <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 pb-3 border-b border-gray-100">
                             System Meta Data
@@ -192,7 +190,7 @@ export default function ProductSpecsCard() {
                                         <span className="shrink-0 text-base">
                                             {data.icon}
                                         </span>
-                                        <span className="truncate font-medium text-sm">
+                                        <span className=" font-medium text-sm">
                                             {data.title}
                                         </span>
                                     </div>
