@@ -70,7 +70,12 @@ export default function SecurityForm({
             },
             {
                 onSuccess: () => {
-                    message.success("Password Updated Successfully!");
+                    form.resetFields();
+                    showModal({
+                        variant: "notification",
+                        title: "Password Updated Successfully!",
+                        type: "success",
+                    });
                 },
                 onError: (error) => {
                     message.error(

@@ -38,6 +38,7 @@ export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
                     was assigned to Application Team
                 </p>
             ),
+            updater: <p className="font-light">Alex</p>,
             updated: <p className="font-light">5 mins ago</p>,
         },
         {
@@ -175,7 +176,7 @@ export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
                     <h2 className="text-base sm:text-lg font-medium text-primary tracking-tight">
                         Recent Activity
                     </h2>
-                    <p className="font-light text-xs sm:text-sm text-gray-500">
+                    <p className="font-light text-xs xl:text-sm text-gray-500">
                         View the latest updates and activities on your tickets.
                     </p>
                 </div>
@@ -208,13 +209,25 @@ export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
                         </div>
 
                         {/* Content */}
-                        <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-1 min-w-0">
-                            <span className="truncate font-medium text-gray-800">
+                        <div className="flex-1 space-y-2">
+                            <p className="truncate font-medium text-gray-800">
                                 {i.title}
-                            </span>
-                            <span className="text-xs text-gray-400 shrink-0">
-                                {i.updated}
-                            </span>
+                            </p>
+                            <div className="flex items-center space-x-3">
+                                {i.updater && (
+                                    <div className="flex items-center space-x-3">
+                                        <p className="text-xs text-gray-400 shrink-0">
+                                            {i.updater}
+                                        </p>
+                                        <p className="text-xs text-gray-400 shrink-0">
+                                            &bull;
+                                        </p>
+                                    </div>
+                                )}
+                                <p className="text-xs text-gray-400 shrink-0">
+                                    {i.updated}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 ))}

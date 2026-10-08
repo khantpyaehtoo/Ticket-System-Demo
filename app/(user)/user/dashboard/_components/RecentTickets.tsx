@@ -107,7 +107,7 @@ export default function RecentTickets() {
                     <h1 className="text-base sm:text-lg font-medium text-primary tracking-tight">
                         Recent Tickets
                     </h1>
-                    <p className="font-light text-xs sm:text-sm text-gray-500">
+                    <p className="font-light text-xs xl:text-sm text-gray-500">
                         Track the latest updates and progress of your support
                         requests
                     </p>
@@ -118,7 +118,7 @@ export default function RecentTickets() {
                 >
                     <Button
                         type="primary"
-                        className="flex items-center rounded-xl! gap-2 px-4! sm:px-6! py-3! sm:py-5! text-xs sm:text-sm"
+                        className="flex items-center rounded-xl! gap-2 px-4! sm:px-5! py-3! sm:py-5! text-xs sm:text-sm"
                     >
                         View All Tickets{" "}
                         <ArrowRight size={16} className="sm:w-5 sm:h-5" />

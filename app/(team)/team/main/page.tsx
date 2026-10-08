@@ -3,6 +3,7 @@ import TicketTable from "./_components/TicketTable";
 import TimerSection from "./_components/TimerSection";
 import HeaderOverviewCards from "./_components/HeaderOverviewCards";
 import PieSemiDonut from "./_components/PieSemiDonut";
+import PieDonutChart from "./_components/PieDonutChart";
 
 export default function Page() {
     return (
@@ -29,7 +30,10 @@ export default function Page() {
             {/* Table */}
             <div className="flex space-x-7">
                 <TicketTable />
-                <PieSemiDonut />
+                <div className="w-1/2 space-y-4">
+                    <PieSemiDonut />
+                    <PieDonutChart />
+                </div>
             </div>
         </section>
     );

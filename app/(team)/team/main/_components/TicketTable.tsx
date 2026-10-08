@@ -148,7 +148,7 @@ export default function TicketTable() {
             <div className="w-full overflow-x-auto">
                 <Table<TicketDetailsType>
                     columns={tableColumns}
-                    scroll={{ x: 800 }}
+                    scroll={{ x: 300 }}
                     // dataSource={dummyTicketsList}
                     rowKey={(record) => record.ticketId || record.id}
                     pagination={{

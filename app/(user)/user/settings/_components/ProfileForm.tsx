@@ -57,7 +57,7 @@ export default function ProfileForm() {
     };
 
     // Save changes to Zustand global store
-    const handleSubmit = (values: any) => {
+    const handleSubmit = (value: unknown) => {
         setImageSrc(tempImageSrc);
         setIsDirty(false);
         showModal({

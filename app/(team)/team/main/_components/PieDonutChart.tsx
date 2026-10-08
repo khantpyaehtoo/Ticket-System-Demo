@@ -6,22 +6,23 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip);
 
-export default function PieSemiDonut() {
-    const priorityItems = [
-        { label: "Low", value: 3, color: "#1d4ed8" },
-        { label: "Medium", value: 3, color: "#f59e0b" },
-        { label: "High", value: 2, color: "#ea580c" },
-        { label: "Critical", value: 2, color: "#b91c1c" },
+export default function PieDonutChart() {
+    const ticketStatus = [
+        { label: "Assigned", value: 3, color: "#7c3aed" },
+        { label: "Inprogress", value: 3, color: "#0284c7" },
+        { label: "Resolved", value: 2, color: "#16a34a" },
+        { label: "On Hold", value: 2, color: "#ea580c" },
+        { label: "Reopened", value: 2, color: "#9333ea" },
     ];
 
     const data = {
-        labels: priorityItems.map((item) => item.label),
+        labels: ticketStatus.map((item) => item.label),
         datasets: [
             {
-                data: priorityItems.map((item) => item.value),
-                backgroundColor: priorityItems.map((item) => item.color),
+                data: ticketStatus.map((item) => item.value),
+                backgroundColor: ticketStatus.map((item) => item.color),
                 borderWidth: 0,
-                hoverBackgroundColor: priorityItems.map((item) => item.color),
+                hoverBackgroundColor: ticketStatus.map((item) => item.color),
             },
         ],
     };
@@ -29,9 +30,9 @@ export default function PieSemiDonut() {
     const options = {
         responsive: true,
         maintainAspectRatio: false,
-        circumference: 180,
-        rotation: -90,
-        cutout: "55%",
+        // circumference: 180,
+        // rotation: -90,
+        cutout: "56%",
         plugins: {
             legend: {
                 display: false,
@@ -46,10 +47,10 @@ export default function PieSemiDonut() {
         <div className="relative p-6 teamHeaderCard shadow-md rounded-2xl bg-white max-w-lg">
             <div className="space-y-1 mb-6">
                 <h2 className="text-lg font-semibold text-gray-800 tracking-tight">
-                    Ticket Priority Overview
+                    Work Status Overview
                 </h2>
                 <p className="font-light text-xs sm:text-sm text-gray-500">
-                    View your assigned tickets by priority level.
+                    Track the current status of your assigned tickets.
                 </p>
             </div>
 
@@ -61,7 +62,7 @@ export default function PieSemiDonut() {
 
                 {/* Custom React Legend */}
                 <div className="flex flex-col gap-3 w-full pr-2">
-                    {priorityItems.map((item) => (
+                    {ticketStatus.map((item) => (
                         <div
                             key={item.label}
                             className="flex items-center justify-between text-sm border-b border-dashed border-gray-200 pb-2"
