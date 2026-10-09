@@ -75,7 +75,7 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
     };
 
     return (
-        <header className="relative z-50 flex flex-col p-4 md:p-6 bg-background text-white shadow-md">
+        <header className="sticky top-0 z-50 flex flex-col p-4 md:p-6 bg-background text-white shadow-md">
             <div className="flex items-center justify-between w-full">
                 {/* Left side: Logo Side */}
                 <Link href={homeHref}>

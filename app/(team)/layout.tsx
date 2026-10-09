@@ -15,7 +15,7 @@ export default function CustomerLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="bg-background min-h-full">
+        <div className="bg-background">
             <TeamHeader navItems={TeamNavItems} homeHref="/team/main" />
             <div className="p-6 md:p-10">{children}</div>
         </div>

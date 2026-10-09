@@ -1,3 +1,4 @@
+import NotificationCard from "@/app/(user)/user/notifications/_components/NotificationCard";
 import { Button } from "antd";
 import React from "react";
 
@@ -15,6 +16,7 @@ export default function page() {
 
     return (
         <div className="text-black">
+            {/* Notification Title */}
             <div className="flex justify-between items-end">
                 <div className="space-y-3">
                     <h1 className="font-medium text-2xl">
@@ -31,11 +33,19 @@ export default function page() {
             </div>
 
             <div className="flex">
+                {/* Notification Side Bar Section */}
                 <div className="bg-white border border-gray-400 p-10 space-y-3 rounded-2xl shadow-md">
                     {notificationConfig.map((n, key) => (
                         <p key={key}>{n.label}</p>
                     ))}
                 </div>
+
+                {/* Notifications Section */}
+                {/* <div>
+                    {notifications.map((noti, key) => {
+                        <NotificationCard key={key} notification={noti} />;
+                    })}
+                </div> */}
             </div>
         </div>
     );
