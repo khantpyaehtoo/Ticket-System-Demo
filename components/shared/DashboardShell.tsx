@@ -15,14 +15,14 @@ export default function DashboardShell({
     header,
 }: DashboardShellProps) {
     return (
-        <div className="flex h-screen overflow-hidden bg-background">
+        <div className="flex h-screen bg-background">
             {/* Sidebar */}
             <Sidebar homeHref={homeHref} navItems={navItems} />
 
             {/* Right Side: Header + Main Body */}
             <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
                 {/* Header Section */}
-                <header className="shrink-0">{header}</header>
+                <header className="sticky top-0 z-101">{header}</header>
 
                 {/* Main Page Body */}
                 <main className="p-6 md:p-8 flex-1">{children}</main>

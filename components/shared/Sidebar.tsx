@@ -14,7 +14,7 @@ export default function Sidebar({ navItems, homeHref }: SidebarProps) {
     return (
         <>
             {/* Desktop Sidebar */}
-            <aside className="w-64 bg-primary text-background min-h-screen lg:flex flex-col justify-between p-6 shrink-0 border-r border-zinc-800 hidden">
+            <aside className="w-64 bg-primary text-background min-h-screen lg:flex flex-col justify-between p-6 shrink-0 border-r border-zinc-800 hidden z-200">
                 <div className="space-y-8">
                     {/* Logo Section */}
                     <div className="flex justify-center items-center gap-2">
