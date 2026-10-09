@@ -23,7 +23,7 @@ export default function UserHeader() {
     const currentLeftConfig = getHeaderConfig(pathname, params);
 
     return (
-        <header className="sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 bg-background shadow-md">
+        <header className="w-full sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 bg-background shadow-md">
             {/* Dynamic Left Side + Mobile Hamburger Button */}
             <div className="flex items-center gap-3">
                 <MobileHamburgerBtn />

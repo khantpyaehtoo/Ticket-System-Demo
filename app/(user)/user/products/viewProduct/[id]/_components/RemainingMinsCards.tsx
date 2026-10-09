@@ -5,7 +5,7 @@ import { DashboardCardProps } from "@/components/ui/DashboardCard";
 import { cn } from "@/lib/utils";
 import { Progress } from "antd";
 
-interface CardProps extends DashboardCardProps {
+export interface CardProps extends DashboardCardProps {
     plength?: number;
 }
 
