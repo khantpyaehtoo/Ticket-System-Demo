@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import profileImg from "@/public/defaultProfile.jpg";
 import { useUserStore } from "@/store/useUserStore";
-import { Avatar } from "antd";
+import { Avatar, Modal } from "antd";
 import Image from "next/image";
 import TicketProperties from "./TicketProperties";
 import { Clock } from "lucide-react";
@@ -34,10 +34,17 @@ export default function TicketDetails({ ticket }: TicketDetailsProps) {
     const currentStatus = ticket?.status || "Submitted";
     const statusColor = getStatusColor(currentStatus);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const text = `Hello Support,\n\nI’m experiencing a technical issue with the system. Some features are not working properly, and the page sometimes becomes unresponsive. I have tried refreshing the page and logging in again, but the issue still persists.\n\nPlease check and help resolve this issue.\n\nBest regards,\nMegan Fox`;
+
+    const CHARACTER_LIMIT = 180;
+    const isLongText = text.length > CHARACTER_LIMIT;
+
     return (
         <div className="w-full">
-            {/* Main Wrapper: Responsive Layout */}
-            <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8 w-full text-primary">
+            {/* Main Wrapper */}
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full text-primary items-stretch">
                 {/* Main Content Area */}
                 <div className="flex-1 w-full border border-primary/10 rounded-xl p-4 sm:p-6 md:p-8 bg-background shadow-sm space-y-6 md:space-y-8">
                     {/* Ticket Header */}
@@ -124,10 +131,43 @@ export default function TicketDetails({ ticket }: TicketDetailsProps) {
 
                         {/* Ticket Description Body */}
                         <div className="space-y-4 sm:space-y-6 text-sm md:text-base leading-relaxed">
-                            <p className="whitespace-pre-line text-foreground/90">
-                                {ticket?.description ||
-                                    `Hello Support,\n\nI’m experiencing a technical issue with the system. Some features are not working properly, and the page sometimes becomes unresponsive. I have tried refreshing the page and logging in again, but the issue still persists.\n\nPlease check and help resolve this issue.\n\nBest regards,\nMegan Fox`}
+                            <p className="whitespace-pre-line text-foreground/90 text-sm">
+                                {isLongText
+                                    ? text.slice(0, CHARACTER_LIMIT)
+                                    : text}
+                                {isLongText && (
+                                    <>
+                                        <span>... </span>
+                                        <button
+                                            onClick={() => setIsModalOpen(true)}
+                                            className="font-semibold text-primary hover:underline focus:outline-none inline"
+                                        >
+                                            See More
+                                        </button>
+                                    </>
+                                )}
                             </p>
+
+                            {/* {isLongText && (
+                                <button
+                                    onClick={() => setIsModalOpen(true)}
+                                    className="mt-2 text-xs font-semibold text-primary hover:underline focus:outline-none"
+                                >
+                                    See More
+                                </button>
+                            )} */}
+
+                            <Modal
+                                title="Full Description"
+                                open={isModalOpen}
+                                onCancel={() => setIsModalOpen(false)}
+                                footer={null}
+                                centered
+                            >
+                                <p className="whitespace-pre-line text-foreground/90 text-sm py-2">
+                                    {text}
+                                </p>
+                            </Modal>
 
                             {/* Attachments / Image Session */}
                             <div className="pt-4 border-t border-primary/10">
@@ -149,7 +189,7 @@ export default function TicketDetails({ ticket }: TicketDetailsProps) {
                 </div>
 
                 {/* Ticket Properties Sidebar */}
-                <div className="w-full lg:w-90 shrink-0">
+                <div className="min-h-full w-full lg:w-90 shrink-0">
                     <TicketProperties />
                 </div>
             </div>

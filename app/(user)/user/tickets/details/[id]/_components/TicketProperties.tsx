@@ -28,6 +28,7 @@ export default function TicketProperties({ data }: TicketPropertiesProps) {
     const properties = [
         { label: "Ticket ID", value: data?.ticketId || "DB-TK1" },
         { label: "Issue Type", value: data?.issueType || "Technical Issues" },
+        { label: "Issue Summary", value: data?.issueSummary || "-- --" },
         { label: "Assign Team", value: data?.assignTeam || "System Team" },
         {
             label: "Related Service",
@@ -60,10 +61,10 @@ export default function TicketProperties({ data }: TicketPropertiesProps) {
     ];
 
     return (
-        <div className="teamHeaderCard p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6">
+        <div className="teamHeaderCard h-full p-4 sm:p-6 shadow-sm space-y-4 sm:space-y-6">
             {/* Header */}
             <div className="pb-3 sm:pb-4 border-b border-primary/10">
-                <h2 className="text-base sm:text-lg font-bold text-secondary tracking-tight">
+                <h2 className="text-base sm:text-lg font-bold text-secondary tracking-normal">
                     Ticket Properties
                 </h2>
                 <p className="text-xs text-muted-foreground mt-0.5">
