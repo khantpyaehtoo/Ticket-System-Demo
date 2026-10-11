@@ -3,6 +3,7 @@
 import { Button } from "antd";
 import React from "react";
 import HoursCardGrid from "./HoursCardGrid";
+import Link from "next/link";
 
 interface TicketCard {
     title: string;
@@ -65,12 +66,14 @@ export default function SLAPlanSection() {
                         <div className="text-black font-bold text-sm sm:text-sm md:text-base">
                             01.09.2026 - 31.10.2026
                         </div>
-                        <Button
-                            block
-                            className="mt-3! py-4! text-xs sm:text-sm"
-                        >
-                            Request Plan Upgrade
-                        </Button>
+                        <Link href={"user/plans"}>
+                            <Button
+                                block
+                                className="mt-3! py-4! text-xs sm:text-sm"
+                            >
+                                Request Plan Upgrade
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

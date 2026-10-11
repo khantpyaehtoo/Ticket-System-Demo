@@ -31,6 +31,7 @@
   
   --font-sans: var(--font-jakata-sans);
   --font-jetbrains: var(--font-jetbrains-mono);
+  --font-roboto: var(--font-roboto);
 
   /* Priority Color */
   --color-critical: var(--critical);

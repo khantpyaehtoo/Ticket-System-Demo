@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans, Roboto } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Providers from "./provider";
@@ -9,6 +9,12 @@ const jakartaSans = Plus_Jakarta_Sans({
     weight: ["300", "400", "500", "700"],
     subsets: ["latin"],
     variable: "--font-jakata-sans",
+});
+
+const roboto = Roboto({
+    weight: ["300", "400", "500", "700"],
+    subsets: ["latin"],
+    variable: "--font-roboto",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -29,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html
             lang="en"
-            className={`${jakartaSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
+            className={`${jakartaSans.variable} ${jetbrainsMono.variable} ${roboto.variable} h-full antialiased`}
         >
             <body
                 className="h-screen bg-background font-sans antialiased"

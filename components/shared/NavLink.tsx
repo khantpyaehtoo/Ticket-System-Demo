@@ -35,14 +35,14 @@ export default function NavLink({ href, label, icon, hasBadge }: NavLinkProps) {
         <Link
             href={href}
             className={cn(
-                "flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium group transition-colors",
+                "flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium group transition-colors mt-3",
                 isActive
                     ? "bg-secondary text-background"
                     : "text-zinc-400 hover:text-background",
             )}
         >
             {/* Left Content: Icon + Label */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
                 <span
                     className={cn(
                         "[&>svg]:w-5 [&>svg]:h-5 transition-colors",
@@ -53,7 +53,7 @@ export default function NavLink({ href, label, icon, hasBadge }: NavLinkProps) {
                 >
                     {icon}
                 </span>
-                <span className="tracking-wider">{label}</span>
+                <span className="tracking-wider ">{label}</span>
             </div>
 
             {/* Right Content: Dot Badge */}
