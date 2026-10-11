@@ -8,6 +8,7 @@ interface TicketPropertiesProps {
     data?: {
         ticketId?: string;
         issueType?: string;
+        issueSummary?: string;
         assignTeam?: string;
         relatedService?: string;
         status?: TicketStatus;
