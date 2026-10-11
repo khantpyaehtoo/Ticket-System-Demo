@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Input, Form, Button, message } from "antd";
-import { Save } from "lucide-react";
+import { Input, Form, message } from "antd";
 import gsap from "gsap";
 import { useAppModal } from "@/hooks/useAppModal";
 import { usePasswordStrength } from "@/app/(user)/user/settings/_hooks/usePasswordStrength";

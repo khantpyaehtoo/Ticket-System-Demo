@@ -20,7 +20,7 @@ export default function page() {
     };
 
     return (
-        <div className="text-black">
+        <div className="max-w-7xl mx-auto p-6 space-y-6 text-black">
             {/* Settings Header */}
             <div className="flex justify-between items-end">
                 <div className="space-y-4">
