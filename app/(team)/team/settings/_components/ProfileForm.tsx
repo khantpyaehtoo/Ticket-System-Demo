@@ -8,7 +8,7 @@ import profileImg from "@/public/defaultProfile.jpg";
 export default function ProfileForm() {
     const [fullName, setFullName] = useState("John Aung");
     const [email, setEmail] = useState("developer_01@gmail.com");
-    const [role] = useState("Front End Developer");
+    const [role] = useState("Frontend Developer");
     const [profileImage, setProfileImage] = useState(profileImg);
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

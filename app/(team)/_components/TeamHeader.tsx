@@ -90,9 +90,9 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                     <Image
                         src="/logo&text.svg"
                         alt="Digital Base"
-                        width={140}
+                        width={160}
                         height={32}
-                        className="brightness-0"
+                        className="brightness-0" // change logo color white to black
                         priority
                     />
                 </Link>
@@ -145,11 +145,11 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                         type="button"
                         onClick={handleToggleMenu}
                         aria-label="Toggle Navigation Menu"
-                        className="md:hidden relative w-10 h-10 rounded-full bg-primary border border-zinc-700 flex flex-col justify-center items-center gap-[5px] text-white focus:outline-none active:scale-95 transition-all cursor-pointer z-202 touch-manipulation"
+                        className="md:hidden relative w-10 h-10 rounded-full bg-primary border border-zinc-700 flex flex-col justify-center items-center gap-1.25 text-white focus:outline-none active:scale-95 transition-all cursor-pointer z-202 touch-manipulation"
                     >
                         <span
                             className={cn(
-                                "w-5 h-[2px] bg-current rounded-full transition-all duration-300 ease-in-out transform origin-center",
+                                "w-5 h-0.5 bg-current rounded-full transition-all duration-300 ease-in-out transform origin-center",
                                 isMobileMenuOpen &&
                                     "translate-y-[7px] rotate-45 text-white",
                             )}

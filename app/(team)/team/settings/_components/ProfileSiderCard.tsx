@@ -44,7 +44,7 @@ export default function ProfileSidebarCard({
                     Michael Jackson
                 </h3>
                 <p className="text-sm text-gray-500 font-medium">
-                    Front End Developer
+                    Frontend Developer
                 </p>
             </div>
 
