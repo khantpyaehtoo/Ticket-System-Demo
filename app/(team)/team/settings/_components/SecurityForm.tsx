@@ -1,0 +1,233 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { Input, Form, Button, message } from "antd";
+import { Save } from "lucide-react";
+import gsap from "gsap";
+import { useAppModal } from "@/hooks/useAppModal";
+import { usePasswordStrength } from "@/app/(user)/user/settings/_hooks/usePasswordStrength";
+import { useChangePasswordMutation } from "@/app/(user)/user/settings/_hooks/useChangePasswordMutation";
+import PasswordStrengthIndicator from "@/app/(user)/user/settings/_components/PasswordStep";
+import ResetPasswordModals from "@/app/(user)/user/settings/_components/ResetPasswordModal";
+
+interface SecurityFormProps {
+    onForgotPasswordClick?: () => void;
+    userEmail?: string;
+}
+
+export default function SecurityForm({
+    onForgotPasswordClick,
+    userEmail = "user@example.com",
+}: SecurityFormProps) {
+    const [form] = Form.useForm();
+    const { showModal, contextHolder } = useAppModal();
+
+    // Password Strength
+    const [password, setPassword] = useState("");
+    const strength = usePasswordStrength(password);
+
+    // Modal Trigger State
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+    const indicatorRef = useRef<HTMLDivElement>(null);
+    const hasPassword = password.length > 0;
+
+    // Main Form Password Animation
+    useEffect(() => {
+        if (!indicatorRef.current) return;
+        if (hasPassword) {
+            gsap.to(indicatorRef.current, {
+                height: "auto",
+                opacity: 1,
+                marginTop: 16,
+                marginBottom: 16,
+                duration: 0.4,
+                ease: "power2.out",
+            });
+        } else {
+            gsap.to(indicatorRef.current, {
+                height: 0,
+                opacity: 0,
+                marginTop: 0,
+                marginBottom: 0,
+                duration: 0.3,
+                ease: "power2.in",
+            });
+        }
+    }, [hasPassword]);
+
+    const { mutate: changePassword, isPending: isChanging } =
+        useChangePasswordMutation();
+
+    const handleUpdatePassword = (values: {
+        oldPassword: string;
+        newPassword: string;
+    }) => {
+        changePassword(
+            {
+                oldPassword: values.oldPassword,
+                newPassword: values.newPassword,
+            },
+            {
+                onSuccess: () => {
+                    form.resetFields();
+                    showModal({
+                        variant: "notification",
+                        title: "Password Updated Successfully!",
+                        type: "success",
+                    });
+                },
+                onError: (error) => {
+                    message.error(
+                        error?.message ||
+                            "Failed to update password. Please try again.",
+                    );
+                },
+            },
+        );
+    };
+
+    const handleForgotClick = () => {
+        setIsConfirmModalOpen(true);
+        if (onForgotPasswordClick) {
+            onForgotPasswordClick();
+        }
+    };
+
+    return (
+        <div className="space-y-4 bg-white border border-gray-200/80 rounded-2xl p-6 shadow-sm">
+            {contextHolder}
+
+            <div className="space-y-2 border-b border-[#E0E0E0] pb-5 ">
+                <h1 className="text-2xl text-black font-semibold">
+                    Change Password
+                </h1>
+                <p className="text-primary text-sm">
+                    Ensure your account uses a secure password with at least 12
+                    characters.
+                </p>
+            </div>
+
+            <Form
+                form={form}
+                layout="vertical"
+                className="w-full"
+                onFinish={handleUpdatePassword}
+            >
+                {/* Current Password */}
+                <Form.Item
+                    name="oldPassword"
+                    className="[&_.ant-form-item-label]:w-full [&_label]:w-full"
+                    label={
+                        <div className="flex justify-between items-center w-full">
+                            <span>Current Password</span>
+                            <button
+                                type="button"
+                                onClick={handleForgotClick}
+                                className="text-primary hover:underline hover:text-secondary cursor-pointer text-xs font-normal"
+                            >
+                                Forgot Password?
+                            </button>
+                        </div>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter current password",
+                        },
+                    ]}
+                >
+                    <Input.Password
+                        placeholder="Enter your password"
+                        className="h-12 bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
+                    />
+                </Form.Item>
+
+                {/* New Password Input */}
+                <Form.Item
+                    name="newPassword"
+                    className="[&_.ant-form-item-label]:w-full [&_label]:w-full"
+                    label={
+                        <div className="flex justify-between items-center w-full">
+                            <span>New Password</span>
+                            <span className="font-light tracking-wide text-xs text-gray-500 text-end">
+                                12+ characters
+                            </span>
+                        </div>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please enter new password",
+                        },
+                    ]}
+                >
+                    <Input.Password
+                        placeholder="Enter your new password"
+                        className="h-12! bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </Form.Item>
+
+                {/* GSAP Password Strength Indicator */}
+                <div
+                    ref={indicatorRef}
+                    className="h-0 opacity-0 overflow-hidden"
+                >
+                    <PasswordStrengthIndicator
+                        hasMinLen={strength.hasMinLen}
+                        hasNumber={strength.hasNumber}
+                        hasSymbol={strength.hasSymbol}
+                        percent={strength.percent}
+                        status={strength.status}
+                        color={strength.color}
+                    />
+                </div>
+
+                {/* Confirm New Password */}
+                <Form.Item
+                    name="confirmPassword"
+                    label="Confirm New Password"
+                    dependencies={["newPassword"]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please confirm your password",
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (
+                                    !value ||
+                                    getFieldValue("newPassword") === value
+                                ) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                    new Error("Passwords do not match!"),
+                                );
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password
+                        placeholder="Confirm your new password"
+                        className="h-12 bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
+                    />
+                </Form.Item>
+            </Form>
+
+            <ResetPasswordModals
+                userEmail={userEmail}
+                isConfirmModalOpen={isConfirmModalOpen}
+                setIsConfirmModalOpen={setIsConfirmModalOpen}
+                onSuccess={() => {
+                    showModal({
+                        variant: "notification",
+                        title: "Password Reset Successfully!",
+                        type: "success",
+                    });
+                }}
+            />
+        </div>
+    );
+}
