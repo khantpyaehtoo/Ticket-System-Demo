@@ -1,8 +1,13 @@
 import { Button } from "antd";
 import { SquareCheck } from "lucide-react";
 import React from "react";
+import { PlanCardType } from "../page";
 
-export default function PlanCard({ planCards }) {
+interface PlanCardProps {
+    planCards: PlanCardType[];
+}
+
+export default function PlanCard({ planCards }: PlanCardProps) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {planCards.map((card, index) => (

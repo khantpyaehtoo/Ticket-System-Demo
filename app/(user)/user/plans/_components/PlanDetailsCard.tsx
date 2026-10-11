@@ -1,7 +1,12 @@
 import { SquareCheck } from "lucide-react";
 import React from "react";
+import { PlanCardType } from "../page";
 
-export default function DetailsCard({ planCards }) {
+interface PlanCardProps {
+    planCards: PlanCardType[];
+}
+
+export default function PlanDetailsCard({ planCards }: PlanCardProps) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 mt-10 gap-6">
             {planCards.map((plan, planIndex) => (

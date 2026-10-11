@@ -1,6 +1,6 @@
 import React from "react";
-import DetailsCard from "./_components/DetailsCard";
 import PlanCard from "./_components/PlanCard";
+import PlanDetailsCard from "./_components/PlanDetailsCard";
 
 // Human-readable labels for the details keys
 // const detailLabels: Record<string, string> = {
@@ -24,7 +24,7 @@ export interface PlanDetails {
     ratePerHours: string;
 }
 
-export interface PlanCard {
+export interface PlanCardType {
     title: string;
     price: string;
     description: string;
@@ -33,7 +33,7 @@ export interface PlanCard {
 }
 
 export default function PlanUpgradePage() {
-    const planCards: PlanCard[] = [
+    const planCards: PlanCardType[] = [
         {
             title: "Basic Plan",
             price: "300,000",
@@ -138,7 +138,7 @@ export default function PlanUpgradePage() {
                 </div>
 
                 {/* Detail Card */}
-                <DetailsCard planCards={planCards} />
+                <PlanDetailsCard planCards={planCards} />
             </div>
         </section>
     );
