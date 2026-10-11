@@ -8,7 +8,7 @@ import { NotificationItem } from "../notificationConfig";
 import { useNotificationStore } from "@/store/useNotificationsStore";
 
 // Dummy Notification Dataset
-const INITIAL_NOTIFICATIONS: (NotificationItem & {
+export const INITIAL_NOTIFICATIONS: (NotificationItem & {
     category: "tickets" | "system" | "remainder";
 })[] = [
     {

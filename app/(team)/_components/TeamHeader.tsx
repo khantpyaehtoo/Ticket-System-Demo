@@ -55,10 +55,10 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                 key={key}
                 href={item.href}
                 className={cn(
-                    "flex items-center justify-between px-3 py-2.5 text-sm font-medium group transition-colors",
+                    "relative flex items-center justify-between px-3 py-2.5 text-sm font-medium group transition-colors",
                     isActive
-                        ? "border-b border-b-primary text-primary"
-                        : "text-zinc-400 hover:text-secondary",
+                        ? "text-primary font-semibold"
+                        : "text-zinc-400 hover:text-black",
                 )}
             >
                 {item.icon ? (
@@ -70,6 +70,14 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                         <span>{item.label}</span>
                     </div>
                 )}
+
+                {/* Sliding Underline Animation */}
+                <span
+                    className={cn(
+                        "absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300 ease-out",
+                        isActive ? "w-full" : "w-0 group-hover:w-full",
+                    )}
+                />
             </Link>
         );
     };
@@ -105,7 +113,7 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
 
                     {/* Desktop Admin Badge */}
                     <div className="hidden md:flex items-center gap-4 whitespace-nowrap pl-6">
-                        <div className=" text-right leading-tight space-y-1">
+                        <div className="text-right leading-tight space-y-1">
                             <p className="text-md font-medium text-primary">
                                 Micheal Jackson
                             </p>
