@@ -66,7 +66,7 @@ export default function SLAPlanSection() {
                         <div className="text-black font-bold text-sm sm:text-sm md:text-base">
                             01.09.2026 - 31.10.2026
                         </div>
-                        <Link href={"user/plans"}>
+                        <Link href={"plans"}>
                             <Button
                                 block
                                 className="mt-3! py-4! text-xs sm:text-sm"

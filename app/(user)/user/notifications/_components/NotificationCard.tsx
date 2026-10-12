@@ -28,7 +28,7 @@ export default function NotificationCard({
                             </span>
                         ) : (
                             <div
-                                className={`w-3 h-3 rounded-full mt-2 inline-block border border-gray-500`}
+                                className={`w-3 h-3 rounded-full mt-2 inline-block border-0`}
                             />
                         )}
 
@@ -53,7 +53,7 @@ export default function NotificationCard({
                                         />
                                     ) : (
                                         <div
-                                            className={`w-3 h-3 rounded-full mt-2 inline-block border border-gray-500`}
+                                            className={`w-3 h-3 rounded-full mt-2 inline-block border-none`}
                                         />
                                     )}
                                     <div

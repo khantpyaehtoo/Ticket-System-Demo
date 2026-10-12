@@ -23,10 +23,6 @@ export default function ProfileSidebarCard({
 
             {/* Avatar Container */}
             <div className="flex justify-center -mt-14 relative z-10">
-                {/* 
-                  Added `relative` here so Next.js Image `fill` targets this 96x96 container correctly.
-                  Used `border-4 border-white` for the clean white ring.
-                */}
                 <div className="relative w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-md bg-gray-200 shrink-0">
                     <Image
                         src={profileImg}

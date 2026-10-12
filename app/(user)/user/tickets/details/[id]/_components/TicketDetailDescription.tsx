@@ -1,5 +1,11 @@
+"use client";
+
+import profileImg from "@/public/defaultProfile.jpg";
+import { useUserStore } from "@/store/useUserStore";
 import { TicketDetailsType } from "@/types/ticket";
-import { Modal } from "antd";
+import { Avatar, Button, Modal } from "antd";
+import { Clock } from "lucide-react";
+import Image from "next/image";
 import React, { useState } from "react";
 
 interface TicketDetailsProps {
@@ -10,6 +16,8 @@ export default function TicketDetailDescription({
     ticket,
 }: TicketDetailsProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const imageSrc = useUserStore((state) => state.imageSrc);
+    const avatarUrl = imageSrc || profileImg.src;
 
     // ${ticket?.description}
     const text = `Hello Support,\n\nI’m experiencing a technical issue with the system. Some features are not working properly, and the page sometimes becomes unresponsive. I have tried refreshing the page and logging in again, but the issue still persists.\n\nPlease check and help resolve this issue.\n\nBest regards,\nMegan Fox`;
@@ -25,7 +33,7 @@ export default function TicketDetailDescription({
                         <span>... </span>
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="font-semibold text-primary hover:underline focus:outline-none inline"
+                            className="font-semibold hover:underline focus:outline-none inline text-blue-800"
                         >
                             See More
                         </button>
@@ -34,15 +42,82 @@ export default function TicketDetailDescription({
             </p>
 
             <Modal
-                title="Full Description"
+                title={null}
                 open={isModalOpen}
-                onCancel={() => setIsModalOpen(false)}
                 footer={null}
+                closable={false}
+                width={800}
+                className="zero-padding-modal"
                 centered
             >
-                <p className="whitespace-pre-line text-foreground/90 text-sm py-2">
-                    {text}
-                </p>
+                <div className="space-y-3">
+                    <div className="bg-primary text-white w-full rounded-t-2xl">
+                        <div className="flex items-start gap-3 sm:gap-4 p-6! sm:p-4 rounded-lg">
+                            <Avatar
+                                src={
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={avatarUrl}
+                                            alt="User Avatar"
+                                            fill
+                                            priority
+                                            sizes="40px"
+                                            className="object-cover rounded-full"
+                                        />
+                                    </div>
+                                }
+                                size={40}
+                                className="ring-2 ring-offset-2 ring-primary border-none!"
+                            />
+
+                            {/* User & Time Info */}
+                            <div className="flex-1 min-w-0 space-y-1">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2">
+                                    <div className="flex items-center space-x-6">
+                                        <h3 className="font-semibold text-sm sm:text-base leading-none">
+                                            {ticket?.senderName || "Megan Fox"}
+                                        </h3>
+
+                                        <p className="truncate max-w-[200px] sm:max-w-none">
+                                            &lt;
+                                            {ticket?.senderEmail ||
+                                                "meganfox@gmail.com"}
+                                            &gt;
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                                        <Clock className="w-3.5 h-3.5 shrink-0" />
+                                        <span>
+                                            {ticket?.createdAt ||
+                                                "15 Sep, 11:00 AM"}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground break-all">
+                                    <span>
+                                        To:{" "}
+                                        {ticket?.recipientEmail ||
+                                            "digitalbase@gmail.com"}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="px-5 pb-6">
+                        <p className="whitespace-pre-line text-foreground/90 text-sm py-2 px-4">
+                            {text}
+                        </p>
+                        <div className="border-t border-t-gray-300 flex justify-end w-full pt-3 mt-4">
+                            <Button
+                                type="primary"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    </div>
+                </div>
             </Modal>
 
             {/* Attachments / Image Session */}

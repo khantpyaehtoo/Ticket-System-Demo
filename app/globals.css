@@ -64,6 +64,11 @@ body {
   color: var(--background);
 }
 
+.zero-padding-modal .ant-modal-container {
+  padding: 0 !important;
+  border-radius: 20px !important;
+}
+
 @utility loginFormBtn {
   @apply h-11 md:h-12 border-none bg-primary text-background hover:bg-secondary rounded-xl font-medium text-sm transition-all cursor-pointer
 }

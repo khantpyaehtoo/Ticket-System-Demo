@@ -5,7 +5,6 @@ import {
     Clock,
     Info,
 } from "lucide-react";
-import React from "react";
 
 export type NotificationType =
     | "warning"
