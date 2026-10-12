@@ -17,7 +17,7 @@ export default function ProfileSidebarCard({
     // const [activeTab, setActiveTab] = useState("profile");
 
     return (
-        <div className="w-80 rounded-2xl bg-white shadow-sm border border-gray-100 overflow-hidden text-gray-800">
+        <div className="w-full lg:w-80 rounded-2xl bg-white shadow-sm border border-gray-100 overflow-hidden text-gray-800">
             {/* Top Dark Header Banner */}
             <div className="h-28 bg-[#3d333a]" />
 
@@ -44,42 +44,83 @@ export default function ProfileSidebarCard({
                 </p>
             </div>
 
-            {/* Navigation Options */}
-            <div className="p-5 space-y-2.5 mt-2">
-                {/* Personal Profile Button */}
-                <button
-                    onClick={() => setActiveTab("profile")}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
-                        activeTab === "profile"
-                            ? "bg-[#3d333a] text-white shadow-sm"
-                            : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                >
-                    <User className="w-5 h-5" />
-                    <span>Personal Profile</span>
-                </button>
+            <div className="p-5 mt-2">
+                {/* Desktop: Navigation Options */}
+                <div className="hidden md:block space-y-2.5">
+                    {/* Personal Profile Button */}
+                    <button
+                        onClick={() => setActiveTab("profile")}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                            activeTab === "profile"
+                                ? "bg-[#3d333a] text-white shadow-sm"
+                                : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                    >
+                        <User className="w-5 h-5" />
+                        <span>Personal Profile</span>
+                    </button>
 
-                {/* Change Password Button */}
-                <button
-                    onClick={() => setActiveTab("password")}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
-                        activeTab === "password"
-                            ? "bg-[#3d333a] text-white shadow-sm"
-                            : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                >
-                    <KeyRound className="w-5 h-5" />
-                    <span>Change Password</span>
-                </button>
+                    {/* Change Password Button */}
+                    <button
+                        onClick={() => setActiveTab("password")}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                            activeTab === "password"
+                                ? "bg-[#3d333a] text-white shadow-sm"
+                                : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                    >
+                        <KeyRound className="w-5 h-5" />
+                        <span>Change Password</span>
+                    </button>
 
-                {/* Log Out Button */}
-                <button
-                    onClick={() => console.log("Logout")}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm text-red-500 hover:bg-red-50 transition-colors mt-4"
-                >
-                    <LogOut className="w-5 h-5" />
-                    <span>Log Out</span>
-                </button>
+                    {/* Log Out Button */}
+                    <button
+                        onClick={() => console.log("Logout")}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm text-red-500 hover:bg-red-50 transition-colors mt-4"
+                    >
+                        <LogOut className="w-5 h-5" />
+                        <span>Log Out</span>
+                    </button>
+                </div>
+
+                {/* Mobile: Navigation Options */}
+                <div className="block md:hidden">
+                    <div className="flex items-center space-x-2">
+                        {/* Personal Profile Button */}
+                        <button
+                            onClick={() => setActiveTab("profile")}
+                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                                activeTab === "profile"
+                                    ? "bg-[#3d333a] text-white shadow-sm"
+                                    : "text-gray-700 hover:bg-gray-100"
+                            }`}
+                        >
+                            <User className="w-5 h-5" />
+                            <p>Personal Profile</p>
+                        </button>
+
+                        {/* Change Password Button */}
+                        <button
+                            onClick={() => setActiveTab("password")}
+                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                                activeTab === "password"
+                                    ? "bg-[#3d333a] text-white shadow-sm"
+                                    : "text-gray-700 hover:bg-gray-100"
+                            }`}
+                        >
+                            <KeyRound className="w-5 h-5" />
+                            <span className="text-center">Change Password</span>
+                        </button>
+                    </div>
+                    {/* Log Out Button */}
+                    <button
+                        onClick={() => console.log("Logout")}
+                        className="w-full flex justify-center items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm text-red-500 bg-red-50  transition-colors mt-4"
+                    >
+                        <LogOut className="w-5 h-5" />
+                        <span>Log Out</span>
+                    </button>
+                </div>
             </div>
         </div>
     );

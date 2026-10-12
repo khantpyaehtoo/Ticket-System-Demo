@@ -26,7 +26,7 @@ export default function ProfileForm() {
     return (
         <div className="flex-1 space-y-6">
             {/* 1. Profile Image Card */}
-            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 shadow-sm hidden md:block">
                 <h3 className="text-sm font-semibold text-gray-800 mb-4">
                     Profile Image
                 </h3>

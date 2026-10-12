@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "antd";
 import { Save } from "lucide-react";
 import React, { useState } from "react";
@@ -6,7 +7,7 @@ import ProfileSidebarCard from "./_components/ProfileSiderCard";
 import ProfileForm from "./_components/ProfileForm";
 import SecurityForm from "./_components/SecurityForm";
 
-export default function page() {
+export default function Page() {
     const [activeTab, setActiveTab] = useState("profile");
 
     const handleSaveAll = () => {
@@ -41,7 +42,7 @@ export default function page() {
             </div>
 
             {/* Main Wrapper */}
-            <div className="flex items-start justify-between space-x-10 mx-auto mt-10">
+            <div className="flex flex-col lg:items-start justify-between lg:flex-row space-x-10 space-y-10 mx-auto mt-10">
                 {/* Left Side */}
                 <ProfileSidebarCard
                     activeTab={activeTab}
