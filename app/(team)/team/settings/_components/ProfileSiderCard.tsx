@@ -46,7 +46,7 @@ export default function ProfileSidebarCard({
 
             <div className="p-5 mt-2">
                 {/* Desktop: Navigation Options */}
-                <div className="hidden md:block space-y-2.5">
+                <div className="hidden lg:block space-y-2.5">
                     {/* Personal Profile Button */}
                     <button
                         onClick={() => setActiveTab("profile")}
@@ -84,12 +84,12 @@ export default function ProfileSidebarCard({
                 </div>
 
                 {/* Mobile: Navigation Options */}
-                <div className="block md:hidden">
+                <div className="block lg:hidden">
                     <div className="flex items-center space-x-2">
                         {/* Personal Profile Button */}
                         <button
                             onClick={() => setActiveTab("profile")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                            className={`w-full flex justify-center items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
                                 activeTab === "profile"
                                     ? "bg-[#3d333a] text-white shadow-sm"
                                     : "text-gray-700 hover:bg-gray-100"
@@ -102,7 +102,7 @@ export default function ProfileSidebarCard({
                         {/* Change Password Button */}
                         <button
                             onClick={() => setActiveTab("password")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
+                            className={`w-full flex justify-center items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-colors ${
                                 activeTab === "password"
                                     ? "bg-[#3d333a] text-white shadow-sm"
                                     : "text-gray-700 hover:bg-gray-100"

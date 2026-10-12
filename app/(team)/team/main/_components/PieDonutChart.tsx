@@ -44,7 +44,7 @@ export default function PieDonutChart() {
     };
 
     return (
-        <div className="relative p-6 teamHeaderCard shadow-md rounded-2xl bg-white max-w-lg">
+        <div className="relative h-full p-6 teamHeaderCard shadow-md rounded-2xl bg-white max-w-lg">
             <div className="space-y-1 mb-6">
                 <h2 className="text-lg font-semibold text-gray-800 tracking-tight">
                     Work Status Overview

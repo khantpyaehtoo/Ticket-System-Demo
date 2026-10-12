@@ -17,7 +17,7 @@ export default function LeftSideNotiSection({
     setFilterTab,
 }: notiSectionProps) {
     return (
-        <div className="w-80 rounded-2xl bg-white shadow-sm border border-gray-100 p-4 space-y-2 text-gray-800 shrink-0">
+        <div className="w-full lg:w-80 rounded-2xl bg-white shadow-sm border border-gray-100 p-4 space-y-2 text-gray-800 shrink-0">
             {notificationConfig.map((item) => {
                 const isActive = filterTab === item.type;
                 return (

@@ -28,9 +28,9 @@ export default function Page() {
             <TimerSection />
 
             {/* Table */}
-            <div className="flex space-x-7">
+            <div className="flex flex-col-reverse lg:flex-row space-x-7 items-stretch h-full">
                 <TicketTable />
-                <div className="w-1/2 space-y-4">
+                <div className="w-full lg:w-1/2 space-y-6 flex flex-row lg:flex-col space-x-7 mb-10 items-stretch">
                     <PieSemiDonut />
                     <PieDonutChart />
                 </div>
