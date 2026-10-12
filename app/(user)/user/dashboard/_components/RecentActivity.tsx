@@ -8,7 +8,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";
 
-export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
+export default function RecentActivity({
+    ActivityListWrapperClass = "h-120",
+    viewAllRoute = "/user/tickets",
+}) {
     const containerRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
 
@@ -181,7 +184,7 @@ export default function RecentActivity({ ActivityListWrapperClass = "h-120" }) {
                     </p>
                 </div>
                 <Link
-                    href="/user/tickets"
+                    href={viewAllRoute}
                     className="flex items-center gap-1.5 text-xs sm:text-sm text-primary hover:underline shrink-0 self-start sm:self-auto font-medium"
                 >
                     View All <ArrowRight size={16} />

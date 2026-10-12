@@ -52,7 +52,10 @@ export default function TimerSection() {
             </div>
 
             <div className="w-1/2">
-                <RecentActivity ActivityListWrapperClass="h-130" />
+                <RecentActivity
+                    ActivityListWrapperClass="h-130"
+                    viewAllRoute="/team/tickets"
+                />
             </div>
         </div>
     );
