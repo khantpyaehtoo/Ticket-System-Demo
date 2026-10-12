@@ -69,6 +69,35 @@ body {
   border-radius: 20px !important;
 }
 
+.ant-select-dropdown {
+    background: var(--background) !important;
+    box-shadow: none;
+    border-radius: 18px !important;
+    padding: 0px !important;
+    border: 1px solid var(--primary) !important;
+    
+}
+.ant-select-item {
+    background: var(--background) !important;
+    color: var(--primary) !important;
+    padding: 10px !important;
+    border-bottom: 1px solid var(--primary) !important;
+    border-radius: 0 !important;
+    
+}
+.ant-select-item:hover {
+    color: var(--background) !important;
+    border: 0 !important;
+    background: var(--primary) !important;
+}
+
+.ant-select-item-option-active {
+    border-bottom: 1px solid var(--primary) !important;
+    color: var(--background) !important;
+    background: var(--primary) !important;
+}
+
+
 @utility loginFormBtn {
   @apply h-11 md:h-12 border-none bg-primary text-background hover:bg-secondary rounded-xl font-medium text-sm transition-all cursor-pointer
 }

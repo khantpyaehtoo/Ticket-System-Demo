@@ -153,7 +153,7 @@ export default function TicketListClient() {
                     <Select
                         defaultValue="all"
                         options={options}
-                        className="w-full sm:w-40! rounded-lg!"
+                        className="custom-dropdown w-full sm:w-40! rounded-lg!"
                     />
                 </div>
             </div>
