@@ -1,6 +1,8 @@
 import React from "react";
 import PlanCard from "./_components/PlanCard";
 import PlanDetailsCard from "./_components/PlanDetailsCard";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 // Human-readable labels for the details keys
 // const detailLabels: Record<string, string> = {
@@ -102,6 +104,22 @@ export default function PlanUpgradePage() {
 
     return (
         <section className="text-gray-900 max-w-7xl mx-auto px-4 py-8 space-y-10">
+            {/* Breadcrumb Navigation */}
+            <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-800">
+                <Link
+                    href="/user/dashboard"
+                    className="hover:text-gray-500 transition-colors font-medium"
+                >
+                    Back to Dashboard
+                </Link>
+                <span className="text-gray-800 font-bold">
+                    <ChevronRight />
+                </span>
+                <span className="text-blue-800 font-medium">
+                    Request Plan Upgrade
+                </span>
+            </nav>
+
             {/* Header Section */}
             <div className="space-y-10">
                 <div className="flex justify-center items-center pb-2">

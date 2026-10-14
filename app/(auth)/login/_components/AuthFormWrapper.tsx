@@ -59,7 +59,7 @@ export default function AuthFormWrapper({
         verifyOtp(
             { email: userEmail, otp: otpCode },
             {
-                onSuccess: (data) => {
+                onSuccess: (data: any) => {
                     message.success("OTP verified successfully!");
                     if (data?.token) {
                         setResetToken(data.token);

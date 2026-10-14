@@ -1,4 +1,3 @@
-import AdminHeader from "@/components/admin/adminHeader";
 import DashboardShell from "@/components/shared/DashboardShell";
 import { NavItem } from "@/types/dashboard";
 import {
@@ -9,6 +8,7 @@ import {
     User,
     User2,
 } from "lucide-react";
+import AdminHeader from "./_components/adminHeader";
 
 const AdminNavItems: NavItem[] = [
     { label: "Dashboard", href: "/admin", icon: <LayoutGrid /> },
