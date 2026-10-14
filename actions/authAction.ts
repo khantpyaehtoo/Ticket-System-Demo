@@ -38,6 +38,10 @@ export async function loginAction(formData: {
     const userAgent = headersList.get("user-agent") || "";
     const forwardedFor = headersList.get("x-forwarded-for") || "";
 
+    // const country = headersList.get("x-vercel-ip-country") || "";
+    // const city = headersList.get("x-vercel-ip-city") || "";
+    // const region = headersList.get("x-vercel-ip-region") || "";
+
     const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -45,7 +49,11 @@ export async function loginAction(formData: {
             "User-Agent": userAgent,
             "X-Forwarded-For": forwardedFor,
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+            email,
+            password,
+            // location: { country, city, region },
+        }),
     });
 
     if (!res.ok) {

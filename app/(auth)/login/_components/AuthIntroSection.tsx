@@ -20,14 +20,14 @@ export default function AuthIntroSection() {
                     priority
                     className="w-auto h-auto"
                 />
-                <div className="intro-content mt-6 md:mt-14 space-y-4 py-4 border-b border-b-background/40">
+                <div className="intro-content mt-6 md:mt-14 space-y-2 py-4 border-b border-b-background/40">
                     <div className="bg-background flex items-center space-x-3 py-1 rounded-full w-fit px-4">
                         <div className="w-2.5 h-2.5 rounded-full bg-primary" />
                         <span className="text-primary text-xs font-medium">
                             Trusted service operations
                         </span>
                     </div>
-                    <p className="w-full inline-block text-2xl md:text-5xl font-medium bg-gradient-to-r from-background to-secondary bg-clip-text text-transparent pb-3 pt-1 leading-tight">
+                    <p className="w-full inline-block text-2xl lg:text-3xl xl:text-5xl font-medium bg-linear-to-r from-background to-secondary bg-clip-text text-transparent pb-3 pt-1 leading-tight">
                         Technical Service Workspace & SLA Management
                     </p>
                     <p className="text-xs md:text-md font-light text-background/90">
@@ -37,7 +37,7 @@ export default function AuthIntroSection() {
                 </div>
             </div>
 
-            <div className="pt-4 md:pt-8 space-y-4 md:space-y-10 relative">
+            <div className="pt-4 md:pt-8 space-y-4 lg:space-y-4 xl:space-y-6 relative">
                 <div className="connecting-line absolute left-3 md:left-4 top-8 -bottom-4 w-0.5 bg-background origin-top" />
                 {STEPPER_ITEMS.map((step, index) => (
                     <div

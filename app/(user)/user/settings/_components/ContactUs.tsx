@@ -154,7 +154,7 @@ export default function ContactUs() {
                             </div>
                         </div>
                     </div>
-                    <button className="bg-primary text-white font-jetbrains px-10 py-4 rounded-2xl">
+                    <button className="bg-primary text-white font-jetbrains px-10 py-4 rounded-2xl text-">
                         Open in Google Maps
                     </button>
                 </div>
