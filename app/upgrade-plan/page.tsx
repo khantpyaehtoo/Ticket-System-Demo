@@ -8,6 +8,7 @@ import {
     ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
+import { DatePicker } from "antd";
 
 export interface PlanDetails {
     totalHours: string;
@@ -303,14 +304,14 @@ export default function UpgradePlanPage() {
                         <label className="text-sm font-semibold text-gray-700">
                             Request Start Date
                         </label>
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Select preferred date"
-                                className="w-full p-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary text-gray-800"
-                            />
-                            <CalendarIcon className="absolute right-3 top-3.5 w-4 h-4 text-gray-400 pointer-events-none" />
-                        </div>
+                        <DatePicker
+                            size="large"
+                            placeholder="Select preferred date"
+                            className="w-full py-3 bg-white border border-gray-200 rounded-xl text-sm hover:border-primary focus:border-primary shadow-sm"
+                            onChange={(date, dateString) => {
+                                console.log("Selected Date:", dateString);
+                            }}
+                        />
                     </div>
 
                     {/* Plan Change Summary Table */}
