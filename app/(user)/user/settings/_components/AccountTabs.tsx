@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import ProfileForm from "./ProfileForm";
 import SecurityForm from "./SecurityForm";
 import ActiveSession from "./ActiveSession";
+import ContactUs from "./ContactUs";
 
 type tabsItems = {
     key: string;
@@ -38,7 +39,7 @@ export default function AccountTabs() {
         {
             key: "4",
             label: "Contact us",
-            children: <SecurityForm />,
+            children: <ContactUs />,
         },
     ];
 
