@@ -182,6 +182,10 @@ export default function ActiveSession() {
                             ))}
                         </div>
                     )}
+
+                    <button className="bg-primary w-full text-white py-4 rounded-2xl font-medium cursor-pointer">
+                        Sign Out All Device
+                    </button>
                 </div>
             </div>
         </div>

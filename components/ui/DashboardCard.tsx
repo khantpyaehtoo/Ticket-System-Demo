@@ -5,8 +5,8 @@ import React, { ReactNode } from "react";
 export interface DashboardCardProps {
     title: string;
     icon: ReactNode;
-    length: number | string;
-    type: string;
+    length: ReactNode | string;
+    type?: ReactNode | string;
     inform_1: string;
     inform_2: string;
 }
@@ -22,7 +22,7 @@ export default function DashboardCard({
     return (
         <div className="relative w-full max-w-sm h-[200px] flex flex-col justify-between p-6 group">
             <svg
-                className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm "
+                className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-sm"
                 viewBox="0 0 320 200"
                 preserveAspectRatio="none"
                 fill="none"
@@ -57,7 +57,7 @@ export default function DashboardCard({
                 </div>
             </div>
 
-            {/* 3. Card Content */}
+            {/* Card Content */}
             <div className="relative z-10 flex flex-col justify-between h-full">
                 {/* Header Section */}
                 <div className="pr-24">
@@ -66,14 +66,20 @@ export default function DashboardCard({
                     </p>
                 </div>
 
-                {/* Middle Section (Value & Type) */}
-                <div className="my-2 flex items-baseline gap-2">
-                    <span className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-                        {length}
-                    </span>
-                    <span className="text-xs sm:text-sm font-normal text-gray-500">
-                        {type}
-                    </span>
+                {/* Middle Section (Value & Type - ပုံပါအတိုင်း လှပတဲ့ Typography Design) */}
+                <div className="my-2 flex items-baseline gap-1.5 flex-wrap">
+                    {typeof length === "object" ? (
+                        length
+                    ) : (
+                        <>
+                            <span className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+                                {length}
+                            </span>
+                            <span className="text-xs sm:text-lg font-normal text-gray-500">
+                                {type}
+                            </span>
+                        </>
+                    )}
                 </div>
 
                 {/* Footer Section */}
