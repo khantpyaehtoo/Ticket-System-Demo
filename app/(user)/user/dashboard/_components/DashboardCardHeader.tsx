@@ -89,7 +89,7 @@ export default function DashboardCardHeader() {
             <div className="flex flex-col">
                 <CreateTicketBtn />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 text-black my-20 items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 text-black mt-20 items-stretch">
                     {DashboardCards.map((card, key) => (
                         <div key={key} className="w-full h-full">
                             <DashboardCard

@@ -43,7 +43,7 @@ export default function PlanUpgradePage() {
                 "Essential support coverage for small teams and basic service needs.",
             details: {
                 totalHours: "10 Hours / Month",
-                hoursUpto: "120",
+                hoursUpto: "Up to 120 Hours / Years",
                 retainerDiscount: "Standard Rate",
                 responseTime: "Within 24 Hours",
                 officeHour: "Office Hours Only (Mon-Fri, 9AM - 5PM)",
@@ -64,7 +64,7 @@ export default function PlanUpgradePage() {
                 "Extended support coverage with more SLA hours for growing teams and increasing service needs.",
             details: {
                 totalHours: "25 Hours / Month",
-                hoursUpto: "300",
+                hoursUpto: "Up to 300 Hours / Years",
                 retainerDiscount: "15% Discount on Retainer",
                 responseTime: "Within 8-12 Hours",
                 officeHour: "Office Hours Only (Mon-Fri, 9AM - 5PM)",
@@ -85,7 +85,7 @@ export default function PlanUpgradePage() {
                 "Comprehensive support coverage for scaling businesses and high-availability operations.",
             details: {
                 totalHours: "50 Hours / Month",
-                hoursUpto: "600",
+                hoursUpto: "Up to 600 Hours / Years",
                 retainerDiscount: "25% Discount on Retainer",
                 responseTime: "Within 1-2 Hours (24/7 for P1)",
                 officeHour:

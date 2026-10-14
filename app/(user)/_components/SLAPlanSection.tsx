@@ -31,7 +31,7 @@ const ticketCards: TicketCard[] = [
 
 export default function SLAPlanSection() {
     return (
-        <div className="slaCardsContainer">
+        <div className="slaCardsContainer mt-20">
             <div className="space-y-4 flex-1 w-full">
                 {/* Title & Description */}
                 <div className="flex items-center space-x-3">

@@ -40,6 +40,11 @@ export const staticHeaderLeftMap: Record<string, HeaderLeftConfig> = {
         title: "Account Settings",
         description: "Manage your preferences and profile details",
     },
+    "/user/plans": {
+        type: "title",
+        title: "Request Plan Upgrade",
+        description: "",
+    },
 };
 
 // Resolver function that handles both static and dynamic routes
