@@ -2,14 +2,16 @@
 
 import React, { useState } from "react";
 import { Upload, X, Lock } from "lucide-react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import profileImg from "@/public/defaultProfile.jpg";
 
 export default function ProfileForm() {
     const [fullName, setFullName] = useState("John Aung");
     const [email, setEmail] = useState("developer_01@gmail.com");
     const [role] = useState("Frontend Developer");
-    const [profileImage, setProfileImage] = useState(profileImg);
+    const [profileImage, setProfileImage] = useState<StaticImageData | string>(
+        profileImg,
+    );
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

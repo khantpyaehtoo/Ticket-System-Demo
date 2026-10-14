@@ -9,6 +9,9 @@ import { INITIAL_NOTIFICATIONS } from "@/app/(user)/user/notifications/_componen
 export default function Page() {
     const [filterTab, setFilterTab] = useState("All");
     const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
+    4;
+
+    const clearUnread = () => {};
 
     const handleMarkAllRead = () => {
         setNotifications((prev) =>
