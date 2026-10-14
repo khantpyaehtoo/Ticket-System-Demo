@@ -17,13 +17,13 @@ export default function MobileSideBar({ navItems, homeHref }: SidebarProps) {
             {/* Mobile Drawer Backdrop */}
             {isOpen && (
                 <div
-                    className="lg:hidden fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity"
+                    className="lg:hidden fixed inset-0 bg-black/60 z-500 backdrop-blur-sm transition-opacity"
                     onClick={closeSidebar}
                 />
             )}
             {/* Mobile Drawer Sidebar */}
             <aside
-                className={`lg:hidden fixed top-0 left-0 bottom-0 z-50 w-64 bg-primary text-background p-6 flex flex-col justify-between border-r border-zinc-800 transform transition-transform duration-300 ease-in-out ${
+                className={`lg:hidden fixed top-0 left-0 bottom-0 z-600 w-64 bg-primary text-background p-6 flex flex-col justify-between border-r border-zinc-800 transform transition-transform duration-300 ease-in-out ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >

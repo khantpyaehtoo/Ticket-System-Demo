@@ -64,6 +64,10 @@ body {
   color: var(--background);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .zero-padding-modal .ant-modal-container {
   padding: 0 !important;
   border-radius: 20px !important;
