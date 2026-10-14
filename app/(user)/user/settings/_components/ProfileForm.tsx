@@ -19,6 +19,7 @@ const getBase64 = (file: File): Promise<string> =>
 export default function ProfileForm() {
     const [form] = Form.useForm();
     const { showModal, contextHolder } = useAppModal();
+    const [fullname, setFullName] = useState("Megan Fox");
 
     const storeImageSrc = useUserStore((state) => state.imageSrc);
     const setImageSrc = useUserStore((state) => state.setImageSrc);
@@ -161,6 +162,8 @@ export default function ProfileForm() {
                 <Form.Item name="name" label="Full Name">
                     <Input
                         type="text"
+                        value={fullname}
+                        onChange={(e) => setFullName(e.target.value)}
                         placeholder="Megan Fox"
                         className="h-12 bg-[#d4d4d4]/10! border-2! border-[#E0E0E0]! rounded-lg!"
                     />
@@ -181,6 +184,27 @@ export default function ProfileForm() {
                     <Input
                         type="text"
                         placeholder="example@gmail.com"
+                        className="h-12 rounded-lg! bg-[#d4d4d4]/40! border-2! border-[#E0E0E0]!"
+                        suffix={<LockKeyhole size="20px" />}
+                        disabled
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    className="[&_.ant-form-item-label]:w-full [&_label]:w-full"
+                    name="email"
+                    label={
+                        <div className="flex justify-between items-center w-full">
+                            <span>Phone Number</span>
+                            <span className="text-resolved font-light text-xs tracking-wide">
+                                Verified
+                            </span>
+                        </div>
+                    }
+                >
+                    <Input
+                        type="text"
+                        placeholder="+95 (09) 123 456 789"
                         className="h-12 rounded-lg! bg-[#d4d4d4]/40! border-2! border-[#E0E0E0]!"
                         suffix={<LockKeyhole size="20px" />}
                         disabled

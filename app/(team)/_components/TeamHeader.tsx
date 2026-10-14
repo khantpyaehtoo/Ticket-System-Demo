@@ -124,7 +124,7 @@ export default function TeamHeader({ navItems, homeHref }: navProps) {
                     </div>
 
                     <div>
-                        <Link href="/settings">
+                        <Link href="/team/settings">
                             <Avatar
                                 src={
                                     <Image
