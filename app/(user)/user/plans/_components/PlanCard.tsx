@@ -2,6 +2,7 @@ import { SquareCheck } from "lucide-react";
 import React from "react";
 import { PlanCardType } from "../page";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface PlanCardProps {
     planCards: PlanCardType[];
@@ -44,13 +45,15 @@ export default function PlanCard({ planCards }: PlanCardProps) {
                             {card.description}
                         </p>
 
-                        <button className="relative overflow-hidden w-full py-3 px-6 rounded-xl border border-primary font-medium transition-all duration-300 group cursor-pointer">
-                            <span className="absolute inset-0 bg-secondary w-0 transition-all duration-500 ease-out group-hover:w-full z-0"></span>
+                        <Link href="/upgrade-plan">
+                            <button className="relative overflow-hidden w-full py-3 px-6 rounded-xl border border-primary font-medium transition-all duration-300 group cursor-pointer">
+                                <span className="absolute inset-0 bg-secondary w-0 transition-all duration-500 ease-out group-hover:w-full z-0"></span>
 
-                            <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                                Request {card.title}
-                            </span>
-                        </button>
+                                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                                    Request {card.title}
+                                </span>
+                            </button>
+                        </Link>
                     </div>
 
                     {/* Plan Details List */}
