@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ContactUs() {
     return (
-        <div className="space-y-10">
+        <div className="space-y-10 w-[80%]">
             <div className="">
                 <div className="flex justify-between items-center">
                     <div className="w-full text-primary space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">

@@ -73,17 +73,17 @@ export default function ActiveSession() {
     };
 
     return (
-        <div className="w-full">
+        <div className="w-[90%] xl:w-[80%]">
             <div>
                 {/* Header Section */}
                 <div className="text-primary my-10 border-b-2 border-[#E0E0E0] pb-5">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-4">
-                        <div className="space-y-2">
-                            <div className="flex items-center">
+                        <div className="space-y-2 w-full">
+                            <div className="flex justify-between items-center">
                                 <h1 className="text-2xl font-bold">
                                     Active Sessions
                                 </h1>
-                                <div className="fixed right-10 bg-primary rounded-2xl flex items-center space-x-3 px-4 py-2 shrink-0">
+                                <div className="bg-primary rounded-2xl flex items-center space-x-3 px-4 py-2 shrink-0">
                                     <div className="w-2 h-2 rounded-full bg-background animate-pulse" />
                                     <h1 className="hidden md:block text-background font-jetbrains text-xs sm:text-sm">
                                         {sessions.length} active sessions across

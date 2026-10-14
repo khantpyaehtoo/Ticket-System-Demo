@@ -13,6 +13,7 @@ export function proxy(request: NextRequest) {
     const isUserRoute = pathname.startsWith("/user");
     const isTeamRoute = pathname.startsWith("/team");
     const isAdminRoute = pathname.startsWith("/admin");
+    const isServiceAdminRoute = pathname.startsWith("/serviceAdmin");
 
     if ((isUserRoute || isTeamRoute || isAdminRoute) && !token) {
         return NextResponse.redirect(new URL("/login", request.url));
@@ -26,6 +27,10 @@ export function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL("/unauthorized", request.url));
     }
 
+    if (isServiceAdminRoute && userRole !== "SERVICE-ADMIN") {
+        return NextResponse.redirect(new URL("/unauthorized", request.url));
+    }
+
     if (isAdminRoute && userRole !== "ADMIN") {
         return NextResponse.redirect(new URL("/unauthorized", request.url));
     }
@@ -35,5 +40,10 @@ export function proxy(request: NextRequest) {
 
 // Matcher Config
 export const config = {
-    matcher: ["/user/:path*", "/team/:path*", "/admin/:path*"],
+    matcher: [
+        "/user/:path*",
+        "/team/:path*",
+        "/admin/:path*",
+        "/serviceAdmin/:path",
+    ],
 };

@@ -68,6 +68,10 @@ body {
   display: none;
 }
 
+.ant-tabs-nav::before {
+  border: none !important;
+}
+
 .zero-padding-modal .ant-modal-container {
   padding: 0 !important;
   border-radius: 20px !important;

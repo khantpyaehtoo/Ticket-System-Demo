@@ -7,10 +7,10 @@ export default function SignOutBtn() {
     return (
         <button
             onClick={() => signOut()}
-            className="flex items-center justify-center gap-2 -mx-6 px-6 pb-1 pt-10 bg-primary text-gray-400 border-t-2 border-t-secondary font-medium hover:text-secondary transition-colors cursor-pointer"
+            className="w-[calc(100%+3rem)] -mx-6 flex items-center justify-center gap-2 px-6 py-3 text-gray-400 border-t-2 border-t-secondary font-medium hover:text-secondary transition-colors cursor-pointer bg-inherit pt-6"
         >
-            <LogOut />
-            <span>Log Out</span>
+            <LogOut size={20} />
+            <span className="text-sm font-medium">Log Out</span>
         </button>
     );
 }

@@ -95,7 +95,7 @@ export default function SecurityForm({
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 w-full md:w-[80%] xl:w-1/2">
             {contextHolder}
 
             <div className="space-y-2 border-b-2 border-[#E0E0E0] pb-5 my-10">
