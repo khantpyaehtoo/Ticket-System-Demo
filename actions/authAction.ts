@@ -51,7 +51,8 @@ export async function loginAction(formData: {
 
         cookieStore.set("accessToken", data.accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            // secure: process.env.NODE_ENV === "production",
+            secure: false,
             sameSite: "lax",
             path: "/",
             maxAge: cookieMaxAge,
@@ -59,7 +60,8 @@ export async function loginAction(formData: {
 
         cookieStore.set("role", data.role, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: false,
+            // secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
             maxAge: cookieMaxAge,

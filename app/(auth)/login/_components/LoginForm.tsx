@@ -28,20 +28,18 @@ export default function LoginForm({ onForgotPassword }: LoginFormProps) {
                 remember: values.remember ?? false,
             },
             {
-                onSuccess: (data) => {
+                onSuccess: (res) => {
                     message.success("Logged in successfully!");
-                    console.log("Login Response Data:", data);
 
-                    if (data?.accessToken) {
-                        localStorage.setItem("token", data.accessToken);
+                    if (res?.accessToken) {
+                        localStorage.setItem("token", res.accessToken);
                     }
 
-                    const targetPath = data?.targetPath || "/user/dashboard";
-
+                    const targetPath = res?.targetPath || "/user/dashboard";
                     router.push(targetPath);
                     router.refresh();
                 },
-                onError: (err) => {
+                onError: (err: any) => {
                     message.error(
                         err?.message ||
                             "Login failed. Please check your credentials.",
