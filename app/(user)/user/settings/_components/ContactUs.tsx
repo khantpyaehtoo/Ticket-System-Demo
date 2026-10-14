@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { Clock, Globe, Mail, MapPin, Phone } from "lucide-react";
 import React from "react";
 
@@ -119,8 +120,8 @@ export default function ContactUs() {
                 </div>
             </div>
 
-            <div className="">
-                <div className="rounded-2xl bg-background p-6 border border-[#E0E0E0]">
+            <div className="w-full ">
+                <div className="rounded-2xl bg-background p-6 border border-[#E0E0E0] flex justify-between items-center">
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <div className="flex items-end space-x-2 text-gray-800">
@@ -153,6 +154,9 @@ export default function ContactUs() {
                             </div>
                         </div>
                     </div>
+                    <button className="bg-primary text-white font-jetbrains px-10 py-4 rounded-2xl">
+                        Open in Google Maps
+                    </button>
                 </div>
             </div>
         </div>

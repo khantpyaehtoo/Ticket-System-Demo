@@ -1,8 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { loginSchema } from "@/lib/validations/auth";
 import { redirect } from "next/navigation";
+import { userAgent } from "next/server";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,9 +34,17 @@ export async function loginAction(formData: {
     const THIRTY_DAYS = 30 * 24 * 60 * 60;
     const cookieMaxAge = remember ? THIRTY_DAYS : undefined;
 
+    const headersList = await headers();
+    const userAgent = headersList.get("user-agent") || "";
+    const forwardedFor = headersList.get("x-forwarded-for") || "";
+
     const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "User-Agent": userAgent,
+            "X-Forwarded-For": forwardedFor,
+        },
         body: JSON.stringify({ email, password }),
     });
 
