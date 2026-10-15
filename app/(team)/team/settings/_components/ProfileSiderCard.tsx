@@ -4,6 +4,7 @@ import { KeyRound, LogOut, User } from "lucide-react";
 import Image from "next/image";
 // import { useState } from "react";
 import profileImg from "@/public/defaultProfile.jpg";
+import { signOut } from "@/actions/authAction";
 
 interface ProfileSidebarProps {
     activeTab: string;
@@ -75,7 +76,7 @@ export default function ProfileSidebarCard({
 
                     {/* Log Out Button */}
                     <button
-                        onClick={() => console.log("Logout")}
+                        onClick={() => signOut()}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm text-red-500 hover:bg-red-50 transition-colors mt-4"
                     >
                         <LogOut className="w-5 h-5" />
@@ -114,7 +115,7 @@ export default function ProfileSidebarCard({
                     </div>
                     {/* Log Out Button */}
                     <button
-                        onClick={() => console.log("Logout")}
+                        onClick={() => signOut()}
                         className="w-full flex justify-center items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm text-red-500 bg-red-50  transition-colors mt-4"
                     >
                         <LogOut className="w-5 h-5" />

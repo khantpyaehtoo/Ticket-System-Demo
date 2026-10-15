@@ -11,7 +11,7 @@ export function proxy(request: NextRequest) {
 
     // Protected Routes
     const isUserRoute = pathname.startsWith("/user");
-    const isTeamRoute = pathname.startsWith("/team");
+    const isTeamRoute = pathname.startsWith("/developer");
     const isAdminRoute = pathname.startsWith("/admin");
     const isServiceAdminRoute = pathname.startsWith("/serviceAdmin");
 
@@ -23,7 +23,7 @@ export function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL("/unauthorized", request.url));
     }
 
-    if (isTeamRoute && userRole !== "TEAM") {
+    if (isTeamRoute && userRole !== "DEVELOPER") {
         return NextResponse.redirect(new URL("/unauthorized", request.url));
     }
 

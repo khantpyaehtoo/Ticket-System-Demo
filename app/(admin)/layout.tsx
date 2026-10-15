@@ -27,7 +27,7 @@ export default function CustomerLayout({
     return (
         <DashboardShell
             navItems={AdminNavItems}
-            homeHref="/dashboard"
+            homeHref="/admin/dashboard"
             header={<AdminHeader />}
         >
             {children}

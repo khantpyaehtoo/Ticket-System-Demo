@@ -34,10 +34,10 @@ export default function ContactUs() {
                                 </h3>
                                 <div className="flex flex-wrap items-center gap-2 text-sm mt-1">
                                     <a
-                                        href="mailto:support@digitalbase.io"
+                                        href="mailto:support@digitalbase.com.mm"
                                         className="text-gray-500 hover:text-primary hover:underline"
                                     >
-                                        support@digitalbase.io
+                                        support@digitalbase.com.mm
                                     </a>
                                 </div>
                             </div>
@@ -51,10 +51,10 @@ export default function ContactUs() {
                                 </h3>
                                 <div className="flex flex-wrap items-center gap-2 text-sm mt-1">
                                     <a
-                                        href="tel:09755999680"
+                                        href="tel:09775999680"
                                         className="text-gray-500 hover:text-primary hover:underline"
                                     >
-                                        09 755 999 680
+                                        09 775 999 680
                                     </a>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@ export default function ContactUs() {
                                         rel="noopener noreferrer"
                                         className="text-gray-500 hover:text-primary hover:underline!"
                                     >
-                                        digital base
+                                        Digital Base
                                     </a>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@ export default function ContactUs() {
                                         rel="noopener noreferrer"
                                         className="text-gray-500 hover:text-primary hover:underline!"
                                     >
-                                        digital base
+                                        Digital Base
                                     </a>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ export default function ContactUs() {
                                     </span>
                                 </div>
                                 <h2 className="text-lg text-primary group-hover/card:text-white font-medium transition-colors mt-1">
-                                    Building 15, Floor 3, Hlaing, MICT Park,
+                                    Building 15, 3rd Floor, Hlaing, MICT Park,
                                     Yangon
                                 </h2>
                                 <p className="text-sm text-gray-500 group-hover/card:text-white/80 max-w-2xl transition-colors mt-1">

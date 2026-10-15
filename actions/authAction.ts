@@ -3,7 +3,6 @@
 import { cookies, headers } from "next/headers";
 import { loginSchema } from "@/lib/validations/auth";
 import { redirect } from "next/navigation";
-import { userAgent } from "next/server";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -38,9 +37,10 @@ export async function loginAction(formData: {
     const userAgent = headersList.get("user-agent") || "";
     const forwardedFor = headersList.get("x-forwarded-for") || "";
 
-    // const country = headersList.get("x-vercel-ip-country") || "";
-    // const city = headersList.get("x-vercel-ip-city") || "";
-    // const region = headersList.get("x-vercel-ip-region") || "";
+    const chUa = headersList.get("sec-ch-ua") || "";
+    const chUaMobile = headersList.get("sec-ch-ua-mobile") || "";
+    const chUaPlatform = headersList.get("sec-ch-ua-platform") || "";
+    const chUaModel = headersList.get("sec-ch-ua-model") || "";
 
     const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
@@ -48,6 +48,10 @@ export async function loginAction(formData: {
             "Content-Type": "application/json",
             "User-Agent": userAgent,
             "X-Forwarded-For": forwardedFor,
+            "sec-ch-ua": chUa,
+            "sec-ch-ua-mobile": chUaMobile,
+            "sec-ch-ua-platform": chUaPlatform,
+            "sec-ch-ua-model": chUaModel,
         },
         body: JSON.stringify({
             email,
@@ -86,7 +90,7 @@ export async function loginAction(formData: {
 
         if (data.role === "ADMIN") {
             targetPath = "/admin/dashboard";
-        } else if (data.role === "TEAM") {
+        } else if (data.role === "DEVELOPER") {
             targetPath = "/team/main";
         } else {
             targetPath = "/user/dashboard";
