@@ -158,7 +158,7 @@ export function useAppModal() {
                                     instance.destroy();
                                     router.push(`/tickets/details/${ticketId}`);
                                 }}
-                                className="bg-black hover:!bg-gray-800 text-white rounded-lg h-10 px-5 text-sm font-medium cursor-pointer border-none"
+                                className="bg-black hover:bg-gray-800! text-white rounded-lg h-10 px-5 text-sm font-medium cursor-pointer border-none"
                             >
                                 View Ticket
                             </Button>

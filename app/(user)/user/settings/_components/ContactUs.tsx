@@ -35,7 +35,7 @@ export default function ContactUs() {
                                 <div className="flex flex-wrap items-center gap-2 text-sm mt-1">
                                     <a
                                         href="mailto:support@digitalbase.com.mm"
-                                        className="text-gray-500 hover:text-primary hover:underline"
+                                        className="hover:underline!"
                                     >
                                         support@digitalbase.com.mm
                                     </a>
@@ -52,7 +52,7 @@ export default function ContactUs() {
                                 <div className="flex flex-wrap items-center gap-2 text-sm mt-1">
                                     <a
                                         href="tel:09775999680"
-                                        className="text-gray-500 hover:text-primary hover:underline"
+                                        className=" hover:underline!"
                                     >
                                         09 775 999 680
                                     </a>
@@ -101,7 +101,7 @@ export default function ContactUs() {
                                         href="https://digitalbase.com.mm"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-500 hover:text-primary hover:underline"
+                                        className="hover:underline!"
                                     >
                                         https://digitalbase.com.mm
                                     </a>
@@ -122,7 +122,7 @@ export default function ContactUs() {
                                         href="https://facebook.com/share/14mycZ7AwDE/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-500 hover:text-primary hover:underline!"
+                                        className="hover:underline!"
                                     >
                                         Digital Base
                                     </a>
@@ -143,7 +143,7 @@ export default function ContactUs() {
                                         href="https://www.linkedin.com/company/digital-base-software-development-company/mycompany/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-500 hover:text-primary hover:underline!"
+                                        className="hover:underline!"
                                     >
                                         Digital Base
                                     </a>
@@ -158,7 +158,7 @@ export default function ContactUs() {
             <div className="w-full">
                 <div className="relative overflow-hidden rounded-2xl bg-background p-6 border border-[#E0E0E0] shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 transition-all duration-300 group/card">
                     {/* Hover Layer */}
-                    <div className="absolute inset-x-0 bottom-0 h-0 bg-primary transition-all duration-500 ease-in-out group-hover/card:h-full z-0"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-0 bg-primary transition-all duration-300 ease-in-out group-hover/card:h-full z-0"></div>
 
                     <div className="relative z-10 space-y-4 w-full">
                         <div className="space-y-2">

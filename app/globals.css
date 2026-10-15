@@ -77,6 +77,19 @@ body {
   border-radius: 20px !important;
 }
 
+.custom-dropdowns .ant-select {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+  border-radius: 12px !important;
+  padding: 12px 6px !important;
+  text-align: center !important;
+}
+
+.custom-dropdowns .ant-select .ant-select-suffix {
+  color: var(--background) !important; 
+  padding-right: 12px !important;
+}
+
 .ant-select-dropdown {
     background: var(--background) !important;
     box-shadow: none;
@@ -105,6 +118,39 @@ body {
     background: var(--primary) !important;
 }
 
+.custom-segmented .ant-segmented {
+  background-color: var(--background) !important;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary) !important;
+  padding-inline: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.09);
+  border: 1px solid #cecccc;
+  border-radius: 12px;
+}
+
+.custom-segmented .ant-segmented .ant-segmented-group .ant-segmented-item {
+  border-radius: 12px;
+  padding: 6px !important;
+  margin-right: 20px;
+}
+
+.custom-segmented .ant-segmented .ant-segmented-group .ant-segmented-item.ant-segmented-item-selected {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+  border-radius: 12px;
+  padding: 6px !important;
+}
+
+.custom-segmented .ant-segmented .ant-segmented-group .ant-segmented-item::after {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+  border-radius: 12px;
+  padding: 6px !important;
+}
 
 @utility loginFormBtn {
   @apply h-11 md:h-12 border-none bg-primary text-background hover:bg-secondary rounded-xl font-medium text-sm transition-all cursor-pointer

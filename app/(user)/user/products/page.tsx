@@ -8,7 +8,7 @@ import { Segmented } from "antd";
 export default function page() {
     return (
         <div className="text-black">
-            <div className="mb-10">
+            <div className="mb-10 custom-segmented">
                 <Segmented<string>
                     options={["All Product", "Nail Salon", "Academy"]}
                     onChange={(value) => {
