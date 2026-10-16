@@ -17,10 +17,8 @@ export default function PlanDetailsCard({ planCards }: PlanCardProps) {
                         key={planIndex}
                         className={`rounded-xl px-6 py-10 bg-white space-y-10 transition-all duration-300 cursor-pointer ${
                             isLast
-                                ? // နောက်ဆုံးကဒ်အတွက် သီးသန့် Gradient သို့မဟုတ် Highlight Border Glow
-                                  "border-2 border-secondary shadow-md hover:shadow-2xl hover:shadow-secondary/30 hover:border-primary"
-                                : // ပုံမှန်ကဒ်များအတွက် Hover လုပ်ရင် Glow ဖြစ်ပြီး Border ပိုထင်ရှားမယ့် ပုံစံ
-                                  "border border-secondary/60 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary"
+                                ? "border-2 border-secondary shadow-md hover:shadow-2xl hover:shadow-secondary/30 hover:border-primary"
+                                : "border border-secondary/60 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary"
                         }`}
                     >
                         <div className="space-y-2">
@@ -32,10 +30,7 @@ export default function PlanDetailsCard({ planCards }: PlanCardProps) {
                             </h1>
                             <div className="space-x-3 text-sm font-medium text-gray-700">
                                 <span>{plan.details.totalHours}</span>
-                                <span>
-                                    (Up to {plan.details.hoursUpto} Hours /
-                                    year)
-                                </span>
+                                <span>(Up to {plan.details.hoursUpto})</span>
                             </div>
                         </div>
 

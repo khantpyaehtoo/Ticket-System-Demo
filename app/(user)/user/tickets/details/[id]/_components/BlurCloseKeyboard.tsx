@@ -14,7 +14,7 @@ export default function BlurCloseKeyboard() {
                     Ticket conversation ended...
                 </div>
             </div>
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-[3px] flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-[3px] flex items-center justify-center p-4 rounded-xl">
                 <div className="flex items-center gap-2 px-3.5 py-2 bg-red-50/90 border border-red-200/80 rounded-xl text-xs font-medium text-red-700 shadow-xs">
                     <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                     <span>This ticket is closed. Keyboard is locked.</span>

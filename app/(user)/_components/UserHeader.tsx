@@ -62,7 +62,7 @@ export default function UserHeader() {
                 </div>
 
                 <div className="pl-3 md:pl-4 border-l border-zinc-200">
-                    <Link href="/settings">
+                    <Link href="/user/settings">
                         <Avatar
                             src={
                                 <Image
