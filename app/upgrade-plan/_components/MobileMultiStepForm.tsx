@@ -11,13 +11,13 @@ import Link from "next/link";
 import { DatePicker } from "antd";
 import { PlanCardType } from "../page";
 
-// interface MobileMultiStepProps {
-//     planCards: PlanCardType[];
-//     selectedPlan: unknown;
-//     setSelectedPlan: unknown;
-//     selectedReason: string;
-//     setSelectedReason: string | null;
-// }
+interface MobileMultiStepUpgradeProps {
+    planCards: PlanCardType[];
+    selectedPlan: PlanCardType;
+    setSelectedPlan: (plan: PlanCardType) => void;
+    selectedReason: string;
+    setSelectedReason: (reason: string) => void;
+}
 
 export default function MobileMultiStepUpgrade({
     planCards,
@@ -25,7 +25,7 @@ export default function MobileMultiStepUpgrade({
     setSelectedPlan,
     selectedReason,
     setSelectedReason,
-}: any) {
+}: MobileMultiStepUpgradeProps) {
     const [currentStep, setCurrentStep] = useState(1);
 
     return (
