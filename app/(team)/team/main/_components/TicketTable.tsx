@@ -67,7 +67,18 @@ export default function TicketTable() {
             title: "Issue Type",
             dataIndex: "issueType",
             key: "issueType",
-            width: 140,
+            width: 120,
+            render: (issue) => (
+                <span className="underline text-link-blue hover:text-gray-400">
+                    {issue}
+                </span>
+            ),
+        },
+        {
+            title: "Issue Summary",
+            dataIndex: "issueSummary",
+            key: "issueSummary",
+            width: 160,
             render: (issue) => (
                 <span className="underline text-link-blue hover:text-gray-400">
                     {issue}
@@ -97,7 +108,7 @@ export default function TicketTable() {
         },
         {
             title: "Action",
-            width: 120,
+            width: 80,
             render: () => (
                 <Link href="view">
                     <span className="underline text-primary">View</span>
