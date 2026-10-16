@@ -12,7 +12,7 @@ export default function page() {
                 <Segmented<string>
                     options={["All Product", "Nail Salon", "Academy"]}
                     onChange={(value) => {
-                        console.log(value); // string
+                        console.log(value);
                     }}
                 />
             </div>
